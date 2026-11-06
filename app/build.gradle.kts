@@ -8,6 +8,7 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+    id("org.openjfx.javafxplugin") version "0.1.0"
 }
 
 repositories {
@@ -34,10 +35,15 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = "org.example.App"
+    mainClass = "it.unicam.cs.mpgc.rpg130419.ConsoleApp"
+}
+
+javafx {
+    version = "27.0.1"
+    modules("javafx.controls", "javafx.fxml")
 }
 
 tasks.named<Test>("test") {
-    // Use JUnit Platform for unit tests.
+    // Use JUnit Platform for dunit tests.
     useJUnitPlatform()
 }
