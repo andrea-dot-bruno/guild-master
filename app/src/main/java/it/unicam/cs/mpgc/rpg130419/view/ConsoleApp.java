@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg130419;
+package it.unicam.cs.mpgc.rpg130419.view;
 
 import it.unicam.cs.mpgc.rpg130419.model.*;
 import it.unicam.cs.mpgc.rpg130419.model.weapons.Sword;

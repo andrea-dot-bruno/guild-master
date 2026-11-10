@@ -35,7 +35,7 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = "it.unicam.cs.mpgc.rpg130419.ConsoleApp"
+    mainClass = "it.unicam.cs.mpgc.rpg130419.view.GUIApp"
 }
 
 javafx {

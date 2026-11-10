@@ -17,8 +17,7 @@ public class FooterController {
         }
         if (underwayExpeditions == 0) {
             underwayExpeditionsLabel.setText("There are no expeditions underway at the moment.");
-        }
-        if (underwayExpeditions == 1) {
+        } else if (underwayExpeditions == 1) {
             underwayExpeditionsLabel.setText("There is " + underwayExpeditions + " expedition underway at the moment.");
         } else {
             underwayExpeditionsLabel.setText("There are " + underwayExpeditions + " expeditions underway at the moment.");
