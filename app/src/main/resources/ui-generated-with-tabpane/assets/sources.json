@@ -1,0 +1,313 @@
+{
+  "description": "Artwork extracted from the supplied Guild Master reference mockups; crops use source image pixels. Parchment background removed from the edges for transparent sprites.",
+  "assets": [
+    {
+      "asset": "crest.png",
+      "source": "ui-mockups/03-overview.png",
+      "crop": {
+        "x": 40,
+        "y": 10,
+        "width": 82,
+        "height": 86
+      },
+      "transparent_background": true
+    },
+    {
+      "asset": "guild-house.png",
+      "source": "ui-mockups/01-main-menu.png",
+      "crop": {
+        "x": 593,
+        "y": 323,
+        "width": 405,
+        "height": 249
+      },
+      "transparent_background": true
+    },
+    {
+      "asset": "ledger.png",
+      "source": "ui-mockups/02-create-guild.png",
+      "crop": {
+        "x": 47,
+        "y": 351,
+        "width": 462,
+        "height": 295
+      },
+      "transparent_background": true
+    },
+    {
+      "asset": "bram.png",
+      "source": "ui-mockups/03-overview.png",
+      "crop": {
+        "x": 1206,
+        "y": 266,
+        "width": 116,
+        "height": 111
+      },
+      "transparent_background": true
+    },
+    {
+      "asset": "lyra.png",
+      "source": "ui-mockups/03-overview.png",
+      "crop": {
+        "x": 1206,
+        "y": 396,
+        "width": 119,
+        "height": 112
+      },
+      "transparent_background": true
+    },
+    {
+      "asset": "cedric.png",
+      "source": "ui-mockups/03-overview.png",
+      "crop": {
+        "x": 1206,
+        "y": 525,
+        "width": 117,
+        "height": 113
+      },
+      "transparent_background": true
+    },
+    {
+      "asset": "elric.png",
+      "source": "ui-mockups/06-expeditions-underway.png",
+      "crop": {
+        "x": 373,
+        "y": 432,
+        "width": 107,
+        "height": 105
+      },
+      "transparent_background": true
+    },
+    {
+      "asset": "mira.png",
+      "source": "ui-mockups/07-heroes-and-equipment.png",
+      "crop": {
+        "x": 35,
+        "y": 737,
+        "width": 105,
+        "height": 97
+      },
+      "transparent_background": true
+    },
+    {
+      "asset": "mossroot.png",
+      "source": "ui-mockups/03-overview.png",
+      "crop": {
+        "x": 36,
+        "y": 473,
+        "width": 261,
+        "height": 141
+      },
+      "transparent_background": false
+    },
+    {
+      "asset": "emberstone.png",
+      "source": "ui-mockups/03-overview.png",
+      "crop": {
+        "x": 36,
+        "y": 651,
+        "width": 264,
+        "height": 145
+      },
+      "transparent_background": false
+    },
+    {
+      "asset": "watchtower.png",
+      "source": "ui-mockups/04-expedition-board.png",
+      "crop": {
+        "x": 765,
+        "y": 343,
+        "width": 387,
+        "height": 191
+      },
+      "transparent_background": false
+    },
+    {
+      "asset": "ruins.png",
+      "source": "ui-mockups/04-expedition-board.png",
+      "crop": {
+        "x": 51,
+        "y": 492,
+        "width": 221,
+        "height": 135
+      },
+      "transparent_background": false
+    },
+    {
+      "asset": "trail.png",
+      "source": "ui-mockups/04-expedition-board.png",
+      "crop": {
+        "x": 51,
+        "y": 659,
+        "width": 222,
+        "height": 138
+      },
+      "transparent_background": false
+    },
+    {
+      "asset": "merchant.png",
+      "source": "ui-mockups/11-shop-buy.png",
+      "crop": {
+        "x": 33,
+        "y": 175,
+        "width": 142,
+        "height": 118
+      },
+      "transparent_background": true
+    },
+    {
+      "asset": "steel-sword.png",
+      "source": "ui-mockups/11-shop-buy.png",
+      "crop": {
+        "x": 972,
+        "y": 218,
+        "width": 144,
+        "height": 145
+      },
+      "transparent_background": true
+    },
+    {
+      "asset": "bronze-sword.png",
+      "source": "ui-mockups/12-shop-sell.png",
+      "crop": {
+        "x": 65,
+        "y": 519,
+        "width": 73,
+        "height": 74
+      },
+      "transparent_background": true
+    },
+    {
+      "asset": "iron-sword.png",
+      "source": "ui-mockups/10-inventory.png",
+      "crop": {
+        "x": 59,
+        "y": 465,
+        "width": 68,
+        "height": 62
+      },
+      "transparent_background": true
+    },
+    {
+      "asset": "shield.png",
+      "source": "ui-mockups/11-shop-buy.png",
+      "crop": {
+        "x": 67,
+        "y": 521,
+        "width": 70,
+        "height": 73
+      },
+      "transparent_background": true
+    },
+    {
+      "asset": "wand.png",
+      "source": "ui-mockups/11-shop-buy.png",
+      "crop": {
+        "x": 66,
+        "y": 600,
+        "width": 70,
+        "height": 71
+      },
+      "transparent_background": true
+    },
+    {
+      "asset": "tonic.png",
+      "source": "ui-mockups/11-shop-buy.png",
+      "crop": {
+        "x": 69,
+        "y": 676,
+        "width": 66,
+        "height": 75
+      },
+      "transparent_background": true
+    },
+    {
+      "asset": "bomb.png",
+      "source": "ui-mockups/11-shop-buy.png",
+      "crop": {
+        "x": 66,
+        "y": 757,
+        "width": 72,
+        "height": 74
+      },
+      "transparent_background": true
+    },
+    {
+      "asset": "coin.png",
+      "source": "ui-mockups/13-expedition-success.png",
+      "crop": {
+        "x": 72,
+        "y": 434,
+        "width": 72,
+        "height": 62
+      },
+      "transparent_background": true
+    },
+    {
+      "asset": "map.png",
+      "source": "ui-mockups/18-overview-empty-state.png",
+      "crop": {
+        "x": 473,
+        "y": 474,
+        "width": 304,
+        "height": 153
+      },
+      "transparent_background": true
+    },
+    {
+      "asset": "success-map.png",
+      "source": "ui-mockups/13-expedition-success.png",
+      "crop": {
+        "x": 85,
+        "y": 196,
+        "width": 248,
+        "height": 122
+      },
+      "transparent_background": true
+    },
+    {
+      "asset": "failure-map.png",
+      "source": "ui-mockups/14-expedition-failure.png",
+      "crop": {
+        "x": 131,
+        "y": 204,
+        "width": 162,
+        "height": 114
+      },
+      "transparent_background": true
+    },
+    {
+      "asset": "moon.png",
+      "source": "ui-mockups/16-end-day-dialog.png",
+      "crop": {
+        "x": 565,
+        "y": 347,
+        "width": 88,
+        "height": 75
+      },
+      "transparent_background": true
+    },
+    {
+      "asset": "leaf.png",
+      "source": "ui-mockups/03-overview.png",
+      "crop": {
+        "x": 29,
+        "y": 887,
+        "width": 51,
+        "height": 62
+      },
+      "transparent_background": true
+    },
+    {
+      "asset": "parchment.png",
+      "source": "ui-mockups/01-main-menu.png",
+      "crop": {
+        "x": 80,
+        "y": 180,
+        "width": 240,
+        "height": 180
+      },
+      "transparent_background": false
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<!-- Controller supplied by FXMLLoader.setController(...). No demonstration game data. -->
+<DialogPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@guild-theme.css" fx:id="loadConfirmationDialogPane" prefWidth="560" prefHeight="275" minHeight="0" styleClass="guild-dialog">
+  <header>
+    <HBox spacing="12" alignment="CENTER_LEFT">
+      <ImageView fitWidth="35" fitHeight="43" preserveRatio="true" smooth="false">
+        <image>
+          <Image url="@assets/crest.png"/>
+        </image>
+      </ImageView>
+      <Label text="Load saved game?" styleClass="dialog-title"/>
+    </HBox>
+  </header>
+  <content>
+    <VBox spacing="18">
+      <Label text="Unsaved progress will be lost." styleClass="muted" wrapText="true"/>
+      <HBox spacing="12" styleClass="stat-row" alignment="CENTER_LEFT">
+        <Label text="Saved guild" styleClass="muted"/>
+        <Region HBox.hgrow="ALWAYS" minWidth="0"/>
+        <Label text="—" styleClass="value" fx:id="savedGuildNameLabel"/>
+      </HBox>
+      <HBox spacing="12" styleClass="stat-row" alignment="CENTER_LEFT">
+        <Label text="Saved day" styleClass="muted"/>
+        <Region HBox.hgrow="ALWAYS" minWidth="0"/>
+        <Label text="—" styleClass="value" fx:id="savedDayLabel"/>
+      </HBox>
+      <Label fx:id="loadFeedbackLabel" text="" styleClass="feedback" wrapText="true" visible="false" managed="false"/>
+    </VBox>
+  </content>
+  <buttonTypes>
+    <ButtonType fx:id="cancelLoadButtonType" text="Cancel" buttonData="CANCEL_CLOSE"/>
+    <ButtonType fx:id="confirmLoadButtonType" text="Load game" buttonData="OK_DONE"/>
+  </buttonTypes>
+</DialogPane>

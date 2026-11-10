@@ -1,6 +1,6 @@
 # 📌 Guild Master
-Breve descrizione del progetto (2-3 righe):  
-Spiega cosa fa il programma e a cosa serve.
+È un GDR interattivo in cui il giocatore interpreta il capo di una gilda. Il suo compito è quello di amministrare le risorse a disposizione in modo strategico ed effettuare spedizioni nei dungeon, per accrescere l'importanza della gilda.
+
 ---
 ## 🚀 Come eseguire il progetto
 ### Prerequisiti
@@ -21,21 +21,4 @@ cd <nome-cartella>
 ```
 ---
 ## 🤖 Uso di strumenti di AI
-Indicare **se e come** sono stati utilizzati strumenti di AI (es. ChatGPT, Copilot, ecc.).
-Descrivere in modo chiaro **per quali attività** e **con quale livello di intervento personale**.
-È importante dimostrare che:
-* il codice è stato **compreso**
-* l’AI è stata usata come **supporto**, non come sostituto
----
-📌 Per una descrizione più dettagliata dell’uso dell’AI, utilizzare la **Wiki del repository**.
-### Esempi :
-* Utilizzato ChatGPT per:
-    * comprendere concetti teorici (es. differenza tra classi e oggetti)
-    * chiarire errori di compilazione
-    * suggerimenti su struttura del codice
-* Utilizzato Copilot per:
-    * autocompletamento di metodi semplici
-    * generazione di codice ripetitivo (es. getter/setter)
-* Utilizzato ChatGPT per generare una prima versione di una funzione, poi:
-    * modificata e adattata manualmente
-    * testata e corretta personalmente
+Strumenti di AI sono stati utilizzati nelle fasi di brainstorming, sia per l'aspetto creativo del gioco che per quello implementativo, con un confronto attivo sulle implementazioni suggerite. Una volta definite le scelte implementative, l'AI è stata di supporto per acquisire conoscenze o favorire la risoluzione di problemi legati agli strumenti usati, sempre con documentazioni ufficiali a confronto.

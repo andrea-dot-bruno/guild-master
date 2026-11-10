@@ -1,0 +1,107 @@
+/* Standard JavaFX controls; all game data is provided by a controller. */
+.guild-root, .guild-dialog {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 15px;
+    -fx-text-fill: #482719;
+    -fx-background-color: #f6e9d5;
+    -fx-background-image: url("assets/parchment.png");
+    -fx-background-repeat: repeat;
+    -fx-focus-color: #af772f;
+    -fx-faint-focus-color: transparent;
+    -fx-accent: #e5ba6e;
+    -fx-selection-bar: #f5d594;
+    -fx-selection-bar-non-focused: #ead4ae;
+    -fx-selection-bar-text: #482719;
+}
+.guild-root { -fx-border-color: #705033, #d6b996; -fx-border-width: 3, 1; -fx-border-insets: 0, 5; -fx-padding: 7; }
+.label { -fx-text-fill: #482719; }
+.app-header { -fx-padding: 4 12 10 12; -fx-min-height: 67; }
+.brand { -fx-font-size: 24px; -fx-font-weight: bold; }
+.guild-name { -fx-font-size: 23px; -fx-font-weight: bold; }
+.header-stat { -fx-font-size: 21px; -fx-font-weight: bold; }
+.app-footer { -fx-padding: 9 12 5 12; -fx-border-color: #a98564; -fx-border-width: 1 0 0 0; -fx-min-height: 61; }
+.page-title { -fx-font-size: 29px; -fx-font-weight: bold; }
+.detail-title { -fx-font-size: 26px; -fx-font-weight: bold; }
+.profile-name { -fx-font-size: 36px; -fx-font-weight: bold; }
+.item-title { -fx-font-size: 20px; -fx-font-weight: bold; }
+.section-title { -fx-font-size: 17px; -fx-font-weight: bold; }
+.value { -fx-font-size: 17px; -fx-font-weight: bold; }
+.muted { -fx-text-fill: #79563e; -fx-font-size: 16px; }
+.small, .empty-text { -fx-text-fill: #79563e; -fx-font-size: 14px; }
+.empty-text { -fx-padding: 14; }
+.chance { -fx-font-size: 41px; -fx-font-weight: bold; }
+.panel { -fx-padding: 14; }
+.heading { -fx-padding: 0 0 7 0; }
+.stat-row { -fx-padding: 4 0; -fx-border-color: #bea181; -fx-border-width: 0 0 1 0; }
+.feedback { -fx-text-fill: #a14e31; -fx-font-size: 14px; }
+.feedback.positive { -fx-text-fill: #646b29; }
+.negative { -fx-text-fill: #a14e31; }
+.button, .toggle-button {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #482719;
+    -fx-padding: 8 14;
+    -fx-background-radius: 0;
+    -fx-background-color: #62422d, #bd9c76, #ead6b6;
+    -fx-background-insets: 0, 2, 4;
+    -fx-cursor: hand;
+}
+.primary, .guild-dialog .button:default {
+    -fx-text-fill: #fff4db;
+    -fx-background-color: #58391c, #edbf69, #ba7d2c;
+    -fx-background-insets: 0, 3, 5;
+}
+.button:hover, .toggle-button:hover { -fx-background-color: #62422d, #bd9c76, #f2dfbf; }
+.primary:hover, .guild-dialog .button:default:hover { -fx-background-color: #58391c, #f3cc85, #c68b35; }
+.button:focused, .toggle-button:focused { -fx-border-color: #9e6e2a; -fx-border-width: 1; -fx-border-insets: -2; }
+.button:disabled, .spinner:disabled { -fx-opacity: 0.65; -fx-cursor: default; }
+.mode-toggle:selected { -fx-background-color: #81592e, #f5d18b; -fx-background-insets: 0, 2; }
+.main-tabs { -fx-tab-min-width: 160; -fx-tab-max-width: 160; -fx-tab-min-height: 36; -fx-open-tab-animation: NONE; -fx-close-tab-animation: NONE; }
+.main-tabs > .tab-header-area { -fx-padding: 3 4 4 4; }
+.main-tabs > .tab-header-area > .tab-header-background { -fx-background-color: #67462f; }
+.main-tabs > .tab-header-area > .headers-region > .tab { -fx-background-color: #8c6749; -fx-background-radius: 0; -fx-border-color: #513624; -fx-border-width: 1; -fx-padding: 4 7; }
+.main-tabs > .tab-header-area > .headers-region > .tab .tab-label { -fx-text-fill: #fff0d8; -fx-font-size: 20px; -fx-font-weight: bold; }
+.main-tabs > .tab-header-area > .headers-region > .tab:selected { -fx-background-color: #f4d08a; }
+.main-tabs > .tab-header-area > .headers-region > .tab:selected .tab-label { -fx-text-fill: #482719; }
+.tab-pane .tab .focus-indicator { -fx-border-color: transparent; }
+.tab-pane .tab:selected:focused .focus-indicator { -fx-border-color: #97642a; }
+.sub-tabs { -fx-tab-min-height: 28; -fx-open-tab-animation: NONE; -fx-close-tab-animation: NONE; }
+.sub-tabs > .tab-header-area { -fx-padding: 0 0 5 0; }
+.sub-tabs > .tab-header-area > .tab-header-background { -fx-background-color: transparent; }
+.sub-tabs > .tab-header-area > .headers-region > .tab { -fx-background-color: #e2cbaa; -fx-background-radius: 0; -fx-padding: 6 15; }
+.sub-tabs > .tab-header-area > .headers-region > .tab:selected { -fx-background-color: #f5d18b; }
+.sub-tabs .tab-label { -fx-font-size: 16px; -fx-text-fill: #482719; }
+.content-split { -fx-background-color: transparent; -fx-padding: 0; }
+.content-split > .split-pane-divider { -fx-background-color: #b69a78; -fx-padding: 0 0.5; }
+.content-scroll, .content-scroll > .viewport { -fx-background-color: transparent; -fx-padding: 0; }
+.preparation-columns > .panel { -fx-border-color: #b69a78; -fx-border-width: 0 1 0 0; -fx-padding: 10; }
+.preparation-summary { -fx-padding: 8 9; }
+.summary-content { -fx-padding: 0 0 4 0; }
+.summary-content .stat-row { -fx-padding: 2 0; }
+.summary-content .stat-row .muted, .summary-content .stat-row .value { -fx-font-size: 15px; }
+.summary-actions { -fx-padding: 8 0 0 0; }
+.data-table, .data-list { -fx-background-color: #b89c7c, #f8eddb; -fx-background-insets: 0, 1; -fx-padding: 1; }
+.data-table .column-header-background, .data-table .column-header, .data-table .filler { -fx-background-color: #e2ceb1; }
+.data-table .column-header { -fx-border-color: #c2a685; -fx-border-width: 0 1 1 0; -fx-padding: 6 3; }
+.data-table .column-header .label { -fx-font-size: 14px; -fx-font-weight: bold; -fx-alignment: CENTER_LEFT; }
+.table-row-cell, .list-cell { -fx-background-color: #f7ecda; -fx-text-fill: #482719; -fx-cell-size: 46; }
+.table-row-cell:odd, .list-cell:odd { -fx-background-color: #f1e3ce; }
+.table-row-cell:selected, .list-cell:selected { -fx-background-color: #f5d594; -fx-text-fill: #482719; }
+.table-row-cell:empty, .list-cell:empty { -fx-background-color: transparent; }
+.table-cell { -fx-padding: 8 7; -fx-text-fill: #482719; -fx-border-color: #dcc8ac; -fx-border-width: 0 0 1 0; -fx-font-size: 15px; }
+.list-cell { -fx-padding: 8 10; }
+.combo-box, .spinner, .text-field { -fx-font-family: "Georgia"; -fx-font-size: 14px; -fx-background-color: #ad8b64, #fff3df; -fx-background-insets: 0, 1; -fx-background-radius: 0; }
+.combo-box .list-cell { -fx-background-color: transparent; -fx-cell-size: 30; -fx-padding: 4 7; -fx-font-size: 14px; }
+.spinner .text-field { -fx-background-color: #fff3df; -fx-padding: 6 9; }
+.spinner .increment-arrow-button, .spinner .decrement-arrow-button { -fx-background-color: #dfc7a4; }
+.progress-bar > .track { -fx-background-color: #694a30, #e6d3b7; -fx-background-insets: 0, 2; -fx-background-radius: 2; }
+.progress-bar > .bar { -fx-background-color: #edb952; -fx-background-insets: 3; -fx-background-radius: 0; -fx-padding: 6; }
+.separator .line { -fx-border-color: #b89975; -fx-border-width: 1 0 0 0; }
+.scroll-bar { -fx-background-color: #ead9bd; }
+.scroll-bar .thumb { -fx-background-color: #a78360; -fx-background-radius: 0; }
+.guild-dialog { -fx-padding: 15; -fx-border-color: #795337, #d8b991; -fx-border-width: 2, 1; -fx-border-insets: 0, 5; }
+.guild-dialog > .header-panel { -fx-background-color: transparent; -fx-padding: 5 7 13 7; }
+.guild-dialog > .content { -fx-padding: 8; }
+.guild-dialog > .button-bar { -fx-padding: 12 7 3 7; }
+.dialog-title { -fx-font-size: 27px; -fx-font-weight: bold; }

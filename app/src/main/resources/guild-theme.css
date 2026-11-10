@@ -1,0 +1,23 @@
+.root {
+    guild-background: #F5E6D2;
+    guild-ink: #482318;
+    guild-ochre: #BB7D33;
+
+    -fx-background-color: guild-background;
+    -fx-font-family: "Georgia";
+    -fx-font-size: 16px;
+}
+
+.main-tabs { -fx-tab-min-width: 160; -fx-tab-max-width: 160; -fx-tab-min-height: 36; -fx-open-tab-animation: NONE; -fx-close-tab-animation: NONE; }
+.main-tabs > .tab-header-area { -fx-padding: 4; }
+.main-tabs > .tab-header-area > .tab-header-background { -fx-background-color: #67462f; }
+.main-tabs > .tab-header-area > .headers-region > .tab { -fx-background-color: #8c6749; -fx-background-radius: 0; -fx-border-color: #513624; -fx-border-width: 1; -fx-padding: 4 7; }
+.main-tabs > .tab-header-area > .headers-region > .tab .tab-label { -fx-text-fill: #fff0d8; -fx-font-size: 20px; -fx-font-weight: bold; }
+.main-tabs > .tab-header-area > .headers-region > .tab:selected { -fx-background-color: #f4d08a; }
+.main-tabs > .tab-header-area > .headers-region > .tab:selected .tab-label { -fx-text-fill: #482719; }
+
+.footer {
+
+    -fx-border-color: guild-ink;
+    -fx-border-width: 1 0 0 0;
+}

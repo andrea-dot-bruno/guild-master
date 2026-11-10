@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<!-- Controller supplied by FXMLLoader.setController(...). No demonstration game data. -->
+<DialogPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@guild-theme.css" fx:id="expeditionReportDialogPane" prefWidth="850" prefHeight="510" minHeight="0" styleClass="guild-dialog">
+  <header>
+    <HBox spacing="12" alignment="CENTER_LEFT">
+      <ImageView fitWidth="35" fitHeight="43" preserveRatio="true" smooth="false">
+        <image>
+          <Image url="@assets/crest.png"/>
+        </image>
+      </ImageView>
+      <Label text="Expedition report" styleClass="dialog-title"/>
+    </HBox>
+  </header>
+  <content>
+    <VBox spacing="12">
+      <HBox spacing="12" alignment="CENTER_LEFT">
+        <ImageView fitWidth="95" fitHeight="70" preserveRatio="true" smooth="false">
+          <image>
+            <Image url="@assets/map.png"/>
+          </image>
+        </ImageView>
+        <VBox spacing="7" HBox.hgrow="ALWAYS">
+          <Label text="—" styleClass="detail-title" fx:id="reportDungeonNameLabel"/>
+          <Label text="—" styleClass="item-title" fx:id="reportOutcomeLabel"/>
+        </VBox>
+      </HBox>
+      <HBox spacing="18" VBox.vgrow="ALWAYS" alignment="CENTER_LEFT">
+        <VBox spacing="12" prefWidth="385" HBox.hgrow="ALWAYS">
+          <Label text="OUTCOME" styleClass="section-title"/>
+          <HBox spacing="12" styleClass="stat-row" alignment="CENTER_LEFT">
+            <Label text="Gold reward" styleClass="muted"/>
+            <Region HBox.hgrow="ALWAYS" minWidth="0"/>
+            <Label text="—" styleClass="value" fx:id="reportGoldRewardLabel"/>
+          </HBox>
+          <HBox spacing="12" styleClass="stat-row" alignment="CENTER_LEFT">
+            <Label text="Wages paid at departure" styleClass="muted"/>
+            <Region HBox.hgrow="ALWAYS" minWidth="0"/>
+            <Label text="—" styleClass="value" fx:id="reportWagesLabel"/>
+          </HBox>
+          <TableView fx:id="reportItemsTable" VBox.vgrow="ALWAYS" minHeight="100" styleClass="data-table">
+            <columns>
+              <TableColumn fx:id="reportItemNameColumn" text="Item / supply" prefWidth="200" minWidth="45"/>
+              <TableColumn fx:id="reportItemOutcomeColumn" text="Outcome" prefWidth="160" minWidth="45"/>
+            </columns>
+            <columnResizePolicy>
+              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS"/>
+            </columnResizePolicy>
+            <placeholder>
+              <Label text="No item or supply changes." styleClass="empty-text" wrapText="true" textAlignment="CENTER"/>
+            </placeholder>
+          </TableView>
+        </VBox>
+        <VBox spacing="12" prefWidth="360" HBox.hgrow="ALWAYS">
+          <Label text="RETURNING HEROES" styleClass="section-title"/>
+          <TableView fx:id="reportHeroesTable" VBox.vgrow="ALWAYS" minHeight="100" styleClass="data-table">
+            <columns>
+              <TableColumn fx:id="reportHeroNameColumn" text="Hero" prefWidth="120" minWidth="45"/>
+              <TableColumn fx:id="reportHeroLevelColumn" text="Level" prefWidth="65" minWidth="45"/>
+              <TableColumn fx:id="reportHeroExperienceColumn" text="XP gained" prefWidth="90" minWidth="45"/>
+            </columns>
+            <columnResizePolicy>
+              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS"/>
+            </columnResizePolicy>
+            <placeholder>
+              <Label text="No returning heroes to display." styleClass="empty-text" wrapText="true" textAlignment="CENTER"/>
+            </placeholder>
+          </TableView>
+        </VBox>
+      </HBox>
+      <Label fx:id="reportSummaryLabel" text="" wrapText="true" styleClass="muted"/>
+    </VBox>
+  </content>
+  <buttonTypes>
+    <ButtonType fx:id="closeReportButtonType" text="Back to guild" buttonData="CANCEL_CLOSE"/>
+  </buttonTypes>
+</DialogPane>

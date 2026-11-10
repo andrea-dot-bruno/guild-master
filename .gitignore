@@ -9,3 +9,5 @@ build
 
 # Ignore IntelliJ IDEA directory
 .idea
+
+.DS_Store
