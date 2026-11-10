@@ -159,4 +159,4 @@ In questo esempio `loader` e `pane` sono quelli di `weapon-selection-dialog.fxml
 | Partita salvata | Riepilogo e messaggio nel dialogo menu |
 | Spedizione conclusa | Dati aggiornati nel solo resoconto, con esito diverso |
 
-Il progetto non viene avviato o modificato automaticamente da questi file. `GUIApp.java`, modello e controller dell'app restano da collegare durante l'implementazione del gioco.
+Il progetto non viene avviato o modificato automaticamente da questi file. `MainApplication.java`, modello e controller dell'app restano da collegare durante l'implementazione del gioco.
