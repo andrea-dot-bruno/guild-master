@@ -13,7 +13,7 @@ import java.util.List;
 
 public class OverviewController {
     @FXML private TableView<Expedition> activeExpeditionsTable;
-    @FXML private ListView<String> availableHeroesList;
+    @FXML private ListView<Hero> availableHeroesList;
 
     @FXML private void handlePlanExpeditionButton(ActionEvent actionEvent) {} //TODO: implement
     @FXML private void handleViewHeroesButton(ActionEvent actionEvent) {} //TODO: implement
@@ -23,10 +23,11 @@ public class OverviewController {
     }
 
     public void setAvailableHeroesList(List<Hero> availableHeroes) {
-        List<String> heroesNames = new ArrayList<>();
-        for (Hero h : availableHeroes) {
-            heroesNames.add(h.getName());
-        }
-        availableHeroesList.getItems().addAll(heroesNames);
+//        TODO: review method
+//        List<String> heroesNames = new ArrayList<>();
+//        for (Hero h : availableHeroes) {
+//            heroesNames.add(h.getName());
+//        }
+//        availableHeroesList.getItems().addAll(heroesNames);
     }
 }

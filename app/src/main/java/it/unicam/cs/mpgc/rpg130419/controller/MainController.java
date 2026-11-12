@@ -8,24 +8,33 @@ import java.util.List;
 
 public class MainController {
     private GameSession session;
-    private HeaderController headerController;
-    private OverviewController overviewController;
-    private ExpeditionsController expeditionsController;
-    private HeroesController heroesController;
-    private RecruitmentController recruitmentController;
-    private FooterController footerController;
 
-    public MainController() {
-        this.headerController = new HeaderController();
-        this.overviewController = new OverviewController();
-        this.expeditionsController = new ExpeditionsController();
-        this.heroesController = new HeroesController();
-        this.recruitmentController = new RecruitmentController();
-        this.footerController = new FooterController();
+    @FXML private HeaderController headerController;
+    @FXML private OverviewController overviewController;
+    @FXML private ExpeditionsController expeditionsController;
+    @FXML private HeroesController heroesController;
+    @FXML private RecruitmentController recruitmentController;
+    @FXML private FooterController footerController;
+
+    public void initialize() {
+        heroesController.setFireHero(this::fireHero);
     }
 
     public void linkSession(GameSession session) {
         this.session = session;
+    }
+
+    public void updateDisplay() {
+        setGoldAmountLabel();
+        setDayNumberLabel();
+        setUnderwayExpeditionsLabel();
+        setGuildNameLabel();
+        setActiveExpeditionsTable();
+        setAvailableHeroesList();
+    }
+
+    private void fireHero(Hero hero) {
+        session.removeHero(hero);
     }
 
     public void setGoldAmountLabel() {
@@ -50,20 +59,13 @@ public class MainController {
 
     public void setActiveExpeditionsTable() {
         List<Expedition> activeExpeditionsList = session.getActiveExpeditions();
-        overviewTabController.setActiveExpeditionsTable(activeExpeditionsList);
+        overviewController.setActiveExpeditionsTable(activeExpeditionsList);
     }
 
     public void setAvailableHeroesList() {
         List<Hero> availableHeroesList = session.getAvailableHeroes();
-        overviewTabController.setAvailableHeroesList(availableHeroesList);
+        overviewController.setAvailableHeroesList(availableHeroesList);
     }
 
-    public void updateDisplay() {
-        setGoldAmountLabel();
-        setDayNumberLabel();
-        setUnderwayExpeditionsLabel();
-        setGuildNameLabel();
-        setActiveExpeditionsTable();
-        setAvailableHeroesList();
-    }
+
 }

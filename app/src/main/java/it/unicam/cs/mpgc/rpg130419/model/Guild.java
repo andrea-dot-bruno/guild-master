@@ -86,4 +86,10 @@ public class Guild {
         }
         return availableHeroes;
     }
+
+    public void removeHero(Hero hero) {
+        if (hero == null) throw new IllegalArgumentException("Hero can't be null.");
+        if (!(heroes.contains(hero))) throw new IllegalArgumentException("Hero not present in the list.");
+        heroes.remove(hero);
+    }
 }

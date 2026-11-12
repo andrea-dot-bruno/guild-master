@@ -39,7 +39,7 @@
                      <children>
                         <ImageView fx:id="recruitHeroIcon" fitHeight="73.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../assets/lyra.png" />
+                              <Image url="@../assets/mage-icons/lyra.png" />
                            </image>
                         </ImageView>
                         <Label fx:id="recruitHeroName" prefHeight="66.0" prefWidth="390.0" text="&lt;player-name&gt;" textAlignment="CENTER" wrapText="true">
@@ -80,15 +80,15 @@
                      <left>
                         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="170.0" BorderPane.alignment="CENTER">
                            <children>
-                              <ImageView fx:id="recruitHeroMainItemIcon" fitHeight="130.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="recruitHeroLeftItemIcon" fitHeight="130.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../assets/iron-sword.png" />
+                                    <Image url="@../assets/weapon-icons/iron-sword.png" />
                                  </image>
                                  <VBox.margin>
                                     <Insets />
                                  </VBox.margin>
                               </ImageView>
-                              <Label fx:id="recruitHeroMainItemDamage" text="&lt;weapon-damage&gt;">
+                              <Label fx:id="recruitHeroLeftItemDamage" text="&lt;weapon-damage&gt;">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
@@ -102,15 +102,15 @@
                      <right>
                         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="170.0" BorderPane.alignment="CENTER">
                            <children>
-                              <ImageView fx:id="recruitHeroSecondItemIcon" fitHeight="130.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="recruitHeroRightItemIcon" fitHeight="130.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../assets/shield.png" />
+                                    <Image url="@../assets/weapon-icons/shield.png" />
                                  </image>
                                  <VBox.margin>
                                     <Insets />
                                  </VBox.margin>
                               </ImageView>
-                              <Label fx:id="recruitHeroSecondItemDamage" prefHeight="23.0" prefWidth="221.0" text="&lt;weapon-damage&gt;">
+                              <Label fx:id="recruitHeroRightItemDamage" prefHeight="23.0" prefWidth="221.0" text="&lt;weapon-damage&gt;">
                                  <font>
                                     <Font size="19.0" />
                                  </font>

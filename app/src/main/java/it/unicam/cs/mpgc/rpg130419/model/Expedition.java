@@ -1,8 +1,10 @@
 package it.unicam.cs.mpgc.rpg130419.model;
 
 import java.util.List;
+import java.util.UUID;
 
 public class Expedition {
+    private final UUID id;
     private Dungeon dungeon;
     private List<Hero> heroes; //TODO: might develop a Party class to store party heroes and handle exp-ing.
     private int remainingTime;
@@ -10,6 +12,7 @@ public class Expedition {
 
 
     public Expedition(Dungeon dungeon, List<Hero> heroes, int time) {
+        this.id = UUID.randomUUID();
         this.dungeon = dungeon;
         this.heroes = heroes;
         this.remainingTime = time;

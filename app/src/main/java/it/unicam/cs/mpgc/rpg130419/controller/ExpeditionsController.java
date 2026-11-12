@@ -1,5 +1,6 @@
 package it.unicam.cs.mpgc.rpg130419.controller;
 
+import it.unicam.cs.mpgc.rpg130419.model.Dungeon;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -8,7 +9,7 @@ import javafx.scene.image.ImageView;
 
 public class ExpeditionsController {
 
-    @FXML private TableView expeditionBoardTable;
+    @FXML private TableView<Dungeon> expeditionBoardTable;
     @FXML private Label boardDungeonName;
     @FXML private ImageView boardDungeonIcon;
     @FXML private Label boardDungeonDifficulty;

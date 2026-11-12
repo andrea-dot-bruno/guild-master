@@ -33,7 +33,19 @@ public class HeroLevel {
         }
     }
 
+    public double getExpPercentage() {
+        return (currentExp / (double) requiredExpToLevelUp);
+    }
+
     public int getLevel() {
         return level;
+    }
+
+    public int getCurrentExp() {
+        return currentExp;
+    }
+
+    public int getRequiredExpToLevelUp() {
+        return requiredExpToLevelUp;
     }
 }

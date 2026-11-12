@@ -1,30 +1,50 @@
 package it.unicam.cs.mpgc.rpg130419.model;
 
+import it.unicam.cs.mpgc.rpg130419.model.weapons.LeftFist;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.RightFist;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class WeaponSet {
-    private List<Weapon> weapons;
+    private Weapon rightWeapon;
+    private Weapon leftWeapon;
 
     public WeaponSet() {
-        weapons = new ArrayList<>();
+        rightWeapon = new RightFist();
+        leftWeapon = new LeftFist();
     }
 
-    public boolean addWeapon(Weapon weapon) {
-        if (weapon == null) throw new IllegalArgumentException("Weapon can't be null");
-        if (weapons.size() >= 2) {
-            return false;
-        } else {
-            weapons.add(weapon);
-            return true;
-        }
+    public void setRightWeapon(Weapon rightWeapon) {
+        this.rightWeapon = rightWeapon;
+    }
+    public void setLeftWeapon(Weapon leftWeapon) {
+        this.leftWeapon = leftWeapon;
     }
 
-    public int calculateWeaponSetPower() {
-        int power = 0;
-        for (Weapon w : weapons) {
-            power += w.getPower();
-        }
-        return power;
+    public int getWeaponSetPower() {
+        return leftWeapon.getPower() + rightWeapon.getPower();
     }
+
+    public String getLeftWeaponIconPath() {
+        return leftWeapon.getIconPath();
+    }
+    public String getRightWeaponIconPath() {
+        return rightWeapon.getIconPath();
+    }
+
+    public int getLeftWeaponPower() {
+        return leftWeapon.getPower();
+    }
+    public int getRightWeaponPower() {
+        return rightWeapon.getPower();
+    }
+
+    public String getLeftWeaponName() {
+        return leftWeapon.getName();
+    }
+    public String getRightWeaponName() {
+        return rightWeapon.getName();
+    }
+
 }

@@ -40,7 +40,7 @@
                      <children>
                         <ImageView fx:id="guildHeroIcon" fitHeight="73.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../assets/cedric.png" />
+                              <Image url="@../assets/knight-icons/cedric.png" />
                            </image>
                         </ImageView>
                         <Label fx:id="guildHeroName" prefHeight="66.0" prefWidth="390.0" text="&lt;player-name&gt;" textAlignment="CENTER" wrapText="true">
@@ -86,15 +86,15 @@
                      <left>
                         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="170.0" BorderPane.alignment="CENTER">
                            <children>
-                              <ImageView fx:id="guildHeroMainItemIcon" fitHeight="130.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="guildHeroLeftWeaponIcon" fitHeight="130.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../assets/iron-sword.png" />
+                                    <Image url="@../assets/weapon-icons/iron-sword.png" />
                                  </image>
                                  <VBox.margin>
                                     <Insets />
                                  </VBox.margin>
                               </ImageView>
-                              <Label fx:id="guildHeroMainItemDamage" text="&lt;weapon-damage&gt;">
+                              <Label fx:id="guildHeroLeftWeaponDamage" text="&lt;weapon-damage&gt;">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
@@ -108,15 +108,15 @@
                      <right>
                         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="170.0" BorderPane.alignment="CENTER">
                            <children>
-                              <ImageView fx:id="guildHeroSecondItemIcon" fitHeight="130.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="guildHeroRightWeaponIcon" fitHeight="130.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../assets/shield.png" />
+                                    <Image url="@../assets/weapon-icons/shield.png" />
                                  </image>
                                  <VBox.margin>
                                     <Insets />
                                  </VBox.margin>
                               </ImageView>
-                              <Label fx:id="guildHeroSecondItemDamage" prefHeight="23.0" prefWidth="221.0" text="&lt;weapon-damage&gt;">
+                              <Label fx:id="guildHeroRightWeaponDamage" prefHeight="23.0" prefWidth="221.0" text="&lt;weapon-damage&gt;">
                                  <font>
                                     <Font size="19.0" />
                                  </font>

@@ -39,7 +39,7 @@
                   </Label>
                   <ImageView fx:id="boardDungeonIcon" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../assets/emberstone.png" />
+                        <Image url="@../assets/dungeon-icons/emberstone.png" />
                      </image>
                   </ImageView>
                   <Label fx:id="boardDungeonDifficulty" layoutX="21.0" layoutY="10.0" prefHeight="0.0" prefWidth="424.0" text="&lt;difficulty&gt;" textAlignment="CENTER">
