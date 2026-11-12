@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1120.0" stylesheets="@guild-theme.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <fx:include fx:id="header" source="header.fxml" />
+      <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="1100.0" styleClass="main-tabs" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab text="Overview">
+               <content>
+                  <fx:include fx:id="overview" source="overview-tab.fxml"/>
+               </content>
+            </Tab>
+            <Tab text="Expeditions">
+               <content>
+                  <fx:include fx:id="expeditions" source="expeditions-tab.fxml"/>
+               </content>
+            </Tab>
+            <Tab text="Heroes">
+               <content>
+                  <fx:include fx:id="heroes" source="heroes-tab.fxml"/>
+               </content>
+            </Tab>
+            <Tab text="Recruitment">
+               <content>
+                  <fx:include fx:id="recruitment" source="recruitment-tab.fxml"/>
+               </content>
+            </Tab>
+         </tabs>
+         <VBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </VBox.margin>
+      </TabPane>
+      <fx:include fx:id="footer" source="footer.fxml" />
+   </children>
+</VBox>

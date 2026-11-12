@@ -1,23 +1,102 @@
 .root {
+    /* Surfaces */
     guild-background: #F5E6D2;
+    guild-panel: #E4CCA8;
+    guild-divider: #A57A5B;
+
+    /* Text */
     guild-ink: #482318;
+    guild-muted-ink: #744B37;
+    guild-light-ink: #FDFCF9;
+
+    /* Wood */
+    guild-walnut: #79543B;
+    guild-walnut-shadow: #6A4934;
+    guild-walnut-highlight: #896247;
+
+    /* Buttons and selection */
     guild-ochre: #BB7D33;
+    guild-ochre-highlight: #C38337;
+    guild-selection: #F5CE86;
+    guild-disabled: #D1BAA1;
+
+    /* Progress bars */
+    guild-progress-fill: #F1BA5D;
+    guild-progress-track: #DCC8B3;
+
+    /* Status messages */
+    guild-success: #5A5609;
+    guild-error: #A84628;
 
     -fx-background-color: guild-background;
     -fx-font-family: "Georgia";
-    -fx-font-size: 16px;
 }
 
-.main-tabs { -fx-tab-min-width: 160; -fx-tab-max-width: 160; -fx-tab-min-height: 36; -fx-open-tab-animation: NONE; -fx-close-tab-animation: NONE; }
-.main-tabs > .tab-header-area { -fx-padding: 4; }
-.main-tabs > .tab-header-area > .tab-header-background { -fx-background-color: #67462f; }
-.main-tabs > .tab-header-area > .headers-region > .tab { -fx-background-color: #8c6749; -fx-background-radius: 0; -fx-border-color: #513624; -fx-border-width: 1; -fx-padding: 4 7; }
-.main-tabs > .tab-header-area > .headers-region > .tab .tab-label { -fx-text-fill: #fff0d8; -fx-font-size: 20px; -fx-font-weight: bold; }
-.main-tabs > .tab-header-area > .headers-region > .tab:selected { -fx-background-color: #f4d08a; }
-.main-tabs > .tab-header-area > .headers-region > .tab:selected .tab-label { -fx-text-fill: #482719; }
+.label {
+    -fx-background-color: guild-background;
+    -fx-font-family: "Georgia";
+}
+
+.button {
+    -fx-font-family: "Georgia";
+}
+
+.button-main {
+    -fx-background-color: guild-ink, guild-panel, guild-ochre;
+    -fx-background-insets: 0, 3, 6;
+    -fx-background-radius: 0;
+    -fx-text-fill: guild-background;
+}
+
+.button-secondary {
+    -fx-background-color: guild-ink, guild-divider, guild-panel;
+    -fx-background-insets: 0, 3, 6;
+    -fx-background-radius: 0;
+    -fx-text-fill: guild-ink;
+}
+
+/* Sfondo marrone della barra, visibile anche a destra delle tab */
+.main-tabs > .tab-header-area > .tab-header-background {-fx-background-color: #67462f;}
+/* Sfondo, bordo, angoli e spaziatura interna di ogni tab */
+.main-tabs > .tab-header-area > .headers-region > .tab {
+    -fx-background-color: #8c6749;
+    -fx-background-radius: 0;
+    -fx-border-color: #513624;
+    -fx-border-width: 1;
+    -fx-padding: 4 7;
+}
+.main-tabs {
+    -fx-tab-min-width: 160;
+    -fx-tab-max-width: 160;
+    -fx-tab-min-height: 36;
+}
+.main-tabs > .tab-header-area {-fx-padding: 4;}
+/* Testo delle tab */
+.main-tabs > .tab-header-area > .headers-region > .tab .tab-label {
+    -fx-text-fill: #fff0d8;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+/* Sfondo e testo della tab selezionata */
+.main-tabs > .tab-header-area > .headers-region > .tab:selected {-fx-background-color: #f4d08a;}
+.main-tabs > .tab-header-area > .headers-region > .tab:selected .tab-label {-fx-text-fill: #482719;}
+
+.dungeon-details {
+    -fx-border-color: guild-ink;
+    -fx-border-width: 0 0 0 1;
+}
+
+.weapon-vbox {
+    -fx-border-color: guild-ink;
+    -fx-border-width: 1;
+}
+
+.equipment-border-pane {
+    -fx-border-color: guild-ink;
+    -fx-border-width: 1 0 0 0;
+}
 
 .footer {
-
     -fx-border-color: guild-ink;
     -fx-border-width: 1 0 0 0;
 }

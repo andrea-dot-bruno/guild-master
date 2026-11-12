@@ -2,6 +2,8 @@ package it.unicam.cs.mpgc.rpg130419.app;
 
 import it.unicam.cs.mpgc.rpg130419.controller.MainController;
 import it.unicam.cs.mpgc.rpg130419.model.GameSession;
+import it.unicam.cs.mpgc.rpg130419.model.Knight;
+import it.unicam.cs.mpgc.rpg130419.model.Mage;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,14 +16,16 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(
-                MainApplication.class.getResource("/view/guild-master-ui-diy.fxml")
+                MainApplication.class.getResource("/view/main-page.fxml")
         );
         Parent root = loader.load();
-
         MainController controller = loader.getController();
         GameSession session = new GameSession();
-        controller.linkSession(session);
+
         session.addMoney(120);
+        session.addHero(new Knight("John"));
+        session.addHero(new Mage("Morris"));
+        controller.linkSession(session);
         controller.updateDisplay();
 
 

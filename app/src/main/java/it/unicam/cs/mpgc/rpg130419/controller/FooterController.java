@@ -1,15 +1,13 @@
 package it.unicam.cs.mpgc.rpg130419.controller;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 public class FooterController {
-    private Label underwayExpeditionsLabel;
+    @FXML private Label underwayExpeditionsLabel;
 
-    public FooterController(Label underwayExpeditionsLabel) {
-        this.underwayExpeditionsLabel = underwayExpeditionsLabel;
-    }
-
-    public void handlerEndDayButton() {}
+    @FXML private void handleEndDayButton(ActionEvent actionEvent) {} //TODO: implement
 
     public void setUnderwayExpeditionsLabel(int underwayExpeditions) {
         if (underwayExpeditions < 0) {

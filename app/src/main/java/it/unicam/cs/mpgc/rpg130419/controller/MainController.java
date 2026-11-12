@@ -3,42 +3,31 @@ package it.unicam.cs.mpgc.rpg130419.controller;
 import it.unicam.cs.mpgc.rpg130419.model.Expedition;
 import it.unicam.cs.mpgc.rpg130419.model.GameSession;
 import it.unicam.cs.mpgc.rpg130419.model.Hero;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TableView;
-
 import java.util.List;
 
 public class MainController {
-    private HeaderController headerController;
-    private OverviewTabController overviewTabController;
-    private FooterController footerController;
     private GameSession session;
+    private HeaderController headerController;
+    private OverviewController overviewController;
+    private ExpeditionsController expeditionsController;
+    private HeroesController heroesController;
+    private RecruitmentController recruitmentController;
+    private FooterController footerController;
 
-    public TableView<Expedition> activeExpeditionsTable;
-    public ListView<Hero> availableHeroesList;
-    public Label guildNameLabel;
-    public Label goldAmountLabel;
-    public Label dayNumberLabel;
-    public Label underwayExpeditionsLabel;
-
-    @FXML public void initialize() {
-        headerController = new HeaderController(guildNameLabel, goldAmountLabel, dayNumberLabel);
-        overviewTabController = new OverviewTabController(activeExpeditionsTable, availableHeroesList);
-        footerController = new FooterController(underwayExpeditionsLabel);
+    public MainController() {
+        this.headerController = new HeaderController();
+        this.overviewController = new OverviewController();
+        this.expeditionsController = new ExpeditionsController();
+        this.heroesController = new HeroesController();
+        this.recruitmentController = new RecruitmentController();
+        this.footerController = new FooterController();
     }
-
-    @FXML private void handlerMenuButton() {headerController.handlerMenuButton();}
-    @FXML private void handlerPlanExpeditionButton() {overviewTabController.handlerPlanExpeditionButton();}
-    @FXML private void handlerViewHeroesButton() {overviewTabController.handlerViewHeroesButton();}
-    @FXML private void handlerEndDayButton() {footerController.handlerEndDayButton();}
 
     public void linkSession(GameSession session) {
         this.session = session;
     }
+
     public void setGoldAmountLabel() {
         int goldAmount = session.getGold();
         headerController.setGoldAmountLabel(goldAmount);
@@ -75,5 +64,6 @@ public class MainController {
         setUnderwayExpeditionsLabel();
         setGuildNameLabel();
         setActiveExpeditionsTable();
+        setAvailableHeroesList();
     }
 }
