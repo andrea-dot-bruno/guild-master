@@ -4,6 +4,9 @@ import it.unicam.cs.mpgc.rpg130419.model.Expedition;
 import it.unicam.cs.mpgc.rpg130419.model.GameSession;
 import it.unicam.cs.mpgc.rpg130419.model.Hero;
 import javafx.fxml.FXML;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+
 import java.util.List;
 
 public class MainController {
@@ -15,9 +18,12 @@ public class MainController {
     @FXML private HeroesController heroesController;
     @FXML private RecruitmentController recruitmentController;
     @FXML private FooterController footerController;
+    @FXML private TabPane mainTabPane;
+    @FXML private Tab heroesTab;
 
     public void initialize() {
         heroesController.setFireHero(this::fireHero);
+        overviewController.setShowHeroesAction(this::showHeroesTab);
     }
 
     public void linkSession(GameSession session) {
@@ -33,8 +39,17 @@ public class MainController {
         setAvailableHeroesList();
     }
 
+    private void showHeroesTab() {
+        mainTabPane.getSelectionModel().select(heroesTab);
+    }
+
     private void fireHero(Hero hero) {
         session.removeHero(hero);
+        populateHeroesTable();
+    }
+
+    public void populateHeroesTable() {
+        heroesController.setGuildHeroes(session.getHeroes(), session.getAvailableHeroes());
     }
 
     public void setGoldAmountLabel() {

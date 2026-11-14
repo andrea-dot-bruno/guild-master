@@ -8,24 +8,24 @@
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1120.0" stylesheets="@guild-theme.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.mpgc.rpg130419.controller.MainController">
    <children>
       <fx:include fx:id="header" source="header.fxml" />
-      <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="1100.0" styleClass="main-tabs" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="mainTabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="1100.0" styleClass="main-tabs" tabClosingPolicy="UNAVAILABLE">
          <tabs>
-            <Tab text="Overview">
+            <Tab fx:id="overviewTab" text="Overview">
                <content>
                   <fx:include fx:id="overview" source="overview-tab.fxml"/>
                </content>
             </Tab>
-            <Tab text="Expeditions">
+            <Tab fx:id="expeditionsTab" text="Expeditions">
                <content>
                   <fx:include fx:id="expeditions" source="expeditions-tab.fxml"/>
                </content>
             </Tab>
-            <Tab text="Heroes">
+            <Tab fx:id="heroesTab" text="Heroes">
                <content>
                   <fx:include fx:id="heroes" source="heroes-tab.fxml"/>
                </content>
             </Tab>
-            <Tab text="Recruitment">
+            <Tab fx:id="recruitmentTab" text="Recruitment">
                <content>
                   <fx:include fx:id="recruitment" source="recruitment-tab.fxml"/>
                </content>

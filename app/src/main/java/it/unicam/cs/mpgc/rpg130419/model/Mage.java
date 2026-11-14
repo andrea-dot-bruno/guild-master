@@ -6,15 +6,16 @@ public class Mage extends Hero {
     private final double powerMultiplier = 1.1;
 
     public Mage(String name) {
-        super(name, new HeroLevel(initialExpRequirement, expRequirementIncrement));
+        super(name, "/assets/mage-icons/lyra.png", new HeroLevel(initialExpRequirement, expRequirementIncrement), 10);
+    }
+
+    @Override
+    public String getHeroClass() {
+        return "Mage";
     }
 
     @Override
     public double calculateTotalPower() {
-        if (weaponSet != null) {
-            return weaponSet.calculateWeaponSetPower() + (heroLevel.getLevel() * powerMultiplier);
-        } else {
-            return heroLevel.getLevel() * powerMultiplier;
-        }
+        return weaponSet.getWeaponSetPower();
     }
 }

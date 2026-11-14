@@ -6,15 +6,16 @@ public class Knight extends Hero {
     private final double powerMultiplier = 1.2;
 
     public Knight(String name) {
-        super(name, new HeroLevel(initialExpRequirement, expRequirementIncrement));
+        super(name, "/assets/knight-icons/bram.png", new HeroLevel(initialExpRequirement, expRequirementIncrement), 12);
+    }
+
+    @Override
+    public String getHeroClass() {
+        return "Knight";
     }
 
     @Override
     public double calculateTotalPower() {
-        if (weaponSet != null) {
-            return weaponSet.calculateWeaponSetPower() + (heroLevel.getLevel() * powerMultiplier);
-        } else {
-            return heroLevel.getLevel() * powerMultiplier;
-        }
+        return weaponSet.getWeaponSetPower();
     }
 }

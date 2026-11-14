@@ -1,5 +1,6 @@
 package it.unicam.cs.mpgc.rpg130419.app;
 
+import it.unicam.cs.mpgc.rpg130419.controller.HeroesController;
 import it.unicam.cs.mpgc.rpg130419.controller.MainController;
 import it.unicam.cs.mpgc.rpg130419.model.GameSession;
 import it.unicam.cs.mpgc.rpg130419.model.Knight;
@@ -27,6 +28,7 @@ public class MainApplication extends Application {
         session.addHero(new Mage("Morris"));
         controller.linkSession(session);
         controller.updateDisplay();
+        controller.populateHeroesTable();
 
 
         stage.setTitle("Guild Master");

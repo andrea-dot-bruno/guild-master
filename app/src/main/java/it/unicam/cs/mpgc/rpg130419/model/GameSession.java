@@ -55,4 +55,8 @@ public class GameSession {
     public void removeHero(Hero hero) {
         guild.removeHero(hero);
     }
+
+    public List<Hero> getHeroes() {
+        return guild.getHeroes();
+    }
 }

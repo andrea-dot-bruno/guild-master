@@ -58,6 +58,8 @@ public abstract class Hero {
         return iconPath;
     }
 
+    public abstract String getHeroClass();
+
     public int getDailyPay() {
         return dailyPay;
     }
