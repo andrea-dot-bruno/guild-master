@@ -11,10 +11,13 @@ import java.util.List;
 
 public class OverviewController {
     private Runnable showHeroesAction;
+    private Runnable planExpeditionAction;
     @FXML private TableView<Expedition> activeExpeditionsTable;
     @FXML private ListView<Hero> availableHeroesList;
 
-    @FXML private void handlePlanExpeditionButton(ActionEvent actionEvent) {} //TODO: implement
+    @FXML private void handlePlanExpeditionButton(ActionEvent actionEvent) {
+        planExpeditionAction.run();
+    }
 
     @FXML private void handleViewHeroesButton(ActionEvent actionEvent) {
         showHeroesAction.run();
@@ -22,6 +25,10 @@ public class OverviewController {
 
     public void setShowHeroesAction(Runnable showHeroesAction) {
         this.showHeroesAction = showHeroesAction;
+    }
+
+    public void setPlanExpeditionAction(Runnable planExpeditionAction) {
+        this.planExpeditionAction = planExpeditionAction;
     }
 
     public void setActiveExpeditionsTable(List<Expedition> activeExpeditionsList) {

@@ -1,10 +1,13 @@
 package it.unicam.cs.mpgc.rpg130419.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameSession {
     private Guild guild;
     private int currentDay;
+    private final List<Dungeon> availableDungeons = new ArrayList<>();
+    private final List<Hero> recruitmentCandidates = new ArrayList<>();
 
     public GameSession() {
         //TODO: implement real name and day
@@ -42,6 +45,18 @@ public class GameSession {
 
     public List<Expedition> getActiveExpeditions() {
         return guild.getActiveExpeditions();
+    }
+
+    public void launchExpedition(Expedition expedition) {
+        guild.launchExpedition(expedition);
+    }
+
+    public List<Dungeon> getAvailableDungeons() {
+        return availableDungeons;
+    }
+
+    public List<Hero> getRecruitmentCandidates() {
+        return recruitmentCandidates;
     }
 
     public void addHero(Hero hero) {

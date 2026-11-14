@@ -20,10 +20,12 @@ public class MainController {
     @FXML private FooterController footerController;
     @FXML private TabPane mainTabPane;
     @FXML private Tab heroesTab;
+    @FXML private Tab expeditionsTab;
 
     public void initialize() {
         heroesController.setFireHero(this::fireHero);
         overviewController.setShowHeroesAction(this::showHeroesTab);
+        overviewController.setPlanExpeditionAction(this::showExpeditionsTab);
     }
 
     public void linkSession(GameSession session) {
@@ -41,6 +43,10 @@ public class MainController {
 
     private void showHeroesTab() {
         mainTabPane.getSelectionModel().select(heroesTab);
+    }
+
+    private void showExpeditionsTab() {
+        mainTabPane.getSelectionModel().select(expeditionsTab);
     }
 
     private void fireHero(Hero hero) {
