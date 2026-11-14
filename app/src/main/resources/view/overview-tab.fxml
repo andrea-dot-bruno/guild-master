@@ -57,10 +57,10 @@
                   </Label>
                   <TableView fx:id="activeExpeditionsTable" prefHeight="403.0" prefWidth="769.0" styleClass="expeditions-table">
                      <columns>
-                        <TableColumn prefWidth="290.33141136169434" text="Expedition" />
-                        <TableColumn minWidth="0.0" prefWidth="175.6685791015625" text="Heroes" />
-                        <TableColumn prefWidth="135.22158813476562" text="Remaining" />
-                        <TableColumn prefWidth="233.4608154296875" text="Progress" />
+                        <TableColumn fx:id="aeTableExpeditionColumn" prefWidth="290.33141136169434" text="Expedition" />
+                        <TableColumn fx:id="aeTableHeroesColumn" minWidth="0.0" prefWidth="175.6685791015625" text="Heroes" />
+                        <TableColumn fx:id="aeTableRemainingColumn" prefWidth="135.22158813476562" text="Remaining" />
+<!--                        <TableColumn fx:id="aeTableProgressColumn" prefWidth="233.4608154296875" text="Progress" />-->
                      </columns>
                   </TableView>
                </children>
