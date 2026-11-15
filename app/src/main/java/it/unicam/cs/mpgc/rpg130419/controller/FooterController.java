@@ -1,17 +1,19 @@
 package it.unicam.cs.mpgc.rpg130419.controller;
 
-import javafx.event.ActionEvent;
+import it.unicam.cs.mpgc.rpg130419.view.EndDayConfirmation;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-
-import java.util.function.Consumer;
 
 public class FooterController {
     private Runnable endDay;
     @FXML private Label underwayExpeditionsLabel;
+    @FXML private Button endDayButton;
 
-    @FXML private void handleEndDayButton(ActionEvent actionEvent) {
-        endDay.run();
+    @FXML private void handleEndDayButton() {
+        if (EndDayConfirmation.show(endDayButton.getScene().getWindow())) {
+            endDay.run();
+        }
     }
 
     public void setUnderwayExpeditionsLabel(int underwayExpeditions) {

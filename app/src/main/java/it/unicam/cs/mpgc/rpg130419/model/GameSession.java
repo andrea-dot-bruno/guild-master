@@ -87,8 +87,8 @@ public class GameSession {
         return guild.getAvailableHeroes();
     }
 
-    public void removeHero(Hero hero) {
-        guild.removeHero(hero);
+    public boolean removeHero(Hero hero) {
+        return guild.removeHero(hero);
     }
 
     public List<Hero> getHeroes() {

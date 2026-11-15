@@ -1,11 +1,13 @@
 package it.unicam.cs.mpgc.rpg130419.controller;
 
 import it.unicam.cs.mpgc.rpg130419.model.Hero;
+import it.unicam.cs.mpgc.rpg130419.view.GuildDialogTheme;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableColumn;
@@ -65,13 +67,28 @@ public class HeroesController {
 
     }
 
-    public void handleFireHeroButton(ActionEvent actionEvent) {
+    @FXML private void handleFireHeroButton() {
         Hero hero = guildHeroesTable.getSelectionModel().getSelectedItem();
-        fireHero.accept(hero);
+        if (hero != null) fireHero.accept(hero);
     }
 
     public void setFireHero(Consumer<Hero> fireHero) {
         this.fireHero = fireHero;
+    }
+
+    public void showFireFailure(Hero hero) {
+        Alert alert = new Alert(Alert.AlertType.WARNING,
+                "You can't remove %s while on an expedition."
+                        .formatted(hero.getName()),
+                ButtonType.OK);
+        alert.initOwner(fireHeroButton.getScene().getWindow());
+        alert.setTitle("Fire Hero");
+        alert.setHeaderText("Hero unavailable");
+        alert.setGraphic(null);
+
+        GuildDialogTheme.applyTo(alert.getDialogPane());
+        alert.getDialogPane().lookupButton(ButtonType.OK).getStyleClass().add("button-main");
+        alert.show();
     }
 
     public void setGuildHeroes(List<Hero> heroes, List<Hero> availableHeroes) {

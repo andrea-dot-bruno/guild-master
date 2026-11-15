@@ -72,7 +72,6 @@ public class Guild {
         }
     }
 
-    //TODO: make this method better, maybe by making heroes a HashSet with K=Hero V=available.
     public List<Hero> getAvailableHeroes() {
         List<Hero> availableHeroes = new ArrayList<>();
         for (Hero h : heroes) {
@@ -80,6 +79,7 @@ public class Guild {
             for (Expedition e : activeExpeditions) {
                 if (e.getInvolvedHeroes().contains(h)) {
                     available = false;
+                    break;
                 }
             }
             if (available) availableHeroes.add(h);
@@ -87,10 +87,9 @@ public class Guild {
         return availableHeroes;
     }
 
-    public void removeHero(Hero hero) {
-//        if (hero == null) throw new IllegalArgumentException("Hero can't be null.");
-//        if (!(heroes.contains(hero))) throw new IllegalArgumentException("Hero not present in the list.");
-        heroes.remove(hero);
+    public boolean removeHero(Hero hero) {
+        if (!getAvailableHeroes().contains(hero)) return false;
+        return heroes.remove(hero);
     }
 
     public List<Hero> getHeroes() {

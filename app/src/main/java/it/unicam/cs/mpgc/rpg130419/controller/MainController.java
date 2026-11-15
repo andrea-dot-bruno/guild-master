@@ -64,7 +64,11 @@ public class MainController {
     }
 
     private void fireHero(Hero hero) {
-        session.removeHero(hero);
+        if (!session.removeHero(hero)) {
+            heroesController.showFireFailure(hero);
+            return;
+        }
+
         populateHeroesTable();
         setAvailableHeroesList();
     }

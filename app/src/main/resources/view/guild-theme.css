@@ -55,19 +55,22 @@
     -fx-text-fill: guild-ink;
 }
 
-/* Menu di gioco */
-.game-menu {
+/* Menu di gioco e dialoghi */
+.game-menu,
+.guild-dialog {
     -fx-background-color: guild-background;
     -fx-border-color: guild-walnut-shadow;
     -fx-border-width: 2;
 }
 
-.game-menu-header {
+.game-menu-header,
+.guild-dialog > .header-panel {
     -fx-background-color: guild-walnut-shadow;
     -fx-padding: 10 16;
 }
 
-.game-menu .game-menu-title {
+.game-menu .game-menu-title,
+.guild-dialog > .header-panel .label {
     -fx-background-color: transparent;
     -fx-text-fill: guild-light-ink;
     -fx-font-size: 22px;
@@ -83,14 +86,35 @@
     -fx-padding: 16;
 }
 
-.game-menu .button {
+.game-menu .button,
+.guild-dialog .button {
     -fx-font-size: 16px;
     -fx-padding: 9 18;
 }
 
-.game-menu .button:focused {
+.guild-dialog .button {
+    -fx-border-color: transparent;
+    -fx-border-insets: 3;
+}
+
+.game-menu .button:focused,
+.guild-dialog .button:focused {
     -fx-border-color: guild-walnut;
     -fx-border-insets: 3;
+}
+
+.guild-dialog {
+    -fx-pref-width: 360px;
+}
+
+.guild-dialog > .content.label {
+    -fx-text-fill: guild-ink;
+    -fx-font-size: 16px;
+    -fx-padding: 16;
+}
+
+.guild-dialog > .button-bar > .container {
+    -fx-padding: 0 16 16 16;
 }
 
 /* Barra di navigazione */
