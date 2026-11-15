@@ -5,6 +5,7 @@ import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableColumn;
@@ -20,6 +21,7 @@ public class HeroesController {
     private Consumer<Hero> fireHero;
     private Set<Hero> availableHeroesSet = Set.of();
     @FXML private TableView<Hero> guildHeroesTable;
+    @FXML private Button fireHeroButton;
     @FXML private TableColumn<Hero, String> heroNameColumn;
     @FXML private TableColumn<Hero, String> heroClassColumn;
     @FXML private TableColumn<Hero, Number> heroLevelColumn;
@@ -50,6 +52,8 @@ public class HeroesController {
                         ? "Available" : "On expedition"));
 
         clearInfoFields();
+        fireHeroButton.disableProperty().bind(
+                guildHeroesTable.getSelectionModel().selectedItemProperty().isNull());
         guildHeroesTable.getSelectionModel().selectedItemProperty()
                 .addListener((property, oldHero, newHero) -> {
                     if (newHero == null) {

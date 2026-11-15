@@ -7,7 +7,7 @@ public class GameSession {
     private Guild guild;
     private int currentDay;
     private final List<Dungeon> availableDungeons = new ArrayList<>();
-    private final List<Hero> recruitmentCandidates = new ArrayList<>();
+    private final List<RecruitmentCandidate> recruitmentCandidates = new ArrayList<>();
 
     public GameSession() {
         //TODO: implement real name and day
@@ -57,8 +57,26 @@ public class GameSession {
         availableDungeons.add(newDungeon);
     }
 
-    public List<Hero> getRecruitmentCandidates() {
+    public List<RecruitmentCandidate> getRecruitmentCandidates() {
         return recruitmentCandidates;
+    }
+
+    public void addRecruitmentCandidate(RecruitmentCandidate candidate) {
+        if (candidate == null) throw new IllegalArgumentException("Candidate can't be null.");
+        if (recruitmentCandidates.contains(candidate)) throw new IllegalArgumentException("Candidate already in recruitment list.");
+        recruitmentCandidates.add(candidate);
+    }
+
+    public boolean hireHero(RecruitmentCandidate candidate) {
+        if (!recruitmentCandidates.contains(candidate)) return false;
+
+        Hero hero = candidate.hero();
+        if (guild.getHeroes().contains(hero)) return false;
+        if (!guild.takeMoney(candidate.hireFee())) return false;
+
+        guild.addHero(hero);
+        recruitmentCandidates.remove(candidate);
+        return true;
     }
 
     public void addHero(Hero hero) {

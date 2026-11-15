@@ -7,6 +7,7 @@ import it.unicam.cs.mpgc.rpg130419.model.ExpeditionState;
 import it.unicam.cs.mpgc.rpg130419.model.GameSession;
 import it.unicam.cs.mpgc.rpg130419.model.Knight;
 import it.unicam.cs.mpgc.rpg130419.model.Mage;
+import it.unicam.cs.mpgc.rpg130419.model.RecruitmentCandidate;
 import it.unicam.cs.mpgc.rpg130419.model.weapons.Sword;
 import it.unicam.cs.mpgc.rpg130419.model.weapons.Wand;
 import javafx.application.Application;
@@ -44,7 +45,7 @@ public class MainApplication extends Application {
 
     // Temporary dummy data for testing the tabs. Remove this method with its call in start().
     private void addDummyData(GameSession session) {
-        session.addMoney(120);
+        session.addMoney(1200);
 
         // Recruited heroes with different levels, equipment and availability.
         Knight john = new Knight("John");
@@ -79,8 +80,9 @@ public class MainApplication extends Application {
         secondExpedition.setState(ExpeditionState.ACTIVE);
         session.launchExpedition(secondExpedition);
 
-        // Candidates on the recruitment board.
-        session.getRecruitmentCandidates().addAll(List.of(new Knight("Gareth"), new Mage("Iris")));
+        // Candidates on the recruitment board with sample hire fees.
+        session.addRecruitmentCandidate(new RecruitmentCandidate(new Knight("Gareth"), 60));
+        session.addRecruitmentCandidate(new RecruitmentCandidate(new Mage("Iris"), 50));
     }
 
     public static void main(String[] args) {

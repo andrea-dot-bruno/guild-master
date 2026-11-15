@@ -17,7 +17,7 @@ public class Wallet {
     }
 
     public boolean canPay(int price) {
-        return gold > price;
+        return price >= 0 && gold >= price;
     }
 
     public boolean takeMoney(int amount) {

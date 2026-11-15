@@ -4,6 +4,7 @@ import it.unicam.cs.mpgc.rpg130419.model.Dungeon;
 import it.unicam.cs.mpgc.rpg130419.model.Expedition;
 import it.unicam.cs.mpgc.rpg130419.model.GameSession;
 import it.unicam.cs.mpgc.rpg130419.model.Hero;
+import it.unicam.cs.mpgc.rpg130419.model.RecruitmentCandidate;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -25,6 +26,7 @@ public class MainController {
 
     public void initialize() {
         heroesController.setFireHero(this::fireHero);
+        recruitmentController.setHireHero(this::hireHero);
         overviewController.setShowHeroesAction(this::showHeroesTab);
         overviewController.setPlanExpeditionAction(this::showExpeditionsTab);
         footerController.setEndDay(this::endDay);
@@ -42,6 +44,7 @@ public class MainController {
         setActiveExpeditionsTable();
         setAvailableHeroesList();
         setAvailableDungeonsTable();
+        setRecruitmentCandidatesTable();
     }
 
     private void showHeroesTab() {
@@ -62,6 +65,18 @@ public class MainController {
 
     private void fireHero(Hero hero) {
         session.removeHero(hero);
+        populateHeroesTable();
+        setAvailableHeroesList();
+    }
+
+    private void hireHero(RecruitmentCandidate candidate) {
+        if (!session.hireHero(candidate)) {
+            recruitmentController.showHireFailure(candidate);
+            return;
+        }
+
+        setGoldAmountLabel();
+        setRecruitmentCandidatesTable();
         populateHeroesTable();
         setAvailableHeroesList();
     }
@@ -114,6 +129,11 @@ public class MainController {
     private void setAvailableDungeonsTable() {
         List<Dungeon> availableDungeons = session.getAvailableDungeons();
         expeditionsController.setAvailableDungeons(availableDungeons);
+    }
+
+    private void setRecruitmentCandidatesTable() {
+        List<RecruitmentCandidate> recruitmentCandidates = session.getRecruitmentCandidates();
+        recruitmentController.setRecruitmentCandidates(recruitmentCandidates);
     }
 
     public void setAvailableHeroesList() {
