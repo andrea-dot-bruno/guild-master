@@ -21,10 +21,13 @@
       <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
             <TableView fx:id="expeditionBoardTable" prefHeight="457.0" prefWidth="635.0">
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN" />
+               </columnResizePolicy>
                <columns>
                   <TableColumn prefWidth="378.4744510650635" text="Dungeon" />
-                  <TableColumn prefWidth="119.52549743652344" text="Days" />
-                  <TableColumn prefWidth="136.7202911376953" text="Reward" />
+                  <TableColumn prefWidth="119.52549743652344" styleClass="numeric-column" text="Days" />
+                  <TableColumn prefWidth="136.7202911376953" styleClass="numeric-column" text="Reward" />
                </columns>
                <HBox.margin>
                   <Insets right="10.0" />

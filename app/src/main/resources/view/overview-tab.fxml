@@ -55,11 +55,14 @@
                         <Insets bottom="5.0" />
                      </VBox.margin>
                   </Label>
-                  <TableView fx:id="activeExpeditionsTable" prefHeight="403.0" prefWidth="769.0" styleClass="expeditions-table">
+                  <TableView fx:id="activeExpeditionsTable" prefHeight="403.0" prefWidth="769.0">
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN" />
+                     </columnResizePolicy>
                      <columns>
-                        <TableColumn fx:id="aeTableExpeditionColumn" prefWidth="290.33141136169434" text="Expedition" />
-                        <TableColumn fx:id="aeTableHeroesColumn" minWidth="0.0" prefWidth="175.6685791015625" text="Heroes" />
-                        <TableColumn fx:id="aeTableRemainingColumn" prefWidth="135.22158813476562" text="Remaining" />
+                        <TableColumn fx:id="aeTableExpeditionColumn" prefWidth="380.0" text="Expedition" />
+                        <TableColumn fx:id="aeTableHeroesColumn" prefWidth="270.0" text="Heroes" />
+                        <TableColumn fx:id="aeTableRemainingColumn" prefWidth="150.0" styleClass="numeric-column" text="Remaining" />
 <!--                        <TableColumn fx:id="aeTableProgressColumn" prefWidth="233.4608154296875" text="Progress" />-->
                      </columns>
                   </TableView>

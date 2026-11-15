@@ -22,12 +22,15 @@
       <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
             <TableView fx:id="recruitHeroTable" prefHeight="457.0" prefWidth="478.0">
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN" />
+               </columnResizePolicy>
                <columns>
                   <TableColumn prefWidth="166.45214653015137" text="Name" />
                   <TableColumn prefWidth="92.56797790527344" text="Class" />
-                  <TableColumn prefWidth="66.93203735351562" text="Level" />
-                  <TableColumn prefWidth="71.112060546875" text="Pay" />
-                  <TableColumn prefWidth="81.38790893554688" text="Hire Fee" />
+                  <TableColumn prefWidth="66.93203735351562" styleClass="numeric-column" text="Level" />
+                  <TableColumn prefWidth="71.112060546875" styleClass="numeric-column" text="Pay" />
+                  <TableColumn prefWidth="81.38790893554688" styleClass="numeric-column" text="Hire Fee" />
                </columns>
                <HBox.margin>
                   <Insets right="10.0" />

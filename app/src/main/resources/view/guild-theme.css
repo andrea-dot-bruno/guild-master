@@ -55,31 +55,139 @@
     -fx-text-fill: guild-ink;
 }
 
-/* Sfondo marrone della barra, visibile anche a destra delle tab */
-.main-tabs > .tab-header-area > .tab-header-background {-fx-background-color: #67462f;}
-/* Sfondo, bordo, angoli e spaziatura interna di ogni tab */
-.main-tabs > .tab-header-area > .headers-region > .tab {
-    -fx-background-color: #8c6749;
-    -fx-background-radius: 0;
-    -fx-border-color: #513624;
-    -fx-border-width: 1;
-    -fx-padding: 4 7;
-}
+/* Barra di navigazione */
 .main-tabs {
     -fx-tab-min-width: 160;
     -fx-tab-max-width: 160;
     -fx-tab-min-height: 36;
 }
-.main-tabs > .tab-header-area {-fx-padding: 4;}
-/* Testo delle tab */
+
+.main-tabs > .tab-header-area {
+    -fx-padding: 5 4;
+}
+
+.main-tabs > .tab-header-area > .tab-header-background {
+    -fx-background-color: guild-walnut-shadow;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
+
+.main-tabs > .tab-header-area > .headers-region > .tab {
+    -fx-background-color: guild-walnut-highlight;
+    -fx-background-insets: 0 2 0 2;
+    -fx-background-radius: 0;
+    -fx-padding: 4 7;
+}
+
+.main-tabs > .tab-header-area > .headers-region > .tab:hover {
+    -fx-background-color: derive(guild-walnut-highlight, 9%);
+}
+
 .main-tabs > .tab-header-area > .headers-region > .tab .tab-label {
-    -fx-text-fill: #fff0d8;
-    -fx-font-size: 20px;
+    -fx-text-fill: guild-light-ink;
+    -fx-font-size: 19px;
     -fx-font-weight: bold;
 }
-/* Sfondo e testo della tab selezionata */
-.main-tabs > .tab-header-area > .headers-region > .tab:selected {-fx-background-color: #f4d08a;}
-.main-tabs > .tab-header-area > .headers-region > .tab:selected .tab-label {-fx-text-fill: #482719;}
+
+.main-tabs > .tab-header-area > .headers-region > .tab .tab-label > .text {
+    -fx-bounds-type: visual;
+}
+
+.main-tabs > .tab-header-area > .headers-region > .tab:selected {
+    -fx-background-color: guild-selection;
+}
+
+.main-tabs > .tab-header-area > .headers-region > .tab:selected .tab-label {
+    -fx-text-fill: guild-ink;
+}
+
+.main-tabs:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-color: guild-walnut;
+    -fx-border-width: 1;
+    -fx-border-insets: 0;
+    -fx-border-radius: 0;
+}
+
+/* Tabelle e lista degli eroi */
+.table-view,
+.list-view {
+    -fx-control-inner-background: #FCF3E5;
+    -fx-control-inner-background-alt: #F4E7D3;
+    -fx-box-border: guild-divider;
+    -fx-accent: guild-selection;
+    -fx-selection-bar-non-focused: guild-panel;
+    -fx-focus-color: guild-walnut;
+    -fx-faint-focus-color: guild-panel;
+    -fx-cell-focus-inner-border: guild-divider;
+    -fx-fixed-cell-size: 32;
+    -fx-font-size: 14px;
+}
+
+.table-view {
+    -fx-table-cell-border-color: #E6D3B9;
+}
+
+.table-view .table-cell,
+.list-view .list-cell {
+    -fx-alignment: CENTER_LEFT;
+    -fx-text-fill: guild-ink;
+    -fx-padding: 0 10;
+}
+
+.table-view .table-cell.numeric-column {
+    -fx-alignment: CENTER;
+}
+
+.table-view .table-row-cell:empty,
+.list-view .list-cell:empty {
+    -fx-background-color: -fx-control-inner-background;
+}
+
+.table-view .table-row-cell:empty .table-cell {
+    -fx-border-color: transparent;
+}
+
+.table-view .placeholder .label {
+    -fx-background-color: transparent;
+    -fx-text-fill: guild-muted-ink;
+}
+
+/* Ogni titolo di colonna è un cartellino sulla fascia scura. */
+.table-view .column-header-background {
+    -fx-background-color: guild-ochre, guild-walnut-shadow;
+    -fx-background-insets: 0, 0 0 2 0;
+}
+
+.table-view .filler {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header.table-column {
+    -fx-background-color: guild-walnut-highlight;
+    -fx-background-insets: 4 2 6 2;
+    -fx-background-radius: 0;
+    -fx-mark-color: guild-light-ink;
+    -fx-padding: 0 8;
+    -fx-size: 40;
+}
+
+.table-view .column-header.table-column:hover {
+    -fx-background-color: guild-walnut;
+}
+
+.table-view .column-header.table-column > .label {
+    -fx-alignment: CENTER_LEFT;
+    -fx-background-color: transparent;
+    -fx-text-fill: guild-light-ink;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 2 2;
+}
+
+.table-view .column-header.numeric-column > .label {
+    -fx-alignment: CENTER;
+    -fx-padding: 0 0 2 0;
+}
 
 .dungeon-details {
     -fx-border-color: guild-ink;

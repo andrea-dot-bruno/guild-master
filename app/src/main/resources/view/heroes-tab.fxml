@@ -23,12 +23,15 @@
       <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
             <TableView fx:id="guildHeroesTable" prefHeight="457.0" prefWidth="456.0">
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN" />
+               </columnResizePolicy>
                <columns>
-                  <TableColumn fx:id="heroNameColumn" prefWidth="132.85873985290527" text="Name" />
-                  <TableColumn fx:id="heroClassColumn" prefWidth="99.14127349853516" text="Class" />
-                  <TableColumn fx:id="heroLevelColumn" prefWidth="67.26530456542969" text="Level" />
-                  <TableColumn fx:id="heroPayColumn" prefWidth="61.267791748046875" text="Pay" />
-                  <TableColumn fx:id="heroStatusColumn" prefWidth="95.732177734375" text="Status" />
+                  <TableColumn fx:id="heroNameColumn" prefWidth="126.0" text="Name" />
+                  <TableColumn fx:id="heroClassColumn" prefWidth="92.0" text="Class" />
+                  <TableColumn fx:id="heroLevelColumn" prefWidth="65.0" styleClass="numeric-column" text="Level" />
+                  <TableColumn fx:id="heroPayColumn" prefWidth="58.0" styleClass="numeric-column" text="Pay" />
+                  <TableColumn fx:id="heroStatusColumn" prefWidth="115.0" text="Status" />
                </columns>
                <HBox.margin>
                   <Insets right="10.0" />
