@@ -29,7 +29,7 @@
             <Label styleClass="preparation-section-title" text="Probability of Success" />
             <HBox alignment="CENTER_LEFT" spacing="10.0">
                <ProgressBar fx:id="probabilityBar" accessibleText="Probability of Success" maxWidth="Infinity"
-                            progress="0.0" HBox.hgrow="ALWAYS" />
+                            progress="0.0" styleClass="guild-progress-bar" HBox.hgrow="ALWAYS" />
                <Label fx:id="probabilityLabel" alignment="CENTER_RIGHT" minWidth="64.0"
                       styleClass="preparation-probability-value" text="0%" />
             </HBox>

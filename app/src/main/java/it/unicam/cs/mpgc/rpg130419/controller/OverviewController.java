@@ -57,6 +57,9 @@ public class OverviewController {
 
     public void setActiveExpeditionsTable(List<Expedition> activeExpeditionsList) {
         activeExpeditionsTable.getItems().setAll(activeExpeditionsList);
+        if (activeExpeditionsTable.getSelectionModel().isEmpty()) {
+            activeExpeditionsTable.getSelectionModel().selectFirst();
+        }
     }
 
     public void setAvailableHeroesList(List<Hero> availableHeroes) {

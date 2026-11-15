@@ -75,7 +75,7 @@
                               <Font size="19.0" />
                            </font>
                         </Label>
-                        <ProgressBar fx:id="guildHeroExpBar" prefHeight="23.0" prefWidth="489.0" progress="0.0" />
+                        <ProgressBar fx:id="guildHeroExpBar" prefWidth="489.0" progress="0.0" styleClass="guild-progress-bar" />
                      </children>
                   </HBox>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="equipment-border-pane">

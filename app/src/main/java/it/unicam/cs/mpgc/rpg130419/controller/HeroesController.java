@@ -94,6 +94,9 @@ public class HeroesController {
     public void setGuildHeroes(List<Hero> heroes, List<Hero> availableHeroes) {
         availableHeroesSet = Set.copyOf(availableHeroes);
         guildHeroesTable.getItems().setAll(heroes);
+        if (guildHeroesTable.getSelectionModel().isEmpty()) {
+            guildHeroesTable.getSelectionModel().selectFirst();
+        }
     }
 
     public void clearInfoFields() {

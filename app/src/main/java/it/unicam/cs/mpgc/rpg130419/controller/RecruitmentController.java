@@ -83,6 +83,9 @@ public class RecruitmentController {
 
     public void setRecruitmentCandidates(List<RecruitmentCandidate> recruitmentCandidates) {
         recruitmentCandidatesTable.getItems().setAll(recruitmentCandidates);
+        if (recruitmentCandidatesTable.getSelectionModel().isEmpty()) {
+            recruitmentCandidatesTable.getSelectionModel().selectFirst();
+        }
     }
 
     private void clearInfoFields() {

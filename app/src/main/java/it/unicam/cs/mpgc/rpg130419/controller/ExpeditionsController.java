@@ -65,6 +65,9 @@ public class ExpeditionsController {
 
     public void setAvailableDungeons(List<Dungeon> availableDungeons) {
         availableDungeonsTable.getItems().setAll(availableDungeons);
+        if (availableDungeonsTable.getSelectionModel().isEmpty()) {
+            availableDungeonsTable.getSelectionModel().selectFirst();
+        }
     }
 
     private void clearInfoFields() {

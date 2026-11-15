@@ -21,7 +21,7 @@
     guild-disabled: #D1BAA1;
 
     /* Progress bars */
-    guild-progress-fill: #F1BA5D;
+    guild-progress-fill: #3F684F;
     guild-progress-track: #DCC8B3;
 
     /* Status messages */
@@ -53,6 +53,19 @@
     -fx-background-insets: 0, 3, 6;
     -fx-background-radius: 0;
     -fx-text-fill: guild-ink;
+}
+
+.guild-progress-bar > .track {
+    -fx-background-color: guild-progress-track;
+    -fx-border-color: guild-divider;
+    -fx-background-radius: 0;
+}
+
+.guild-progress-bar > .bar {
+    -fx-background-color: guild-progress-fill;
+    -fx-background-insets: 2;
+    -fx-background-radius: 0;
+    -fx-padding: 8;
 }
 
 /* Menu di gioco e dialoghi */
@@ -170,19 +183,6 @@
 
 .preparation-dungeon > .separator > .line {
     -fx-border-color: guild-divider transparent transparent;
-}
-
-.preparation-dungeon .progress-bar > .track {
-    -fx-background-color: guild-progress-track;
-    -fx-border-color: guild-divider;
-    -fx-background-radius: 0;
-}
-
-.preparation-dungeon .progress-bar > .bar {
-    -fx-background-color: guild-progress-fill;
-    -fx-background-insets: 2;
-    -fx-background-radius: 0;
-    -fx-padding: 8;
 }
 
 .preparation-hero-scroll {
