@@ -76,4 +76,14 @@ public class Expedition {
     public String getDungeonName() {
         return dungeon.getName();
     }
+
+    @Override
+    public final boolean equals(Object other) {
+        return other instanceof Expedition expedition && id.equals(expedition.id);
+    }
+
+    @Override
+    public final int hashCode() {
+        return id.hashCode();
+    }
 }

@@ -44,4 +44,14 @@ public class Dungeon {
     public String getIconPath() {
         return iconPath;
     }
+
+    @Override
+    public final boolean equals(Object other) {
+        return other instanceof Dungeon dungeon && id.equals(dungeon.id);
+    }
+
+    @Override
+    public final int hashCode() {
+        return id.hashCode();
+    }
 }

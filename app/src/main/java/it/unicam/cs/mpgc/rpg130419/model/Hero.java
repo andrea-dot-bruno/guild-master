@@ -94,4 +94,14 @@ public abstract class Hero {
     public String getRightWeaponName() {
         return weaponSet.getRightWeaponName();
     }
+
+    @Override
+    public final boolean equals(Object other) {
+        return other instanceof Hero hero && id.equals(hero.id);
+    }
+
+    @Override
+    public final int hashCode() {
+        return id.hashCode();
+    }
 }
