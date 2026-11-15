@@ -55,6 +55,44 @@
     -fx-text-fill: guild-ink;
 }
 
+/* Menu di gioco */
+.game-menu {
+    -fx-background-color: guild-background;
+    -fx-border-color: guild-walnut-shadow;
+    -fx-border-width: 2;
+}
+
+.game-menu-header {
+    -fx-background-color: guild-walnut-shadow;
+    -fx-padding: 10 16;
+}
+
+.game-menu .game-menu-title {
+    -fx-background-color: transparent;
+    -fx-text-fill: guild-light-ink;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.game-menu .game-menu-status {
+    -fx-text-fill: guild-muted-ink;
+    -fx-font-size: 14px;
+}
+
+.game-menu-actions {
+    -fx-padding: 16;
+}
+
+.game-menu .button {
+    -fx-font-size: 16px;
+    -fx-padding: 9 18;
+}
+
+.game-menu .button:focused {
+    -fx-border-color: guild-walnut;
+    -fx-border-insets: 3;
+}
+
 /* Barra di navigazione */
 .main-tabs {
     -fx-tab-min-width: 160;
