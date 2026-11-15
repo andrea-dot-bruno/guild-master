@@ -12,8 +12,8 @@ public class ConsoleApp {
     public static void main(String[] args) {
 //        System.out.println("\n\n\n-------------Testing App-------------");
 //
-//        Hero mage = new Mage("Markus");
-//        Hero knight = new Knight("Osvald");
+//        Hero mage = new Mage("Markus", "/assets/mage-icons/lyra.png");
+//        Hero knight = new Knight("Osvald", "/assets/knight-icons/bram.png");
 //
 //        Weapon sword = new Sword();
 //        Weapon wand = new Wand();

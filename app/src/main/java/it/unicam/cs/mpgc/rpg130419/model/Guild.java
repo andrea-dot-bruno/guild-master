@@ -2,6 +2,7 @@ package it.unicam.cs.mpgc.rpg130419.model;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 public class Guild {
@@ -50,7 +51,7 @@ public class Guild {
     }
 
     public List<Expedition> getActiveExpeditions() {
-        return activeExpeditions;
+        return List.copyOf(activeExpeditions);
     }
 
     public boolean launchExpedition(Expedition expedition) {
@@ -59,24 +60,43 @@ public class Guild {
         if (party.isEmpty() || new HashSet<>(party).size() != party.size()) return false;
         if (!getAvailableHeroes().containsAll(party)) return false;
 
-        expedition.setState(ExpeditionState.ACTIVE);
+        if (!expedition.start()) return false;
         activeExpeditions.add(expedition);
         return true;
     }
 
-    public boolean removeExpedition(Expedition expedition) {
-        if (expedition == null) throw new IllegalArgumentException("Expedition can't be null.");
-        if (!expedition.isCompleted()) return false;
-        return activeExpeditions.remove(expedition);
-    }
-
-    public void endDay() {
-        for (Expedition e : activeExpeditions) {
-            e.dayHasPassed();
-            if (e.isCompleted()) {
-                e.computeWin();
+    List<Expedition> advanceExpeditions() {
+        List<Expedition> completedExpeditions = new ArrayList<>();
+        Iterator<Expedition> expeditions = activeExpeditions.iterator();
+        while (expeditions.hasNext()) {
+            Expedition expedition = expeditions.next();
+            expedition.advanceDay();
+            if (expedition.isCompleted()) {
+                completedExpeditions.add(expedition);
+                expeditions.remove();
             }
         }
+        return completedExpeditions;
+    }
+
+    void awardExpeditionRewards(List<Expedition> completedExpeditions) {
+        for (Expedition expedition : completedExpeditions) {
+            if (expedition.getState() != ExpeditionState.WON) continue;
+            Dungeon dungeon = expedition.getDungeon();
+            addMoney(dungeon.getGoldReward());
+            for (Hero hero : expedition.getInvolvedHeroes()) {
+                hero.addExp(dungeon.getExpReward());
+                hero.levelUp();
+            }
+        }
+    }
+
+    boolean payDailyWages() {
+        int totalWages = 0;
+        for (Hero hero : heroes) {
+            totalWages += hero.getDailyPay();
+        }
+        return takeMoney(totalWages);
     }
 
     public List<Hero> getAvailableHeroes() {
@@ -101,11 +121,5 @@ public class Guild {
 
     public List<Hero> getHeroes() {
         return heroes;
-    }
-
-    public void updateExpeditions() {
-        for (Expedition e : activeExpeditions) {
-            e.dayHasPassed();
-        }
     }
 }

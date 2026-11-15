@@ -107,10 +107,16 @@
     -fx-pref-width: 360px;
 }
 
-.guild-dialog > .content.label {
+.guild-dialog > .content.label,
+.guild-dialog .expedition-report .label {
     -fx-text-fill: guild-ink;
     -fx-font-size: 16px;
     -fx-padding: 16;
+}
+
+.guild-dialog .expedition-report,
+.guild-dialog .expedition-report > .viewport {
+    -fx-background-color: transparent;
 }
 
 .guild-dialog > .button-bar > .container {

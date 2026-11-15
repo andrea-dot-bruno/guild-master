@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameSession {
+    private static final int MIN_RECRUITMENT_CANDIDATES = 4;
+    private static final int MIN_AVAILABLE_DUNGEONS = 3;
+
     private Guild guild;
     private int currentDay;
+    private boolean gameOver;
     private final List<Dungeon> availableDungeons = new ArrayList<>();
     private final List<RecruitmentCandidate> recruitmentCandidates = new ArrayList<>();
 
@@ -44,7 +48,7 @@ public class GameSession {
     }
 
     public boolean launchExpedition(Expedition expedition) {
-        return guild.launchExpedition(expedition);
+        return !gameOver && guild.launchExpedition(expedition);
     }
 
     public boolean launchExpedition(Dungeon dungeon, List<Hero> party) {
@@ -76,7 +80,7 @@ public class GameSession {
     }
 
     public boolean hireHero(RecruitmentCandidate candidate) {
-        if (!recruitmentCandidates.contains(candidate)) return false;
+        if (gameOver || !recruitmentCandidates.contains(candidate)) return false;
 
         Hero hero = candidate.hero();
         if (guild.getHeroes().contains(hero)) return false;
@@ -96,22 +100,35 @@ public class GameSession {
     }
 
     public boolean removeHero(Hero hero) {
-        return guild.removeHero(hero);
+        return !gameOver && guild.removeHero(hero);
     }
 
     public List<Hero> getHeroes() {
         return guild.getHeroes();
     }
 
-    public void newDay() {
+    public DayResult endDay() {
+        if (gameOver) throw new IllegalStateException("The game has ended.");
+
         currentDay += 1;
+        List<Expedition> completedExpeditions = guild.advanceExpeditions();
+        guild.awardExpeditionRewards(completedExpeditions);
+        gameOver = !guild.payDailyWages();
+        if (!gameOver) replenishBoards();
+
+        return new DayResult(completedExpeditions, gameOver);
     }
 
     public int getCurrentDay() {
         return currentDay;
     }
 
-    public void updateExpeditions() {
-        guild.updateExpeditions();
+    private void replenishBoards() {
+        while (recruitmentCandidates.size() < MIN_RECRUITMENT_CANDIDATES) {
+            addRecruitmentCandidate(RandomHeroBuilder.buildCandidate());
+        }
+        while (availableDungeons.size() < MIN_AVAILABLE_DUNGEONS) {
+            addAvailableDungeon(RandomDungeonBuilder.buildDungeon());
+        }
     }
 }

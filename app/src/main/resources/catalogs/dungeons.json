@@ -1,0 +1,24 @@
+{
+  "names": [
+    "Ashen Vault", "Blackfen Barrow", "Bleakwater Keep", "Briarwatch Ruins",
+    "Cairn of Echoes", "Cinderstone Mine", "Copper Hollow", "Cracked Bastion",
+    "Dawnspire Crypt", "Deepwell Cavern", "Duskwood Shrine", "Eastwall Tunnels",
+    "Emberstone Hall", "Fallowmere Cellars", "Farwatch Tower", "Flintgate Pass",
+    "Flooded Cloister", "Frostroot Den", "Gallows Ridge", "Ghostlight Grotto",
+    "Greyhaven Depths", "Hollow Crown Keep", "Ironbark Catacombs", "Lost Quarry",
+    "Marrowgate Tomb", "Moonfall Observatory", "Mossroot Warren", "Nightwind Vault",
+    "Old King’s Road", "Pale Lantern Shrine", "Redstone Causeway", "Rimefang Cavern",
+    "Saltmarsh Ruins", "Shaleguard Outpost", "Silverpine Crossing", "Slatewater Lock",
+    "Stonewind Abbey", "Sunken Archive", "Thornbridge Fort", "Underhill Maze",
+    "Warden’s Refuge", "Westmoor Barrow", "Whispering Gallery", "Winterglass Keep"
+  ],
+  "icons": {
+    "directory": "/assets/dungeon-icons",
+    "files": ["emberstone.png", "mossroot.png", "ruins.png", "trail.png", "watchtower.png"]
+  },
+  "profiles": [
+    { "difficulty": 8, "days": 1, "xp": 50, "gold": 100 },
+    { "difficulty": 16, "days": 2, "xp": 100, "gold": 140 },
+    { "difficulty": 28, "days": 4, "xp": 180, "gold": 240 }
+  ]
+}

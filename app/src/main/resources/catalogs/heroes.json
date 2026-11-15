@@ -1,0 +1,18 @@
+{
+  "names": [
+    "Adela", "Aldric", "Althea", "Anwen", "Arden", "Astrid", "Beren", "Briar",
+    "Callan", "Cassia", "Cedric", "Cerys", "Corin", "Dain", "Darian", "Edric",
+    "Eira", "Elara", "Elric", "Emrys", "Faelan", "Fenwick", "Freya", "Hadrian",
+    "Hilda", "Iona", "Isolde", "Keira", "Leoric", "Liora", "Maeve", "Marek",
+    "Melis", "Mira", "Nessa", "Nolan", "Orla", "Osric", "Perrin", "Rhea",
+    "Ronan", "Seren", "Sigrid", "Talion", "Tamsin", "Torin", "Vera", "Wystan"
+  ],
+  "knightIcons": {
+    "directory": "/assets/knight-icons",
+    "files": ["bram.png", "cedric.png", "elric.png"]
+  },
+  "mageIcons": {
+    "directory": "/assets/mage-icons",
+    "files": ["lyra.png", "mira.png"]
+  }
+}

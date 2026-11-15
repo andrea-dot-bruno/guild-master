@@ -33,8 +33,6 @@ public class MainApplication extends Application {
 
         controller.linkSession(session);
         controller.updateDisplay();
-        controller.populateHeroesTable();
-        controller.populateActiveExpeditionsTable();
 
 
         stage.setTitle("Guild Master");
@@ -47,11 +45,13 @@ public class MainApplication extends Application {
         session.addMoney(1200);
 
         // Recruited heroes with different levels, equipment and availability.
-        Knight john = new Knight("John");
-        Mage morris = new Mage("Morris");
-        Knight bram = new Knight("Bram");
-        Mage lyra = new Mage("Lyra");
-        Knight rowan = new Knight("Rowan");
+        String knightIcon = "/assets/knight-icons/bram.png";
+        String mageIcon = "/assets/mage-icons/lyra.png";
+        Knight john = new Knight("John", knightIcon);
+        Mage morris = new Mage("Morris", mageIcon);
+        Knight bram = new Knight("Bram", knightIcon);
+        Mage lyra = new Mage("Lyra", mageIcon);
+        Knight rowan = new Knight("Rowan", knightIcon);
 
         john.setRightWeapon(new Sword());
         bram.addExp(160);
@@ -78,8 +78,8 @@ public class MainApplication extends Application {
         session.launchExpedition(secondExpedition);
 
         // Candidates on the recruitment board with sample hire fees.
-        session.addRecruitmentCandidate(new RecruitmentCandidate(new Knight("Gareth"), 60));
-        session.addRecruitmentCandidate(new RecruitmentCandidate(new Mage("Iris"), 50));
+        session.addRecruitmentCandidate(new RecruitmentCandidate(new Knight("Gareth", knightIcon), 60));
+        session.addRecruitmentCandidate(new RecruitmentCandidate(new Mage("Iris", mageIcon), 50));
     }
 
     public static void main(String[] args) {

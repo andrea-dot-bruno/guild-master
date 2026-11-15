@@ -5,8 +5,8 @@ public class Knight extends Hero {
     private static final int expRequirementIncrement = 50;
     private final double powerMultiplier = 1.2;
 
-    public Knight(String name) {
-        super(name, "/assets/knight-icons/bram.png", new HeroLevel(initialExpRequirement, expRequirementIncrement), 12);
+    public Knight(String name, String iconPath) {
+        super(name, iconPath, new HeroLevel(initialExpRequirement, expRequirementIncrement), 12);
     }
 
     @Override

@@ -29,25 +29,36 @@ public class Expedition {
         return Math.max(0.0, partyPower / dungeon.getDifficulty());
     }
 
-    public void computeWin() {
-        double probability = calculateSuccessProbability(dungeon, heroes);
-        state = Math.random() < probability ? ExpeditionState.WON : ExpeditionState.LOST;
+    boolean start() {
+        if (state != ExpeditionState.WAITING) return false;
+        state = ExpeditionState.ACTIVE;
+        return true;
     }
 
-    public void dayHasPassed() {
-        remainingTime -= 1;
+    void advanceDay() {
+        if (state != ExpeditionState.ACTIVE) return;
+
+        remainingTime = Math.max(0, remainingTime - 1);
+        if (remainingTime == 0) {
+            double probability = calculateSuccessProbability(dungeon, heroes);
+            state = Math.random() < probability ? ExpeditionState.WON : ExpeditionState.LOST;
+        }
     }
 
     public boolean isCompleted() {
-        return remainingTime <= 0;
+        return state == ExpeditionState.WON || state == ExpeditionState.LOST;
     }
 
     public int getRemainingTime() {
         return remainingTime;
     }
 
-    public void setState(ExpeditionState state) {
-        this.state = state;
+    public ExpeditionState getState() {
+        return state;
+    }
+
+    Dungeon getDungeon() {
+        return dungeon;
     }
 
     public List<Hero> getInvolvedHeroes() {

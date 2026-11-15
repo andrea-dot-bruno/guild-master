@@ -1,14 +1,17 @@
 package it.unicam.cs.mpgc.rpg130419.controller;
 
+import it.unicam.cs.mpgc.rpg130419.model.DayResult;
 import it.unicam.cs.mpgc.rpg130419.model.Dungeon;
 import it.unicam.cs.mpgc.rpg130419.model.Expedition;
 import it.unicam.cs.mpgc.rpg130419.model.GameSession;
 import it.unicam.cs.mpgc.rpg130419.model.Hero;
 import it.unicam.cs.mpgc.rpg130419.model.RecruitmentCandidate;
+import it.unicam.cs.mpgc.rpg130419.view.DayEndDialogs;
 import it.unicam.cs.mpgc.rpg130419.view.ExpeditionPreparation;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.stage.Window;
 
 import java.util.List;
 
@@ -45,6 +48,7 @@ public class MainController {
         setGuildNameLabel();
         setActiveExpeditionsTable();
         setAvailableHeroesList();
+        populateHeroesTable();
         setAvailableDungeonsTable();
         setRecruitmentCandidatesTable();
     }
@@ -74,11 +78,17 @@ public class MainController {
     }
 
     private void endDay() {
-        session.newDay();
+        DayResult result = session.endDay();
         updateDisplay();
-        updateExpeditions();
-        refreshOverviewTab();
-        refreshHeroesTab();
+
+        Window owner = mainTabPane.getScene().getWindow();
+        if (result.gameOver()) {
+            mainTabPane.setDisable(true);
+            footerController.disableEndDay();
+            DayEndDialogs.showGameOver(owner);
+        } else if (!result.completedExpeditions().isEmpty()) {
+            DayEndDialogs.showExpeditionReport(owner, result.completedExpeditions());
+        }
     }
 
     private void fireHero(Hero hero) {
@@ -103,24 +113,8 @@ public class MainController {
         setAvailableHeroesList();
     }
 
-    public void populateHeroesTable() {
+    private void populateHeroesTable() {
         heroesController.setGuildHeroes(session.getHeroes(), session.getAvailableHeroes());
-    }
-
-    public void populateActiveExpeditionsTable() {
-        overviewController.setActiveExpeditionsTable(session.getActiveExpeditions());
-    }
-
-    public void refreshOverviewTab() {
-        populateActiveExpeditionsTable();
-    }
-
-    public void refreshHeroesTab() {
-        populateHeroesTable();
-    }
-
-    public void updateExpeditions() {
-        session.updateExpeditions();
     }
 
     public void setGoldAmountLabel() {

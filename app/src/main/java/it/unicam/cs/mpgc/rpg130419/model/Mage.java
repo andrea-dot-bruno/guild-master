@@ -5,8 +5,8 @@ public class Mage extends Hero {
     private static final int expRequirementIncrement = 35;
     private final double powerMultiplier = 1.1;
 
-    public Mage(String name) {
-        super(name, "/assets/mage-icons/lyra.png", new HeroLevel(initialExpRequirement, expRequirementIncrement), 10);
+    public Mage(String name, String iconPath) {
+        super(name, iconPath, new HeroLevel(initialExpRequirement, expRequirementIncrement), 10);
     }
 
     @Override

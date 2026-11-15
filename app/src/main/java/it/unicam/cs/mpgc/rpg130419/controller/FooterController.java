@@ -32,4 +32,8 @@ public class FooterController {
     public void setEndDay(Runnable endDay) {
         this.endDay = endDay;
     }
+
+    public void disableEndDay() {
+        endDayButton.setDisable(true);
+    }
 }
