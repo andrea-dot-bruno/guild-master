@@ -10,12 +10,11 @@ public class Expedition {
     private int remainingTime;
     private ExpeditionState state;
 
-
-    public Expedition(Dungeon dungeon, List<Hero> heroes, int time) {
+    public Expedition(Dungeon dungeon, List<Hero> heroes) {
         this.id = UUID.randomUUID();
         this.dungeon = dungeon;
         this.heroes = heroes;
-        this.remainingTime = time;
+        this.remainingTime = dungeon.getTimeToBeat();
         this.state = ExpeditionState.WAITING;
     }
 
@@ -57,5 +56,24 @@ public class Expedition {
 
     public List<Hero> getInvolvedHeroes() {
         return heroes;
+    }
+
+    public String printInvolvedHeroes() {
+        StringBuilder output = new StringBuilder();
+        if (heroes == null) return "No heroes in this expedition. Strange...";
+        if (heroes.size() == 1) return heroes.getFirst().getName();
+        for (int i = 0; i < heroes.size(); i++) {
+            Hero h = heroes.get(i);
+            if (i == heroes.size() - 1) {
+                output.append("%s.".formatted(h.getName()));
+            } else {
+                output.append("%s, ".formatted(h.getName()));
+            }
+        }
+        return output.toString();
+    }
+
+    public String getDungeonName() {
+        return dungeon.getName();
     }
 }

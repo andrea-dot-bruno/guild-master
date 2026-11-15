@@ -17,6 +17,8 @@ import java.util.Set;
 import java.util.function.Consumer;
 
 public class HeroesController {
+    private Consumer<Hero> fireHero;
+    private Set<Hero> availableHeroesSet = Set.of();
     @FXML private TableView<Hero> guildHeroesTable;
     @FXML private TableColumn<Hero, String> heroNameColumn;
     @FXML private TableColumn<Hero, String> heroClassColumn;
@@ -33,9 +35,6 @@ public class HeroesController {
     @FXML private Label guildHeroLeftWeaponDamage;
     @FXML private ImageView guildHeroRightWeaponIcon;
     @FXML private Label guildHeroRightWeaponDamage;
-    private Consumer<Hero> fireHero;
-
-    private Set<Hero> availableHeroesSet = Set.of();
 
     @FXML private void initialize() {
         heroNameColumn.setCellValueFactory(cell ->

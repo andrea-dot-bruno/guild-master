@@ -34,6 +34,7 @@ public class MainApplication extends Application {
         controller.linkSession(session);
         controller.updateDisplay();
         controller.populateHeroesTable();
+        controller.populateActiveExpeditionsTable();
 
 
         stage.setTitle("Guild Master");
@@ -64,19 +65,19 @@ public class MainApplication extends Application {
         session.addHero(lyra);
         session.addHero(rowan);
 
-        // Dungeons on the expedition board (difficulty, XP reward).
+        // Dungeons on the expedition board (name, difficulty, days, XP reward).
         session.getAvailableDungeons().addAll(List.of(
-                new Dungeon(8, 50),
-                new Dungeon(16, 100),
-                new Dungeon(28, 180)
+                new Dungeon("Dungeon 4", 8, 1, 50),
+                new Dungeon("Dungeon 5", 16, 2, 100),
+                new Dungeon("Dungeon 6", 28, 4, 180)
         ));
 
         // Active expeditions with separate parties and different days remaining.
-        Expedition firstExpedition = new Expedition(new Dungeon(12, 80), List.of(john), 1);
+        Expedition firstExpedition = new Expedition(new Dungeon("Dungeon 1", 12, 1, 80), List.of(john));
         firstExpedition.setState(ExpeditionState.ACTIVE);
         session.launchExpedition(firstExpedition);
 
-        Expedition secondExpedition = new Expedition(new Dungeon(20, 140), List.of(bram, lyra), 3);
+        Expedition secondExpedition = new Expedition(new Dungeon("Dungeon 2", 20, 3, 140), List.of(bram, lyra));
         secondExpedition.setState(ExpeditionState.ACTIVE);
         session.launchExpedition(secondExpedition);
 

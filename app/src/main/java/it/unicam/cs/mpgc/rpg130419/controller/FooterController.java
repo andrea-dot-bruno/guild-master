@@ -4,10 +4,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
+import java.util.function.Consumer;
+
 public class FooterController {
+    private Runnable endDay;
     @FXML private Label underwayExpeditionsLabel;
 
-    @FXML private void handleEndDayButton(ActionEvent actionEvent) {} //TODO: implement
+    @FXML private void handleEndDayButton(ActionEvent actionEvent) {
+        endDay.run();
+    }
 
     public void setUnderwayExpeditionsLabel(int underwayExpeditions) {
         if (underwayExpeditions < 0) {
@@ -20,5 +25,9 @@ public class FooterController {
         } else {
             underwayExpeditionsLabel.setText("There are " + underwayExpeditions + " expeditions underway at the moment.");
         }
+    }
+
+    public void setEndDay(Runnable endDay) {
+        this.endDay = endDay;
     }
 }

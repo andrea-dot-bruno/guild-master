@@ -96,4 +96,10 @@ public class Guild {
     public List<Hero> getHeroes() {
         return heroes;
     }
+
+    public void updateExpeditions() {
+        for (Expedition e : activeExpeditions) {
+            e.dayHasPassed();
+        }
+    }
 }

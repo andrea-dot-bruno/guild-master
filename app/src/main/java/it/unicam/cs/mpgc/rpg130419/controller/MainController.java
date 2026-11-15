@@ -26,6 +26,7 @@ public class MainController {
         heroesController.setFireHero(this::fireHero);
         overviewController.setShowHeroesAction(this::showHeroesTab);
         overviewController.setPlanExpeditionAction(this::showExpeditionsTab);
+        footerController.setEndDay(this::endDay);
     }
 
     public void linkSession(GameSession session) {
@@ -49,13 +50,38 @@ public class MainController {
         mainTabPane.getSelectionModel().select(expeditionsTab);
     }
 
+    private void endDay() {
+        session.newDay();
+        updateDisplay();
+        updateExpeditions();
+        refreshOverviewTab();
+        refreshHeroesTab();
+    }
+
     private void fireHero(Hero hero) {
         session.removeHero(hero);
         populateHeroesTable();
+        setAvailableHeroesList();
     }
 
     public void populateHeroesTable() {
         heroesController.setGuildHeroes(session.getHeroes(), session.getAvailableHeroes());
+    }
+
+    public void populateActiveExpeditionsTable() {
+        overviewController.setActiveExpeditionsTable(session.getActiveExpeditions());
+    }
+
+    public void refreshOverviewTab() {
+        populateActiveExpeditionsTable();
+    }
+
+    public void refreshHeroesTab() {
+        populateHeroesTable();
+    }
+
+    public void updateExpeditions() {
+        session.updateExpeditions();
     }
 
     public void setGoldAmountLabel() {

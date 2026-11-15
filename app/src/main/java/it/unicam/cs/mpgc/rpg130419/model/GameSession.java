@@ -19,10 +19,6 @@ public class GameSession {
         return guild.getGold();
     }
 
-    public int getCurrentDay() {
-        return currentDay;
-    }
-
     public int getActiveExpeditionsNumber() {
         return guild.getActiveExpeditionsNumber();
     }
@@ -73,5 +69,17 @@ public class GameSession {
 
     public List<Hero> getHeroes() {
         return guild.getHeroes();
+    }
+
+    public void newDay() {
+        currentDay += 1;
+    }
+
+    public int getCurrentDay() {
+        return currentDay;
+    }
+
+    public void updateExpeditions() {
+        guild.updateExpeditions();
     }
 }
