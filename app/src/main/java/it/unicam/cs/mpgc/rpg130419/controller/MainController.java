@@ -1,5 +1,6 @@
 package it.unicam.cs.mpgc.rpg130419.controller;
 
+import it.unicam.cs.mpgc.rpg130419.model.Dungeon;
 import it.unicam.cs.mpgc.rpg130419.model.Expedition;
 import it.unicam.cs.mpgc.rpg130419.model.GameSession;
 import it.unicam.cs.mpgc.rpg130419.model.Hero;
@@ -40,6 +41,7 @@ public class MainController {
         setGuildNameLabel();
         setActiveExpeditionsTable();
         setAvailableHeroesList();
+        setAvailableDungeonsTable();
     }
 
     private void showHeroesTab() {
@@ -107,6 +109,11 @@ public class MainController {
     public void setActiveExpeditionsTable() {
         List<Expedition> activeExpeditionsList = session.getActiveExpeditions();
         overviewController.setActiveExpeditionsTable(activeExpeditionsList);
+    }
+
+    private void setAvailableDungeonsTable() {
+        List<Dungeon> availableDungeons = session.getAvailableDungeons();
+        expeditionsController.setAvailableDungeons(availableDungeons);
     }
 
     public void setAvailableHeroesList() {

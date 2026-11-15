@@ -65,19 +65,17 @@ public class MainApplication extends Application {
         session.addHero(lyra);
         session.addHero(rowan);
 
-        // Dungeons on the expedition board (name, difficulty, days, XP reward).
-        session.getAvailableDungeons().addAll(List.of(
-                new Dungeon("Dungeon 4", 8, 1, 50),
-                new Dungeon("Dungeon 5", 16, 2, 100),
-                new Dungeon("Dungeon 6", 28, 4, 180)
-        ));
+        // Dungeons on the expedition board (name, difficulty, days, XP reward, gold reward).
+        session.addAvailableDungeon(new Dungeon("Dungeon 4", "assets/dungeon-icons/mossroot.png", 8, 1, 50, 100));
+        session.addAvailableDungeon(new Dungeon("Dungeon 5", "assets/dungeon-icons/ruins.png", 16, 2, 100, 100));
+        session.addAvailableDungeon(new Dungeon("Dungeon 6", "assets/dungeon-icons/trail.png", 28, 4, 180, 100));
 
         // Active expeditions with separate parties and different days remaining.
-        Expedition firstExpedition = new Expedition(new Dungeon("Dungeon 1", 12, 1, 80), List.of(john));
+        Expedition firstExpedition = new Expedition(new Dungeon("Dungeon 1", "assets/dungeon-icons/trail.png", 12, 1, 80, 120), List.of(john));
         firstExpedition.setState(ExpeditionState.ACTIVE);
         session.launchExpedition(firstExpedition);
 
-        Expedition secondExpedition = new Expedition(new Dungeon("Dungeon 2", 20, 3, 140), List.of(bram, lyra));
+        Expedition secondExpedition = new Expedition(new Dungeon("Dungeon 2", "assets/dungeon-icons/watchtower.png", 20, 3, 140, 120), List.of(bram, lyra));
         secondExpedition.setState(ExpeditionState.ACTIVE);
         session.launchExpedition(secondExpedition);
 

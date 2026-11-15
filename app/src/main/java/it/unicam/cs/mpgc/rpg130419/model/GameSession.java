@@ -51,6 +51,12 @@ public class GameSession {
         return availableDungeons;
     }
 
+    public void addAvailableDungeon(Dungeon newDungeon) {
+        if (newDungeon == null) throw new IllegalArgumentException("Dungeon can't be null.");
+        if (availableDungeons.contains(newDungeon)) throw new IllegalArgumentException("Dungeon already present in the list.");
+        availableDungeons.add(newDungeon);
+    }
+
     public List<Hero> getRecruitmentCandidates() {
         return recruitmentCandidates;
     }
