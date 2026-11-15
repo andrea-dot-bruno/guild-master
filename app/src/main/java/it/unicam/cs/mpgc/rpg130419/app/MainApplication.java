@@ -3,7 +3,6 @@ package it.unicam.cs.mpgc.rpg130419.app;
 import it.unicam.cs.mpgc.rpg130419.controller.MainController;
 import it.unicam.cs.mpgc.rpg130419.model.Dungeon;
 import it.unicam.cs.mpgc.rpg130419.model.Expedition;
-import it.unicam.cs.mpgc.rpg130419.model.ExpeditionState;
 import it.unicam.cs.mpgc.rpg130419.model.GameSession;
 import it.unicam.cs.mpgc.rpg130419.model.Knight;
 import it.unicam.cs.mpgc.rpg130419.model.Mage;
@@ -73,11 +72,9 @@ public class MainApplication extends Application {
 
         // Active expeditions with separate parties and different days remaining.
         Expedition firstExpedition = new Expedition(new Dungeon("Dungeon 1", "assets/dungeon-icons/trail.png", 12, 1, 80, 120), List.of(john));
-        firstExpedition.setState(ExpeditionState.ACTIVE);
         session.launchExpedition(firstExpedition);
 
         Expedition secondExpedition = new Expedition(new Dungeon("Dungeon 2", "assets/dungeon-icons/watchtower.png", 20, 3, 140, 120), List.of(bram, lyra));
-        secondExpedition.setState(ExpeditionState.ACTIVE);
         session.launchExpedition(secondExpedition);
 
         // Candidates on the recruitment board with sample hire fees.

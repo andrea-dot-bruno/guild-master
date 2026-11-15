@@ -43,8 +43,16 @@ public class GameSession {
         return guild.getActiveExpeditions();
     }
 
-    public void launchExpedition(Expedition expedition) {
-        guild.launchExpedition(expedition);
+    public boolean launchExpedition(Expedition expedition) {
+        return guild.launchExpedition(expedition);
+    }
+
+    public boolean launchExpedition(Dungeon dungeon, List<Hero> party) {
+        if (!availableDungeons.contains(dungeon)) return false;
+        if (!launchExpedition(new Expedition(dungeon, party))) return false;
+
+        availableDungeons.remove(dungeon);
+        return true;
     }
 
     public List<Dungeon> getAvailableDungeons() {

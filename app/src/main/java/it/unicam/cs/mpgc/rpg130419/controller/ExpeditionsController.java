@@ -4,7 +4,6 @@ import it.unicam.cs.mpgc.rpg130419.model.Dungeon;
 import javafx.beans.property.ReadOnlyDoubleWrapper;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,11 +13,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class ExpeditionsController {
+    private Consumer<Dungeon> prepareExpedition;
 
     @FXML private TableView<Dungeon> availableDungeonsTable;
-    @FXML private Button preparePartyButton;
+    @FXML private Button prepareExpeditionButton;
     @FXML private TableColumn<Dungeon, String> dungeonNameColumn;
     @FXML private TableColumn<Dungeon, Number> dungeonDaysColumn;
     @FXML private TableColumn<Dungeon, Number> dungeonGoldRewardColumn;
@@ -41,7 +42,7 @@ public class ExpeditionsController {
                 new ReadOnlyDoubleWrapper(cell.getValue().getDifficulty()));
 
         clearInfoFields();
-        preparePartyButton.disableProperty().bind(
+        prepareExpeditionButton.disableProperty().bind(
                 availableDungeonsTable.getSelectionModel().selectedItemProperty().isNull());
         availableDungeonsTable.getSelectionModel().selectedItemProperty()
                 .addListener((property, oldDungeon, newDungeon) -> {
@@ -53,7 +54,14 @@ public class ExpeditionsController {
                 });
     }
 
-    @FXML private void handlePreparePartyButton(ActionEvent actionEvent) {} //TODO: implement
+    @FXML private void handlePrepareExpeditionButton() {
+        Dungeon dungeon = availableDungeonsTable.getSelectionModel().getSelectedItem();
+        if (dungeon != null) prepareExpedition.accept(dungeon);
+    }
+
+    public void setPrepareExpedition(Consumer<Dungeon> prepareExpedition) {
+        this.prepareExpedition = prepareExpedition;
+    }
 
     public void setAvailableDungeons(List<Dungeon> availableDungeons) {
         availableDungeonsTable.getItems().setAll(availableDungeons);

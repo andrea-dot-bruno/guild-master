@@ -66,7 +66,7 @@
                         <Font size="19.0" />
                      </font>
                   </Label>
-                  <Button fx:id="preparePartyButton" alignment="CENTER" mnemonicParsing="false" onAction="#handlePreparePartyButton" prefHeight="67.0" prefWidth="177.0" styleClass="button-main" text="Prepare Party" textAlignment="CENTER" wrapText="true">
+                  <Button fx:id="prepareExpeditionButton" alignment="CENTER" mnemonicParsing="false" onAction="#handlePrepareExpeditionButton" prefHeight="67.0" prefWidth="177.0" styleClass="button-main" text="Prepare Expedition" textAlignment="CENTER" wrapText="true">
                      <VBox.margin>
                         <Insets top="40.0" />
                      </VBox.margin>

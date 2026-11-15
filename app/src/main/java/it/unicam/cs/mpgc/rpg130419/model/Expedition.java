@@ -5,37 +5,33 @@ import java.util.UUID;
 
 public class Expedition {
     private final UUID id;
-    private Dungeon dungeon;
-    private List<Hero> heroes; //TODO: might develop a Party class to store party heroes and handle exp-ing.
+    private final Dungeon dungeon;
+    private final List<Hero> heroes;
     private int remainingTime;
     private ExpeditionState state;
 
     public Expedition(Dungeon dungeon, List<Hero> heroes) {
         this.id = UUID.randomUUID();
         this.dungeon = dungeon;
-        this.heroes = heroes;
+        this.heroes = List.copyOf(heroes);
         this.remainingTime = dungeon.getTimeToBeat();
         this.state = ExpeditionState.WAITING;
     }
 
-    //TODO: this method is not accounting for items in the party, but it should.
-    //TODO: create computePartyPower() method for cleaner code.
-    public void computeWin() {
+    public static double calculateSuccessProbability(Dungeon dungeon, List<Hero> heroes) {
+        if (heroes.isEmpty()) return 0.0;
+
         double partyPower = 0;
         for (Hero hero : heroes) {
             partyPower += hero.getTotalPower();
         }
-        if (partyPower >= dungeon.getDifficulty()) {
-            state = ExpeditionState.WON;
-        } else {
-            double winPercentage = partyPower / dungeon.getDifficulty();
-            double randomNumber = Math.random();
-            if (randomNumber > winPercentage) {
-                state = ExpeditionState.LOST;
-            } else {
-                state = ExpeditionState.WON;
-            }
-        }
+        if (partyPower >= dungeon.getDifficulty()) return 1.0;
+        return Math.max(0.0, partyPower / dungeon.getDifficulty());
+    }
+
+    public void computeWin() {
+        double probability = calculateSuccessProbability(dungeon, heroes);
+        state = Math.random() < probability ? ExpeditionState.WON : ExpeditionState.LOST;
     }
 
     public void dayHasPassed() {
@@ -60,7 +56,6 @@ public class Expedition {
 
     public String printInvolvedHeroes() {
         StringBuilder output = new StringBuilder();
-        if (heroes == null) return "No heroes in this expedition. Strange...";
         if (heroes.size() == 1) return heroes.getFirst().getName();
         for (int i = 0; i < heroes.size(); i++) {
             Hero h = heroes.get(i);

@@ -1,6 +1,7 @@
 package it.unicam.cs.mpgc.rpg130419.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class Guild {
@@ -52,9 +53,15 @@ public class Guild {
         return activeExpeditions;
     }
 
-    public void launchExpedition(Expedition expedition) {
+    public boolean launchExpedition(Expedition expedition) {
         if (expedition == null) throw new IllegalArgumentException("Expedition can't be null.");
+        List<Hero> party = expedition.getInvolvedHeroes();
+        if (party.isEmpty() || new HashSet<>(party).size() != party.size()) return false;
+        if (!getAvailableHeroes().containsAll(party)) return false;
+
+        expedition.setState(ExpeditionState.ACTIVE);
         activeExpeditions.add(expedition);
+        return true;
     }
 
     public boolean removeExpedition(Expedition expedition) {

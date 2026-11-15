@@ -117,6 +117,130 @@
     -fx-padding: 0 16 16 16;
 }
 
+/* Preparazione della spedizione */
+.expedition-preparation {
+    -fx-border-color: guild-walnut-shadow;
+    -fx-border-width: 2;
+}
+
+.expedition-preparation .preparation-title {
+    -fx-background-color: guild-walnut-shadow;
+    -fx-text-fill: guild-light-ink;
+    -fx-font-size: 27px;
+    -fx-font-weight: bold;
+    -fx-padding: 13 20;
+}
+
+.preparation-content {
+    -fx-padding: 20 20 0;
+}
+
+.preparation-dungeon,
+.preparation-party {
+    -fx-background-color: guild-panel;
+    -fx-border-color: guild-divider;
+    -fx-padding: 14;
+}
+
+.preparation-content .label,
+.preparation-actions .label {
+    -fx-background-color: transparent;
+    -fx-text-fill: guild-ink;
+}
+
+.preparation-section-title {
+    -fx-font-size: 19px;
+    -fx-font-weight: bold;
+}
+
+.preparation-dungeon-stats,
+.preparation-probability-value {
+    -fx-font-size: 15px;
+}
+
+.preparation-probability-value {
+    -fx-font-weight: bold;
+}
+
+.preparation-dungeon > .separator > .line {
+    -fx-border-color: guild-divider transparent transparent;
+}
+
+.preparation-dungeon .progress-bar > .track {
+    -fx-background-color: guild-progress-track;
+    -fx-border-color: guild-divider;
+    -fx-background-radius: 0;
+}
+
+.preparation-dungeon .progress-bar > .bar {
+    -fx-background-color: guild-progress-fill;
+    -fx-background-insets: 2;
+    -fx-background-radius: 0;
+    -fx-padding: 8;
+}
+
+.preparation-hero-scroll {
+    -fx-background: guild-background;
+    -fx-box-border: guild-divider;
+}
+
+.preparation-hero-cards {
+    -fx-padding: 6;
+}
+
+.preparation-hero-card {
+    -fx-alignment: CENTER_LEFT;
+    -fx-background-color: derive(guild-background, 18%);
+    -fx-background-radius: 0;
+    -fx-border-color: guild-divider;
+    -fx-cursor: hand;
+    -fx-padding: 7 10;
+}
+
+.preparation-hero-card:hover {
+    -fx-background-color: derive(guild-panel, 18%);
+}
+
+.preparation-hero-card:selected {
+    -fx-background-color: guild-selection;
+    -fx-border-color: guild-walnut;
+}
+
+.preparation-hero-card:focused {
+    -fx-border-color: guild-ink;
+    -fx-border-width: 2;
+    -fx-padding: 6 9;
+}
+
+.preparation-hero-name {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.preparation-content .preparation-hero-level {
+    -fx-font-size: 13px;
+    -fx-text-fill: guild-muted-ink;
+}
+
+.preparation-actions {
+    -fx-padding: 14 20 18;
+}
+
+.preparation-actions .button {
+    -fx-font-size: 15px;
+    -fx-padding: 10 18;
+    -fx-border-color: transparent;
+    -fx-border-insets: 3;
+}
+
+.preparation-actions .button:focused {
+    -fx-border-color: guild-walnut;
+}
+
+.preparation-actions .preparation-error {
+    -fx-text-fill: guild-error;
+}
+
 /* Barra di navigazione */
 .main-tabs {
     -fx-tab-min-width: 160;

@@ -5,6 +5,7 @@ import it.unicam.cs.mpgc.rpg130419.model.Expedition;
 import it.unicam.cs.mpgc.rpg130419.model.GameSession;
 import it.unicam.cs.mpgc.rpg130419.model.Hero;
 import it.unicam.cs.mpgc.rpg130419.model.RecruitmentCandidate;
+import it.unicam.cs.mpgc.rpg130419.view.ExpeditionPreparation;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -29,6 +30,7 @@ public class MainController {
         recruitmentController.setHireHero(this::hireHero);
         overviewController.setShowHeroesAction(this::showHeroesTab);
         overviewController.setPlanExpeditionAction(this::showExpeditionsTab);
+        expeditionsController.setPrepareExpedition(this::prepareExpedition);
         footerController.setEndDay(this::endDay);
     }
 
@@ -53,6 +55,22 @@ public class MainController {
 
     private void showExpeditionsTab() {
         mainTabPane.getSelectionModel().select(expeditionsTab);
+    }
+
+    private void prepareExpedition(Dungeon dungeon) {
+        ExpeditionPreparation.show(mainTabPane.getScene().getWindow(), dungeon,
+                session.getAvailableHeroes(), party -> launchExpedition(dungeon, party));
+    }
+
+    private boolean launchExpedition(Dungeon dungeon, List<Hero> party) {
+        if (!session.launchExpedition(dungeon, party)) return false;
+
+        setAvailableDungeonsTable();
+        setUnderwayExpeditionsLabel();
+        setActiveExpeditionsTable();
+        setAvailableHeroesList();
+        populateHeroesTable();
+        return true;
     }
 
     private void endDay() {
