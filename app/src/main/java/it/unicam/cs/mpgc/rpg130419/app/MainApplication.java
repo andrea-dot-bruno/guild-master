@@ -27,7 +27,7 @@ import java.util.List;
 public class MainApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        Path saveFile = Path.of(System.getProperty("user.home"), ".guild-master", "save.json");
+        Path saveFile = Path.of("saves", "save.json");
         GameSaveRepository saves = new JsonGameSaveRepository(saveFile);
         GameSession session;
         try {
