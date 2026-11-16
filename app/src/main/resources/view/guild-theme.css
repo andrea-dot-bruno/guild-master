@@ -55,6 +55,23 @@
     -fx-text-fill: guild-ink;
 }
 
+.start-screen-title {
+    -fx-text-fill: guild-ink;
+    -fx-font-size: 56px;
+    -fx-font-weight: bold;
+}
+
+.start-screen .button {
+    -fx-font-size: 18px;
+    -fx-padding: 10 18;
+    -fx-border-color: transparent;
+    -fx-border-insets: 3;
+}
+
+.start-screen .button:focused {
+    -fx-border-color: guild-walnut;
+}
+
 .guild-progress-bar > .track {
     -fx-background-color: guild-progress-track;
     -fx-border-color: guild-divider;

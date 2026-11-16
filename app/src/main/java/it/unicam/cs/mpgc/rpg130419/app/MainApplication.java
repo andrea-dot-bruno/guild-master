@@ -1,6 +1,7 @@
 package it.unicam.cs.mpgc.rpg130419.app;
 
 import it.unicam.cs.mpgc.rpg130419.controller.MainController;
+import it.unicam.cs.mpgc.rpg130419.controller.StartScreenController;
 import it.unicam.cs.mpgc.rpg130419.model.Dungeon;
 import it.unicam.cs.mpgc.rpg130419.model.Expedition;
 import it.unicam.cs.mpgc.rpg130419.model.GameSession;
@@ -29,14 +30,36 @@ public class MainApplication extends Application {
     public void start(Stage stage) throws IOException {
         Path saveFile = Path.of("saves", "save.json");
         GameSaveRepository saves = new JsonGameSaveRepository(saveFile);
+        FXMLLoader loader = new FXMLLoader(
+                MainApplication.class.getResource("/view/start-screen.fxml")
+        );
+        Parent root = loader.load();
+        StartScreenController controller = loader.getController();
+        controller.setNewGameAction(() -> {
+            if (SaveDialogs.confirmOverwrite(stage)) startNewGame(stage, saves);
+        });
+        controller.setLoadGameAction(() -> loadGame(stage, saves));
+
+        stage.setTitle("Guild Master");
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    private void loadGame(Stage stage, GameSaveRepository saves) {
         GameSession session;
         try {
             session = saves.loadOrCreate(this::newSession);
+            stage.getScene().setRoot(createGameView(session, saves));
         } catch (IOException exception) {
-            SaveDialogs.showError(null, "Could Not Open Game", exception);
+            SaveDialogs.showError(stage, "Could Not Open Game", exception);
             return;
         }
+        if (session.isGameOver() && DayEndDialogs.confirmNewGame(stage)) {
+            startNewGame(stage, saves);
+        }
+    }
 
+    private Parent createGameView(GameSession session, GameSaveRepository saves) throws IOException {
         FXMLLoader loader = new FXMLLoader(
                 MainApplication.class.getResource("/view/main-page.fxml")
         );
@@ -44,25 +67,18 @@ public class MainApplication extends Application {
         MainController controller = loader.getController();
         controller.linkSession(session, saves);
         controller.updateDisplay();
-
-        stage.setTitle("Guild Master");
-        stage.setScene(new Scene(root));
-        stage.show();
-        if (session.isGameOver() && DayEndDialogs.confirmNewGame(stage)) {
-            restartGame(stage, controller, saves);
-        }
+        return root;
     }
 
-    private void restartGame(Stage stage, MainController controller, GameSaveRepository saves) {
+    private void startNewGame(Stage stage, GameSaveRepository saves) {
         GameSession session = newSession();
         try {
+            Parent root = createGameView(session, saves);
             saves.save(session);
+            stage.getScene().setRoot(root);
         } catch (IOException exception) {
-            SaveDialogs.showError(stage, "Could Not Save New Game", exception);
-            return;
+            SaveDialogs.showError(stage, "Could Not Start New Game", exception);
         }
-        controller.linkSession(session, saves);
-        controller.updateDisplay();
     }
 
     private GameSession newSession() {

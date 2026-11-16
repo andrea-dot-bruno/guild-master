@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="700.0" prefWidth="1120.0" styleClass="start-screen" stylesheets="@guild-theme.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.mpgc.rpg130419.controller.StartScreenController">
+   <children>
+      <Label styleClass="start-screen-title" text="GUILD MASTER" />
+      <ImageView fitHeight="200.0" fitWidth="325.0" preserveRatio="true">
+         <image>
+            <Image url="@../assets/guild-house.png" />
+         </image>
+         <VBox.margin>
+            <Insets top="18.0" bottom="30.0" />
+         </VBox.margin>
+      </ImageView>
+      <VBox alignment="CENTER" spacing="10.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#handleNewGame" prefWidth="216.0" styleClass="button-secondary" text="New Game" />
+            <Button mnemonicParsing="false" onAction="#handleLoadGame" prefWidth="216.0" styleClass="button-secondary" text="Load Game" />
+            <Button mnemonicParsing="false" onAction="#handleQuit" prefWidth="216.0" styleClass="button-secondary" text="Quit">
+               <VBox.margin>
+                  <Insets top="12.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</VBox>
