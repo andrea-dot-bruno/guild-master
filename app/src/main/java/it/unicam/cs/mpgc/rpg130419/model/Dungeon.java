@@ -1,5 +1,6 @@
 package it.unicam.cs.mpgc.rpg130419.model;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class Dungeon {
@@ -19,6 +20,21 @@ public class Dungeon {
         this.timeToBeat = timeToBeat;
         this.expReward = expReward;
         this.goldReward = goldReward;
+    }
+
+    public Dungeon(UUID id, String name, String iconPath, double difficulty, int timeToBeat,
+                   int expReward, int goldReward) {
+        this.id = Objects.requireNonNull(id);
+        this.name = name;
+        this.iconPath = iconPath;
+        this.difficulty = difficulty;
+        this.timeToBeat = timeToBeat;
+        this.expReward = expReward;
+        this.goldReward = goldReward;
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     public double getDifficulty() {

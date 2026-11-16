@@ -2,6 +2,7 @@ package it.unicam.cs.mpgc.rpg130419.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class GameSession {
     private static final int MIN_RECRUITMENT_CANDIDATES = 4;
@@ -17,6 +18,17 @@ public class GameSession {
         //TODO: implement real name and day
         this.guild = new Guild("Test Guild");
         this.currentDay = 12;
+        this.gameOver = false;
+    }
+
+    public GameSession(Guild guild, int currentDay, boolean gameOver, List<Dungeon> availableDungeons,
+                       List<RecruitmentCandidate> recruitmentCandidates) {
+        if (currentDay < 1) throw new IllegalArgumentException("Invalid game day.");
+        this.guild = Objects.requireNonNull(guild);
+        this.currentDay = currentDay;
+        this.gameOver = gameOver;
+        availableDungeons.forEach(this::addAvailableDungeon);
+        recruitmentCandidates.forEach(this::addRecruitmentCandidate);
     }
 
     public int getGold() {
@@ -121,6 +133,10 @@ public class GameSession {
 
     public int getCurrentDay() {
         return currentDay;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
     }
 
     private void replenishBoards() {

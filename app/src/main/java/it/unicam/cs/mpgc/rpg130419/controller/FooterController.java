@@ -33,7 +33,7 @@ public class FooterController {
         this.endDay = endDay;
     }
 
-    public void disableEndDay() {
-        endDayButton.setDisable(true);
+    public void setEndDayDisabled(boolean disabled) {
+        endDayButton.setDisable(disabled);
     }
 }

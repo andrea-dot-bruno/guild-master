@@ -1,6 +1,7 @@
 package it.unicam.cs.mpgc.rpg130419.model;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 public class Expedition {
@@ -16,6 +17,25 @@ public class Expedition {
         this.heroes = List.copyOf(heroes);
         this.remainingTime = dungeon.getTimeToBeat();
         this.state = ExpeditionState.WAITING;
+    }
+
+    private Expedition(UUID id, Dungeon dungeon, List<Hero> heroes, int remainingTime) {
+        this.id = Objects.requireNonNull(id);
+        this.dungeon = dungeon;
+        this.heroes = List.copyOf(heroes);
+        this.remainingTime = remainingTime;
+        this.state = ExpeditionState.WAITING;
+    }
+
+    public static Expedition restore(UUID id, Dungeon dungeon, List<Hero> heroes, int remainingTime) {
+        if (remainingTime < 1 || remainingTime > dungeon.getTimeToBeat()) {
+            throw new IllegalArgumentException("Invalid remaining expedition time.");
+        }
+        return new Expedition(id, dungeon, heroes, remainingTime);
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     public static double calculateSuccessProbability(Dungeon dungeon, List<Hero> heroes) {
@@ -57,7 +77,7 @@ public class Expedition {
         return state;
     }
 
-    Dungeon getDungeon() {
+    public Dungeon getDungeon() {
         return dungeon;
     }
 

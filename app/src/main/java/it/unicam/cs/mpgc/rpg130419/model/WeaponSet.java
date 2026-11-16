@@ -3,9 +3,6 @@ package it.unicam.cs.mpgc.rpg130419.model;
 import it.unicam.cs.mpgc.rpg130419.model.weapons.LeftFist;
 import it.unicam.cs.mpgc.rpg130419.model.weapons.RightFist;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class WeaponSet {
     private Weapon rightWeapon;
     private Weapon leftWeapon;
@@ -20,6 +17,14 @@ public class WeaponSet {
     }
     public void setLeftWeapon(Weapon leftWeapon) {
         this.leftWeapon = leftWeapon;
+    }
+
+    public Weapon getLeftWeapon() {
+        return leftWeapon;
+    }
+
+    public Weapon getRightWeapon() {
+        return rightWeapon;
     }
 
     public int getWeaponSetPower() {

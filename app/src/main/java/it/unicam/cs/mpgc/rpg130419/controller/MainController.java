@@ -6,17 +6,21 @@ import it.unicam.cs.mpgc.rpg130419.model.Expedition;
 import it.unicam.cs.mpgc.rpg130419.model.GameSession;
 import it.unicam.cs.mpgc.rpg130419.model.Hero;
 import it.unicam.cs.mpgc.rpg130419.model.RecruitmentCandidate;
+import it.unicam.cs.mpgc.rpg130419.persistence.GameSaveRepository;
 import it.unicam.cs.mpgc.rpg130419.view.DayEndDialogs;
 import it.unicam.cs.mpgc.rpg130419.view.ExpeditionPreparation;
+import it.unicam.cs.mpgc.rpg130419.view.SaveDialogs;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.stage.Window;
 
+import java.io.IOException;
 import java.util.List;
 
 public class MainController {
     private GameSession session;
+    private GameSaveRepository saves;
 
     @FXML private HeaderController headerController;
     @FXML private OverviewController overviewController;
@@ -37,8 +41,9 @@ public class MainController {
         footerController.setEndDay(this::endDay);
     }
 
-    public void linkSession(GameSession session) {
+    public void linkSession(GameSession session, GameSaveRepository saves) {
         this.session = session;
+        this.saves = saves;
     }
 
     public void updateDisplay() {
@@ -51,6 +56,8 @@ public class MainController {
         populateHeroesTable();
         setAvailableDungeonsTable();
         setRecruitmentCandidatesTable();
+        mainTabPane.setDisable(session.isGameOver());
+        footerController.setEndDayDisabled(session.isGameOver());
     }
 
     private void showHeroesTab() {
@@ -68,7 +75,6 @@ public class MainController {
 
     private boolean launchExpedition(Dungeon dungeon, List<Hero> party) {
         if (!session.launchExpedition(dungeon, party)) return false;
-
         setAvailableDungeonsTable();
         setUnderwayExpeditionsLabel();
         setActiveExpeditionsTable();
@@ -80,11 +86,13 @@ public class MainController {
     private void endDay() {
         DayResult result = session.endDay();
         updateDisplay();
-
         Window owner = mainTabPane.getScene().getWindow();
+        try {
+            saves.save(session);
+        } catch (IOException exception) {
+            SaveDialogs.showError(owner, "Could Not Autosave Game", exception);
+        }
         if (result.gameOver()) {
-            mainTabPane.setDisable(true);
-            footerController.disableEndDay();
             DayEndDialogs.showGameOver(owner);
         } else if (!result.completedExpeditions().isEmpty()) {
             DayEndDialogs.showExpeditionReport(owner, result.completedExpeditions());
@@ -96,7 +104,6 @@ public class MainController {
             heroesController.showFireFailure(hero);
             return;
         }
-
         populateHeroesTable();
         setAvailableHeroesList();
     }
@@ -106,7 +113,6 @@ public class MainController {
             recruitmentController.showHireFailure(candidate);
             return;
         }
-
         setGoldAmountLabel();
         setRecruitmentCandidatesTable();
         populateHeroesTable();

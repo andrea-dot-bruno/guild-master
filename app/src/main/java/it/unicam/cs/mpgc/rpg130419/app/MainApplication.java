@@ -4,11 +4,16 @@ import it.unicam.cs.mpgc.rpg130419.controller.MainController;
 import it.unicam.cs.mpgc.rpg130419.model.Dungeon;
 import it.unicam.cs.mpgc.rpg130419.model.Expedition;
 import it.unicam.cs.mpgc.rpg130419.model.GameSession;
+import it.unicam.cs.mpgc.rpg130419.model.Guild;
 import it.unicam.cs.mpgc.rpg130419.model.Knight;
 import it.unicam.cs.mpgc.rpg130419.model.Mage;
 import it.unicam.cs.mpgc.rpg130419.model.RecruitmentCandidate;
 import it.unicam.cs.mpgc.rpg130419.model.weapons.Sword;
 import it.unicam.cs.mpgc.rpg130419.model.weapons.Wand;
+import it.unicam.cs.mpgc.rpg130419.persistence.GameSaveRepository;
+import it.unicam.cs.mpgc.rpg130419.persistence.JsonGameSaveRepository;
+import it.unicam.cs.mpgc.rpg130419.view.DayEndDialogs;
+import it.unicam.cs.mpgc.rpg130419.view.SaveDialogs;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,70 +21,74 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 
 public class MainApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        Path saveFile = Path.of(System.getProperty("user.home"), ".guild-master", "save.json");
+        GameSaveRepository saves = new JsonGameSaveRepository(saveFile);
+        GameSession session;
+        try {
+            session = saves.loadOrCreate(this::newSession);
+        } catch (IOException exception) {
+            SaveDialogs.showError(null, "Could Not Open Game", exception);
+            return;
+        }
+
         FXMLLoader loader = new FXMLLoader(
                 MainApplication.class.getResource("/view/main-page.fxml")
         );
         Parent root = loader.load();
         MainController controller = loader.getController();
-        GameSession session = new GameSession();
-
-        // TODO: Remove this call when real game data is available.
-        addDummyData(session);
-
-        controller.linkSession(session);
+        controller.linkSession(session, saves);
         controller.updateDisplay();
-
 
         stage.setTitle("Guild Master");
         stage.setScene(new Scene(root));
         stage.show();
+        if (session.isGameOver() && DayEndDialogs.confirmNewGame(stage)) {
+            restartGame(stage, controller, saves);
+        }
     }
 
-    // Temporary dummy data for testing the tabs. Remove this method with its call in start().
-    private void addDummyData(GameSession session) {
-        session.addMoney(1200);
+    private void restartGame(Stage stage, MainController controller, GameSaveRepository saves) {
+        GameSession session = newSession();
+        try {
+            saves.save(session);
+        } catch (IOException exception) {
+            SaveDialogs.showError(stage, "Could Not Save New Game", exception);
+            return;
+        }
+        controller.linkSession(session, saves);
+        controller.updateDisplay();
+    }
 
-        // Recruited heroes with different levels, equipment and availability.
-        String knightIcon = "/assets/knight-icons/bram.png";
-        String mageIcon = "/assets/mage-icons/lyra.png";
-        Knight john = new Knight("John", knightIcon);
-        Mage morris = new Mage("Morris", mageIcon);
-        Knight bram = new Knight("Bram", knightIcon);
-        Mage lyra = new Mage("Lyra", mageIcon);
-        Knight rowan = new Knight("Rowan", knightIcon);
+    private GameSession newSession() {
+        Guild guild = new Guild("Adventurers' Guild");
+        GameSession session = new GameSession(guild, 1, false, List.of(), List.of());
+        session.addMoney(150);
 
-        john.setRightWeapon(new Sword());
-        bram.addExp(160);
-        bram.levelUp();
+        Knight bram = new Knight("Bram", "/assets/knight-icons/bram.png");
+        bram.setRightWeapon(new Sword());
+        Mage lyra = new Mage("Lyra", "/assets/mage-icons/lyra.png");
         lyra.setRightWeapon(new Wand());
-        lyra.addExp(75);
-
-        session.addHero(john);
-        session.addHero(morris);
         session.addHero(bram);
         session.addHero(lyra);
-        session.addHero(rowan);
 
-        // Dungeons on the expedition board (name, difficulty, days, XP reward, gold reward).
-        session.addAvailableDungeon(new Dungeon("Dungeon 4", "assets/dungeon-icons/mossroot.png", 8, 1, 50, 100));
-        session.addAvailableDungeon(new Dungeon("Dungeon 5", "assets/dungeon-icons/ruins.png", 16, 2, 100, 100));
-        session.addAvailableDungeon(new Dungeon("Dungeon 6", "assets/dungeon-icons/trail.png", 28, 4, 180, 100));
+        Dungeon firstDungeon = new Dungeon("Mossroot Warren", "/assets/dungeon-icons/mossroot.png", 8, 1, 50, 100);
+        session.launchExpedition(new Expedition(firstDungeon, List.of(bram)));
+        session.addAvailableDungeon(new Dungeon("Old King's Road", "/assets/dungeon-icons/trail.png", 8, 1, 50, 100));
+        session.addAvailableDungeon(new Dungeon("Briarwatch Ruins", "/assets/dungeon-icons/ruins.png", 16, 2, 100, 140));
 
-        // Active expeditions with separate parties and different days remaining.
-        Expedition firstExpedition = new Expedition(new Dungeon("Dungeon 1", "assets/dungeon-icons/trail.png", 12, 1, 80, 120), List.of(john));
-        session.launchExpedition(firstExpedition);
-
-        Expedition secondExpedition = new Expedition(new Dungeon("Dungeon 2", "assets/dungeon-icons/watchtower.png", 20, 3, 140, 120), List.of(bram, lyra));
-        session.launchExpedition(secondExpedition);
-
-        // Candidates on the recruitment board with sample hire fees.
-        session.addRecruitmentCandidate(new RecruitmentCandidate(new Knight("Gareth", knightIcon), 60));
-        session.addRecruitmentCandidate(new RecruitmentCandidate(new Mage("Iris", mageIcon), 50));
+        Knight gareth = new Knight("Gareth", "/assets/knight-icons/cedric.png");
+        gareth.setRightWeapon(new Sword());
+        Mage iris = new Mage("Iris", "/assets/mage-icons/mira.png");
+        iris.setRightWeapon(new Wand());
+        session.addRecruitmentCandidate(new RecruitmentCandidate(gareth, 60));
+        session.addRecruitmentCandidate(new RecruitmentCandidate(iris, 50));
+        return session;
     }
 
     public static void main(String[] args) {

@@ -1,7 +1,6 @@
 package it.unicam.cs.mpgc.rpg130419.model;
 
-import java.util.UUID;
-
+import java.util.Objects;
 import java.util.UUID;
 
 public abstract class Hero {
@@ -14,6 +13,15 @@ public abstract class Hero {
 
     public Hero(String name, String iconPath, HeroLevel heroLevel, int dailyPay) {
         this.id = UUID.randomUUID();
+        this.name = name;
+        this.iconPath = iconPath;
+        this.dailyPay = dailyPay;
+        this.heroLevel = heroLevel;
+        this.weaponSet = new WeaponSet();
+    }
+
+    protected Hero(UUID id, String name, String iconPath, HeroLevel heroLevel, int dailyPay) {
+        this.id = Objects.requireNonNull(id);
         this.name = name;
         this.iconPath = iconPath;
         this.dailyPay = dailyPay;
@@ -74,6 +82,14 @@ public abstract class Hero {
 
     public int getRequiredExpToLevelUp() {
         return heroLevel.getRequiredExpToLevelUp();
+    }
+
+    public Weapon getLeftWeapon() {
+        return weaponSet.getLeftWeapon();
+    }
+
+    public Weapon getRightWeapon() {
+        return weaponSet.getRightWeapon();
     }
 
     public String getLeftWeaponIconPath() {

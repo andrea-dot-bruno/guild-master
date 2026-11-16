@@ -36,6 +36,15 @@ public final class DayEndDialogs {
         alert.showAndWait();
     }
 
+    public static boolean confirmNewGame(Window owner) {
+        Alert alert = createAlert(owner, Alert.AlertType.CONFIRMATION, "Game Over");
+        ButtonType newGame = new ButtonType("New Game", ButtonType.OK.getButtonData());
+        alert.getButtonTypes().setAll(newGame, ButtonType.CANCEL);
+        alert.getDialogPane().lookupButton(newGame).getStyleClass().add("button-main");
+        alert.setContentText("The saved game has ended. Start a new game?");
+        return alert.showAndWait().filter(newGame::equals).isPresent();
+    }
+
     private static Alert createAlert(Window owner, Alert.AlertType type, String title) {
         Alert alert = new Alert(type, "", ButtonType.OK);
         alert.initOwner(owner);

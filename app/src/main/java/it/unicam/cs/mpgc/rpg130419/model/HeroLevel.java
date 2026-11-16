@@ -15,6 +15,15 @@ public class HeroLevel {
         this.currentExp = 0;
     }
 
+    HeroLevel(int initialExpRequirement, int expRequirementIncrement, int level, int currentExp) {
+        if (level < 1 || currentExp < 0) throw new IllegalArgumentException("Invalid hero progress.");
+        this.initialExpRequirement = initialExpRequirement;
+        this.expRequirementIncrement = expRequirementIncrement;
+        this.level = level;
+        this.currentExp = currentExp;
+        calculateRequiredExpToLevelUp();
+    }
+
     //TODO: change and balance this formula. It should favour more heroes with smaller expRequiredIncrement value.
     public void calculateRequiredExpToLevelUp() {
         requiredExpToLevelUp = initialExpRequirement + (expRequirementIncrement * (level - 1));
