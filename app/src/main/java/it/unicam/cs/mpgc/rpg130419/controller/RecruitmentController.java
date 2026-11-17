@@ -1,5 +1,6 @@
 package it.unicam.cs.mpgc.rpg130419.controller;
 
+import it.unicam.cs.mpgc.rpg130419.model.GameSession;
 import it.unicam.cs.mpgc.rpg130419.model.Hero;
 import it.unicam.cs.mpgc.rpg130419.model.RecruitmentCandidate;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
@@ -18,9 +19,11 @@ import java.util.function.Consumer;
 
 public class RecruitmentController {
     private Consumer<RecruitmentCandidate> hireHero;
+    private Runnable refreshRecruitmentAction;
 
     @FXML private TableView<RecruitmentCandidate> recruitmentCandidatesTable;
     @FXML private Button hireHeroButton;
+    @FXML private Button refreshRecruitmentButton;
     @FXML private TableColumn<RecruitmentCandidate, String> candidateNameColumn;
     @FXML private TableColumn<RecruitmentCandidate, String> candidateClassColumn;
     @FXML private TableColumn<RecruitmentCandidate, Number> candidateLevelColumn;
@@ -48,6 +51,7 @@ public class RecruitmentController {
         candidateHireFeeColumn.setCellValueFactory(cell ->
                 new ReadOnlyIntegerWrapper(cell.getValue().hireFee()));
 
+        refreshRecruitmentButton.setText("Refresh Candidates (%d G)".formatted(GameSession.RECRUITMENT_REFRESH_COST));
         clearInfoFields();
         hireHeroButton.disableProperty().bind(
                 recruitmentCandidatesTable.getSelectionModel().selectedItemProperty().isNull());
@@ -66,6 +70,18 @@ public class RecruitmentController {
         if (candidate != null) hireHero.accept(candidate);
     }
 
+    @FXML private void handleRefreshRecruitment() {
+        refreshRecruitmentAction.run();
+    }
+
+    public void setRefreshRecruitmentAction(Runnable refreshRecruitmentAction) {
+        this.refreshRecruitmentAction = refreshRecruitmentAction;
+    }
+
+    public void setRefreshRecruitmentDisabled(boolean disabled) {
+        refreshRecruitmentButton.setDisable(disabled);
+    }
+
     public void setHireHero(Consumer<RecruitmentCandidate> hireHero) {
         this.hireHero = hireHero;
     }
@@ -81,9 +97,14 @@ public class RecruitmentController {
     }
 
     public void setRecruitmentCandidates(List<RecruitmentCandidate> recruitmentCandidates) {
+        TableView.TableViewSelectionModel<RecruitmentCandidate> selection = recruitmentCandidatesTable.getSelectionModel();
+        RecruitmentCandidate selected = selection.getSelectedItem();
         recruitmentCandidatesTable.getItems().setAll(recruitmentCandidates);
-        if (recruitmentCandidatesTable.getSelectionModel().isEmpty()) {
-            recruitmentCandidatesTable.getSelectionModel().selectFirst();
+        if (selected != null && recruitmentCandidates.contains(selected)) {
+            selection.select(selected);
+        } else {
+            selection.clearSelection();
+            selection.selectFirst();
         }
     }
 

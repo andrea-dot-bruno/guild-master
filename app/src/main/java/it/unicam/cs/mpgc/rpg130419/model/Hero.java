@@ -4,27 +4,27 @@ import java.util.Objects;
 import java.util.UUID;
 
 public abstract class Hero {
+    private static final int BASE_DAILY_PAY = 5;
+    private static final int POWER_PER_EXTRA_GOLD = 2;
+
     protected final UUID id;
     protected final String name;
     protected final String iconPath;
-    protected final int dailyPay;
     protected final HeroLevel heroLevel;
     protected WeaponSet weaponSet;
 
-    public Hero(String name, String iconPath, HeroLevel heroLevel, int dailyPay) {
+    public Hero(String name, String iconPath, HeroLevel heroLevel) {
         this.id = UUID.randomUUID();
         this.name = name;
         this.iconPath = iconPath;
-        this.dailyPay = dailyPay;
         this.heroLevel = heroLevel;
         this.weaponSet = new WeaponSet();
     }
 
-    protected Hero(UUID id, String name, String iconPath, HeroLevel heroLevel, int dailyPay) {
+    protected Hero(UUID id, String name, String iconPath, HeroLevel heroLevel) {
         this.id = Objects.requireNonNull(id);
         this.name = name;
         this.iconPath = iconPath;
-        this.dailyPay = dailyPay;
         this.heroLevel = heroLevel;
         this.weaponSet = new WeaponSet();
     }
@@ -50,6 +50,10 @@ public abstract class Hero {
 
     public abstract double calculateTotalPower();
 
+    public int getEquipmentPower() {
+        return weaponSet.getWeaponSetPower();
+    }
+
     public double getExpPercentage() {
         return heroLevel.getExpPercentage();
     }
@@ -69,7 +73,7 @@ public abstract class Hero {
     public abstract String getHeroClass();
 
     public int getDailyPay() {
-        return dailyPay;
+        return BASE_DAILY_PAY + getEquipmentPower() / POWER_PER_EXTRA_GOLD;
     }
 
     public int getLevel() {

@@ -8,11 +8,11 @@ public class Knight extends Hero {
     private final double powerMultiplier = 1.2;
 
     public Knight(String name, String iconPath) {
-        super(name, iconPath, new HeroLevel(initialExpRequirement, expRequirementIncrement), 12);
+        super(name, iconPath, new HeroLevel(initialExpRequirement, expRequirementIncrement));
     }
 
     public Knight(UUID id, String name, String iconPath, int level, int currentExp) {
-        super(id, name, iconPath, new HeroLevel(initialExpRequirement, expRequirementIncrement, level, currentExp), 12);
+        super(id, name, iconPath, new HeroLevel(initialExpRequirement, expRequirementIncrement, level, currentExp));
     }
 
     @Override
@@ -22,6 +22,6 @@ public class Knight extends Hero {
 
     @Override
     public double calculateTotalPower() {
-        return weaponSet.getWeaponSetPower();
+        return getEquipmentPower();
     }
 }

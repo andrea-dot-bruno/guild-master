@@ -8,11 +8,11 @@ public class Mage extends Hero {
     private final double powerMultiplier = 1.1;
 
     public Mage(String name, String iconPath) {
-        super(name, iconPath, new HeroLevel(initialExpRequirement, expRequirementIncrement), 10);
+        super(name, iconPath, new HeroLevel(initialExpRequirement, expRequirementIncrement));
     }
 
     public Mage(UUID id, String name, String iconPath, int level, int currentExp) {
-        super(id, name, iconPath, new HeroLevel(initialExpRequirement, expRequirementIncrement, level, currentExp), 10);
+        super(id, name, iconPath, new HeroLevel(initialExpRequirement, expRequirementIncrement, level, currentExp));
     }
 
     @Override
@@ -22,6 +22,6 @@ public class Mage extends Hero {
 
     @Override
     public double calculateTotalPower() {
-        return weaponSet.getWeaponSetPower();
+        return getEquipmentPower();
     }
 }

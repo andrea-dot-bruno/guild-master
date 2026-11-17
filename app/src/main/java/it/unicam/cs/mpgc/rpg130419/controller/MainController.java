@@ -36,6 +36,7 @@ public class MainController {
         headerController.setSaveGameAction(this::saveGame);
         heroesController.setFireHero(this::fireHero);
         recruitmentController.setHireHero(this::hireHero);
+        recruitmentController.setRefreshRecruitmentAction(this::refreshRecruitment);
         overviewController.setShowHeroesAction(this::showHeroesTab);
         overviewController.setPlanExpeditionAction(this::showExpeditionsTab);
         expeditionsController.setPrepareExpedition(this::prepareExpedition);
@@ -130,6 +131,13 @@ public class MainController {
         setAvailableHeroesList();
     }
 
+    private void refreshRecruitment() {
+        if (session.refreshRecruitment()) {
+            setRecruitmentCandidatesTable();
+        }
+        setGoldAmountLabel();
+    }
+
     private void populateHeroesTable() {
         heroesController.setGuildHeroes(session.getHeroes(), session.getAvailableHeroes(),
                 session.getTotalDailyWages());
@@ -138,6 +146,7 @@ public class MainController {
     public void setGoldAmountLabel() {
         int goldAmount = session.getGold();
         headerController.setGoldAmountLabel(goldAmount);
+        recruitmentController.setRefreshRecruitmentDisabled(!session.canRefreshRecruitment());
     }
 
     public void setDayNumberLabel() {

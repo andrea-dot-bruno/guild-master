@@ -9,8 +9,8 @@ import it.unicam.cs.mpgc.rpg130419.model.Guild;
 import it.unicam.cs.mpgc.rpg130419.model.Knight;
 import it.unicam.cs.mpgc.rpg130419.model.Mage;
 import it.unicam.cs.mpgc.rpg130419.model.RecruitmentCandidate;
-import it.unicam.cs.mpgc.rpg130419.model.weapons.Sword;
-import it.unicam.cs.mpgc.rpg130419.model.weapons.Wand;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.BronzeSword;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.BasicWand;
 import it.unicam.cs.mpgc.rpg130419.persistence.GameSaveRepository;
 import it.unicam.cs.mpgc.rpg130419.persistence.JsonGameSaveRepository;
 import it.unicam.cs.mpgc.rpg130419.view.DayEndDialogs;
@@ -130,9 +130,9 @@ public class MainApplication extends Application {
         session.addMoney(150);
 
         Knight bram = new Knight("Bram", "/assets/knight-icons/bram.png");
-        bram.setRightWeapon(new Sword());
+        bram.setRightWeapon(new BronzeSword());
         Mage lyra = new Mage("Lyra", "/assets/mage-icons/lyra.png");
-        lyra.setRightWeapon(new Wand());
+        lyra.setRightWeapon(new BasicWand());
         session.addHero(bram);
         session.addHero(lyra);
 
@@ -142,11 +142,11 @@ public class MainApplication extends Application {
         session.addAvailableDungeon(new Dungeon("Briarwatch Ruins", "/assets/dungeon-icons/ruins.png", 16, 2, 100, 140));
 
         Knight gareth = new Knight("Gareth", "/assets/knight-icons/cedric.png");
-        gareth.setRightWeapon(new Sword());
+        gareth.setRightWeapon(new BronzeSword());
         Mage iris = new Mage("Iris", "/assets/mage-icons/mira.png");
-        iris.setRightWeapon(new Wand());
-        session.addRecruitmentCandidate(new RecruitmentCandidate(gareth, 60));
-        session.addRecruitmentCandidate(new RecruitmentCandidate(iris, 50));
+        iris.setRightWeapon(new BasicWand());
+        session.addRecruitmentCandidate(new RecruitmentCandidate(gareth));
+        session.addRecruitmentCandidate(new RecruitmentCandidate(iris));
         return session;
     }
 

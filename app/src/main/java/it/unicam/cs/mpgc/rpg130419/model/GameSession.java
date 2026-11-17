@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class GameSession {
+    public static final int RECRUITMENT_REFRESH_COST = 10;
     private static final int MIN_RECRUITMENT_CANDIDATES = 4;
     private static final int MIN_AVAILABLE_DUNGEONS = 3;
 
@@ -108,6 +109,24 @@ public class GameSession {
 
         guild.addHero(hero);
         recruitmentCandidates.remove(candidate);
+        return true;
+    }
+
+    public boolean canRefreshRecruitment() {
+        return !gameOver && guild.canPay(RECRUITMENT_REFRESH_COST);
+    }
+
+    public boolean refreshRecruitment() {
+        if (!canRefreshRecruitment()) return false;
+
+        List<RecruitmentCandidate> newCandidates = new ArrayList<>(MIN_RECRUITMENT_CANDIDATES);
+        for (int i = 0; i < MIN_RECRUITMENT_CANDIDATES; i++) {
+            newCandidates.add(RandomHeroBuilder.buildCandidate());
+        }
+
+        if (!guild.takeMoney(RECRUITMENT_REFRESH_COST)) return false;
+        recruitmentCandidates.clear();
+        recruitmentCandidates.addAll(newCandidates);
         return true;
     }
 
