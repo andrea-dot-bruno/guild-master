@@ -35,6 +35,10 @@ public class GameSession {
         return guild.getGold();
     }
 
+    public int getTotalDailyWages() {
+        return guild.getTotalDailyWages();
+    }
+
     public int getActiveExpeditionsNumber() {
         return guild.getActiveExpeditionsNumber();
     }

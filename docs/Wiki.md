@@ -96,3 +96,4 @@ Al termine della giornata il metodo `payDailyWages` di `Guild`(`it.unicam.cs.mpg
 * Utilizzato ChatGPT per generare una prima versione di una funzione, poi:
     * controllata e compresa l'implementazione, e discusse le alternative;
     * corretta e modificata personalmente per rispettare i principi SOLID e di Clean Code.
+Ogni utilizzo dell'Intelligenza Artificiale è stato effettuato coscenziosamente, e sempre supervisionato. Inoltre, ogni azione sul codice è sempre stata pianificata e discussa in anticipo.

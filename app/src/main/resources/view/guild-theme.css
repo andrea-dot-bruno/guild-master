@@ -1,4 +1,5 @@
-.root {
+.root,
+.guild-screen {
     /* Surfaces */
     guild-background: #F5E6D2;
     guild-panel: #E4CCA8;
@@ -39,6 +40,55 @@
 
 .button {
     -fx-font-family: "Georgia";
+}
+
+.header-title {
+    -fx-font-size: 29px;
+    -fx-font-weight: bold;
+}
+
+.header-guild-name {
+    -fx-font-size: 23px;
+    -fx-font-weight: bold;
+}
+
+.header-title-divider {
+    -fx-font-size: 38px;
+}
+
+.header-status-divider {
+    -fx-font-size: 27px;
+}
+
+.header-counter,
+.equipment-title,
+.board-action {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.header-menu-button {
+    -fx-font-size: 20px;
+}
+
+.screen-title {
+    -fx-font-size: 33px;
+    -fx-font-weight: bold;
+}
+
+.section-title {
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+}
+
+.footer-status,
+.view-heroes-button {
+    -fx-font-size: 17px;
+}
+
+.end-day-button,
+.plan-expedition-button {
+    -fx-font-size: 18px;
 }
 
 .button-main {
@@ -435,12 +485,29 @@
     -fx-border-width: 0 0 0 1;
 }
 
+.detail-title {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: guild-ink;
+}
+
+.detail-stat {
+    -fx-font-size: 17px;
+    -fx-text-fill: guild-muted-ink;
+}
+
+.detail-stat.detail-stat-primary {
+    -fx-font-size: 19px;
+    -fx-font-weight: bold;
+    -fx-text-fill: guild-ink;
+}
+
 .weapon-vbox {
     -fx-border-color: guild-ink;
     -fx-border-width: 1;
 }
 
-.equipment-border-pane {
+.equipment-panel {
     -fx-border-color: guild-ink;
     -fx-border-width: 1 0 0 0;
 }

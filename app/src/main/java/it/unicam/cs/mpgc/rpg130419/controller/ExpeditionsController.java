@@ -85,6 +85,6 @@ public class ExpeditionsController {
         boardDungeonDifficulty.setText("Difficulty: %s".formatted(dungeon.getDifficulty()));
         boardDungeonDays.setText("Days: %d".formatted(dungeon.getTimeToBeat()));
         boardDungeonExpReward.setText("XP Reward: %d".formatted(dungeon.getExpReward()));
-        boardDungeonGoldReward.setText("Gold Reward: %d".formatted(dungeon.getGoldReward()));
+        boardDungeonGoldReward.setText("Gold Reward: %d G".formatted(dungeon.getGoldReward()));
     }
 }

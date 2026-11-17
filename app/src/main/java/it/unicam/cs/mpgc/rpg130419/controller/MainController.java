@@ -131,7 +131,8 @@ public class MainController {
     }
 
     private void populateHeroesTable() {
-        heroesController.setGuildHeroes(session.getHeroes(), session.getAvailableHeroes());
+        heroesController.setGuildHeroes(session.getHeroes(), session.getAvailableHeroes(),
+                session.getTotalDailyWages());
     }
 
     public void setGoldAmountLabel() {

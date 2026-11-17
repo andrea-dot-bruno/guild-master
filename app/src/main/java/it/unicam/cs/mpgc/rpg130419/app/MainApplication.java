@@ -18,8 +18,11 @@ import it.unicam.cs.mpgc.rpg130419.view.GuildIntroduction;
 import it.unicam.cs.mpgc.rpg130419.view.SaveDialogs;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -28,6 +31,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class MainApplication extends Application {
+    private final StackPane viewport = new StackPane();
+
     @Override
     public void start(Stage stage) throws IOException {
         Path saveFile = Path.of("saves", "save.json");
@@ -35,16 +40,30 @@ public class MainApplication extends Application {
         FXMLLoader loader = new FXMLLoader(
                 MainApplication.class.getResource("/view/start-screen.fxml")
         );
-        Parent root = loader.load();
+        Region startView = loader.load();
         StartScreenController controller = loader.getController();
         controller.setNewGameAction(() -> {
             if (SaveDialogs.confirmOverwrite(stage)) startNewGame(stage, saves);
         });
         controller.setLoadGameAction(() -> loadGame(stage, saves));
 
+        viewport.setBackground(Background.fill(Color.BLACK));
+        showView(startView);
+        Scene scene = new Scene(viewport);
         stage.setTitle("Guild Master");
-        stage.setScene(new Scene(root));
+        stage.setScene(scene);
         stage.show();
+        double frameWidth = stage.getWidth() - scene.getWidth();
+        double frameHeight = stage.getHeight() - scene.getHeight();
+        stage.setMinWidth(startView.prefWidth(-1) + frameWidth);
+        stage.setMinHeight(startView.prefHeight(-1) + frameHeight);
+    }
+
+    private void showView(Region view) {
+        view.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        view.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        view.getStyleClass().add("guild-screen");
+        viewport.getChildren().setAll(view);
     }
 
     private void loadGame(Stage stage, GameSaveRepository saves) {
@@ -57,7 +76,7 @@ public class MainApplication extends Application {
             }
             session = savedSession.get();
             FXMLLoader gameView = loadGameView(session, saves);
-            stage.getScene().setRoot(gameView.getRoot());
+            showView(gameView.getRoot());
         } catch (IOException exception) {
             SaveDialogs.showError(stage, "Could Not Open Game", exception);
             return;
@@ -88,7 +107,7 @@ public class MainApplication extends Application {
                 controller.setGuildNameLabel();
                 return true;
             });
-            stage.getScene().setRoot(gameView.getRoot());
+            showView(gameView.getRoot());
             introduction.show();
         } catch (IOException exception) {
             SaveDialogs.showError(stage, "Could Not Start New Game", exception);

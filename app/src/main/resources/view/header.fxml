@@ -3,11 +3,10 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.text.Font?>
 
 <HBox fx:id="header" alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="70.0" styleClass="header" stylesheets="@guild-theme.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.mpgc.rpg130419.controller.HeaderController">
    <padding>
@@ -19,61 +18,39 @@
             <Image url="@../assets/crest.png" />
          </image>
       </ImageView>
-      <Label prefHeight="34.0" prefWidth="247.0" text="GUILD MASTER">
-         <font>
-            <Font name="Georgia Bold" size="29.0" />
-         </font>
+      <Label minWidth="-Infinity" prefHeight="34.0" text="GUILD MASTER" styleClass="header-title">
          <HBox.margin>
             <Insets left="5.0" />
          </HBox.margin>
       </Label>
-      <Label text="│">
-         <font>
-            <Font name="Georgia" size="38.0" />
-         </font>
-      </Label>
-      <Label fx:id="guildNameLabel" prefHeight="26.0" prefWidth="216.0" text="Test Guild">
-         <font>
-            <Font name="Georgia Bold" size="23.0" />
-         </font>
-      </Label>
-      <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-      <Label fx:id="dayNumberLabel" prefHeight="26.0" prefWidth="74.0" text="Day 12" textAlignment="RIGHT" HBox.hgrow="NEVER">
+      <Label text="│" styleClass="header-title-divider" />
+      <Label fx:id="guildNameLabel" maxWidth="Infinity" minWidth="0.0" text="Test Guild" HBox.hgrow="ALWAYS" styleClass="header-guild-name">
          <HBox.margin>
-            <Insets />
+            <Insets left="5.0" right="15.0" />
          </HBox.margin>
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
+         <tooltip>
+            <Tooltip maxWidth="420.0" text="${guildNameLabel.text}" wrapText="true" />
+         </tooltip>
       </Label>
-      <Label text="│">
-         <font>
-            <Font size="27.0" />
-         </font>
-      </Label>
+      <Label fx:id="dayNumberLabel" minWidth="-Infinity" prefHeight="26.0" text="Day 12" textAlignment="RIGHT" styleClass="header-counter" />
+      <Label text="│" styleClass="header-status-divider" />
       <ImageView fitHeight="49.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/coin.png" />
          </image>
       </ImageView>
-      <Label fx:id="goldAmountLabel" prefHeight="24.0" prefWidth="84.0" text="2345 G" HBox.hgrow="NEVER">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
+      <Label fx:id="goldAmountLabel" minWidth="-Infinity" prefHeight="24.0" text="2345 G" styleClass="header-counter">
          <HBox.margin>
             <Insets left="5.0" />
          </HBox.margin>
       </Label>
-      <Button fx:id="menuButton" mnemonicParsing="false" onAction="#handleMenuButton" prefHeight="159.0" prefWidth="108.0" styleClass="button-secondary" text="Menu">
+      <Button fx:id="menuButton" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleMenuButton" prefHeight="159.0" prefWidth="108.0" styleClass="button-secondary, header-menu-button" text="Menu">
          <HBox.margin>
             <Insets left="15.0" />
          </HBox.margin>
          <padding>
             <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
          </padding>
-         <font>
-            <Font size="20.0" />
-         </font>
       </Button>
    </children>
 </HBox>

@@ -8,35 +8,37 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <VBox prefHeight="530.0" prefWidth="1100.0" stylesheets="@guild-theme.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.mpgc.rpg130419.controller.HeroesController">
    <children>
-      <Label prefHeight="22.0" prefWidth="336.0" text="Guild Heroes">
-         <font>
-            <Font name="System Bold" size="33.0" />
-         </font>
-      </Label>
+      <Label prefHeight="22.0" prefWidth="336.0" text="Guild Heroes" styleClass="screen-title" />
       <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
-            <TableView fx:id="guildHeroesTable" prefHeight="457.0" prefWidth="456.0">
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN" />
-               </columnResizePolicy>
-               <columns>
-                  <TableColumn fx:id="heroNameColumn" prefWidth="126.0" text="Name" />
-                  <TableColumn fx:id="heroClassColumn" prefWidth="92.0" text="Class" />
-                  <TableColumn fx:id="heroLevelColumn" prefWidth="65.0" styleClass="numeric-column" text="Level" />
-                  <TableColumn fx:id="heroPayColumn" prefWidth="58.0" styleClass="numeric-column" text="Pay" />
-                  <TableColumn fx:id="heroStatusColumn" prefWidth="115.0" text="Status" />
-               </columns>
+            <VBox spacing="8.0">
+               <children>
+                  <TableView fx:id="guildHeroesTable" prefHeight="457.0" prefWidth="456.0" VBox.vgrow="ALWAYS">
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN" />
+                     </columnResizePolicy>
+                     <columns>
+                        <TableColumn fx:id="heroNameColumn" prefWidth="126.0" text="Name" />
+                        <TableColumn fx:id="heroClassColumn" prefWidth="92.0" text="Class" />
+                        <TableColumn fx:id="heroLevelColumn" prefWidth="65.0" styleClass="numeric-column" text="Level" />
+                        <TableColumn fx:id="heroPayColumn" prefWidth="58.0" styleClass="numeric-column" text="Pay" />
+                        <TableColumn fx:id="heroStatusColumn" prefWidth="115.0" text="Status" />
+                     </columns>
+                  </TableView>
+                  <Label fx:id="totalDailyWagesLabel" styleClass="detail-stat, detail-stat-primary" text="Total Daily Wages: 0 G" />
+               </children>
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
-            </TableView>
+            </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="dungeon-details" HBox.hgrow="ALWAYS">
                <children>
                   <HBox prefHeight="0.0" prefWidth="603.0">
@@ -46,104 +48,62 @@
                               <Image url="@../assets/knight-icons/cedric.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="guildHeroName" prefHeight="66.0" prefWidth="390.0" text="&lt;player-name&gt;" textAlignment="CENTER" wrapText="true">
-                           <font>
-                              <Font name="System Bold" size="28.0" />
-                           </font>
-                        </Label>
+                        <Label fx:id="guildHeroName" prefHeight="66.0" prefWidth="390.0" styleClass="detail-title" text="&lt;player-name&gt;" wrapText="true" />
                      </children>
                   </HBox>
-                  <Label fx:id="guildHeroLevel" layoutX="21.0" layoutY="10.0" prefHeight="0.0" prefWidth="603.0" text="&lt;level&gt;" textAlignment="CENTER">
-                     <font>
-                        <Font size="19.0" />
-                     </font>
+                  <Label fx:id="guildHeroLevelAndClass" maxWidth="Infinity" styleClass="detail-stat" text="Level 1 · Knight" />
+                  <Label fx:id="guildHeroPay" maxWidth="Infinity" styleClass="detail-stat, detail-stat-primary" text="Daily Pay: 12 G">
+                     <VBox.margin>
+                        <Insets top="4.0" />
+                     </VBox.margin>
                   </Label>
-                  <Label fx:id="guildHeroClass" layoutX="21.0" layoutY="42.0" prefHeight="0.0" prefWidth="603.0" text="&lt;class&gt;" textAlignment="CENTER">
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="guildHeroPay" layoutX="21.0" layoutY="133.0" prefHeight="0.0" prefWidth="603.0" text="&lt;pay&gt;" textAlignment="CENTER">
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Label>
-                  <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="593.0">
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <VBox.margin>
+                        <Insets top="8.0" />
+                     </VBox.margin>
                      <children>
-                        <Label prefHeight="23.0" prefWidth="105.0" text="Experience:" textAlignment="CENTER">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                        </Label>
-                        <ProgressBar fx:id="guildHeroExpBar" prefWidth="489.0" progress="0.0" styleClass="guild-progress-bar" />
+                        <Label styleClass="detail-stat" text="Experience" />
+                        <ProgressBar fx:id="guildHeroExpBar" maxWidth="Infinity" progress="0.0" styleClass="guild-progress-bar" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="equipment-border-pane">
-                     <top>
-                        <Label text="EQUIPMENT" BorderPane.alignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="20.0" />
-                           </font>
-                        </Label>
-                     </top>
-                     <left>
-                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="170.0" BorderPane.alignment="CENTER">
-                           <children>
-                              <ImageView fx:id="guildHeroLeftWeaponIcon" fitHeight="130.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../assets/weapon-icons/iron-sword.png" />
-                                 </image>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </ImageView>
-                              <Label fx:id="guildHeroLeftWeaponDamage" text="&lt;weapon-damage&gt;">
-                                 <font>
-                                    <Font size="19.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <BorderPane.margin>
-                              <Insets left="100.0" />
-                           </BorderPane.margin>
-                        </VBox>
-                     </left>
-                     <right>
-                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="170.0" BorderPane.alignment="CENTER">
-                           <children>
-                              <ImageView fx:id="guildHeroRightWeaponIcon" fitHeight="130.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../assets/weapon-icons/shield.png" />
-                                 </image>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </ImageView>
-                              <Label fx:id="guildHeroRightWeaponDamage" prefHeight="23.0" prefWidth="221.0" text="&lt;weapon-damage&gt;">
-                                 <font>
-                                    <Font size="19.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <BorderPane.margin>
-                              <Insets right="100.0" />
-                           </BorderPane.margin>
-                        </VBox>
-                     </right>
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0" spacing="8.0" styleClass="equipment-panel">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
                      <padding>
                         <Insets top="10.0" />
                      </padding>
-                  </BorderPane>
-                  <Button fx:id="fireHeroButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleFireHeroButton" prefHeight="67.0" prefWidth="177.0" styleClass="button-main" text="Fire Hero" textAlignment="CENTER" wrapText="true">
+                     <children>
+                        <Label styleClass="equipment-title" text="EQUIPMENT" />
+                        <GridPane alignment="CENTER" hgap="50.0" vgap="6.0">
+                           <columnConstraints>
+                              <ColumnConstraints halignment="CENTER" prefWidth="170.0" />
+                              <ColumnConstraints halignment="CENTER" prefWidth="170.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="130.0" prefHeight="130.0" maxHeight="130.0" valignment="CENTER" />
+                           </rowConstraints>
+                           <children>
+                              <ImageView fx:id="guildHeroLeftWeaponIcon" fitHeight="130.0" fitWidth="130.0" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/weapon-icons/iron-sword.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="guildHeroRightWeaponIcon" fitHeight="130.0" fitWidth="130.0" preserveRatio="true" GridPane.columnIndex="1">
+                                 <image>
+                                    <Image url="@../assets/weapon-icons/shield.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="guildHeroLeftWeaponDamage" styleClass="detail-stat, detail-stat-primary" text="Power: 0" GridPane.rowIndex="1" />
+                              <Label fx:id="guildHeroRightWeaponDamage" styleClass="detail-stat, detail-stat-primary" text="Power: 0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </VBox>
+                  <Button fx:id="fireHeroButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleFireHeroButton" prefHeight="67.0" prefWidth="177.0" styleClass="button-main, board-action" text="Fire Hero" textAlignment="CENTER" wrapText="true">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
                   </Button>
                </children>
                <padding>

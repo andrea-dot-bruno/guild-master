@@ -97,11 +97,15 @@ public class Guild {
     }
 
     boolean payDailyWages() {
+        return takeMoney(getTotalDailyWages());
+    }
+
+    int getTotalDailyWages() {
         int totalWages = 0;
         for (Hero hero : heroes) {
             totalWages += hero.getDailyPay();
         }
-        return takeMoney(totalWages);
+        return totalWages;
     }
 
     public List<Hero> getAvailableHeroes() {

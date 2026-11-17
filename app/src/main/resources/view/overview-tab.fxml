@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <VBox prefHeight="530.0" prefWidth="1100.0" stylesheets="@guild-theme.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.mpgc.rpg130419.controller.OverviewController">
    <children>
@@ -24,20 +23,12 @@
             </ImageView>
             <VBox prefHeight="100.0" prefWidth="389.0">
                <children>
-                  <Label text="A new day at the guild">
-                     <font>
-                        <Font name="System Bold" size="33.0" />
-                     </font>
-                  </Label>
+                  <Label text="A new day at the guild" styleClass="screen-title" />
                   <Label prefWidth="395.0" text="Prepare your heroes, then coose your next expedition." textFill="#0000009d" />
                </children>
             </VBox>
             <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-            <Button fx:id="planExpeditionButton" alignment="CENTER" mnemonicParsing="false" onAction="#handlePlanExpeditionButton" prefHeight="42.0" prefWidth="163.0" styleClass="button-main" text="Plan Expedition" textAlignment="CENTER">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
+            <Button fx:id="planExpeditionButton" alignment="CENTER" mnemonicParsing="false" onAction="#handlePlanExpeditionButton" prefHeight="42.0" prefWidth="163.0" styleClass="button-main, plan-expedition-button" text="Plan Expedition" textAlignment="CENTER" />
          </children>
          <VBox.margin>
             <Insets left="10.0" right="10.0" top="10.0" />
@@ -47,10 +38,7 @@
          <children>
             <VBox prefHeight="430.0" prefWidth="834.0">
                <children>
-                  <Label text="ACTIVE EXPEDITIONS">
-                     <font>
-                        <Font name="System Bold" size="17.0" />
-                     </font>
+                  <Label text="ACTIVE EXPEDITIONS" styleClass="section-title">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
@@ -60,10 +48,11 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN" />
                      </columnResizePolicy>
                      <columns>
-                        <TableColumn fx:id="aeTableExpeditionColumn" prefWidth="380.0" text="Expedition" />
-                        <TableColumn fx:id="aeTableHeroesColumn" prefWidth="270.0" text="Heroes" />
-                        <TableColumn fx:id="aeTableRemainingColumn" prefWidth="150.0" styleClass="numeric-column" text="Remaining" />
-<!--                        <TableColumn fx:id="aeTableProgressColumn" prefWidth="233.4608154296875" text="Progress" />-->
+                        <TableColumn fx:id="aeTableExpeditionColumn" prefWidth="235.0" text="Expedition" />
+                        <TableColumn fx:id="aeTableHeroesColumn" prefWidth="280.0" text="Heroes" />
+                        <TableColumn fx:id="aeTableRemainingColumn" prefWidth="100.0" styleClass="numeric-column" text="Remaining" />
+                        <TableColumn fx:id="aeTableGoldRewardColumn" prefWidth="105.0" styleClass="numeric-column" text="Gold Reward" />
+                        <TableColumn fx:id="aeTableSuccessChanceColumn" minWidth="110.0" prefWidth="114.0" styleClass="numeric-column" text="Success Chance" />
                      </columns>
                   </TableView>
                </children>
@@ -73,10 +62,7 @@
             </VBox>
             <VBox layoutX="10.0" layoutY="10.0" prefHeight="430.0" prefWidth="255.0">
                <children>
-                  <Label text="AVAILABLE HEROES">
-                     <font>
-                        <Font name="System Bold" size="17.0" />
-                     </font>
+                  <Label text="AVAILABLE HEROES" styleClass="section-title">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
@@ -86,11 +72,7 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </ListView>
-                  <Button fx:id="viewHeroesButton" mnemonicParsing="false" onAction="#handleViewHeroesButton" prefHeight="51.0" prefWidth="255.0" styleClass="button-secondary" text="View Heroes">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Button>
+                  <Button fx:id="viewHeroesButton" mnemonicParsing="false" onAction="#handleViewHeroesButton" prefHeight="51.0" prefWidth="255.0" styleClass="button-secondary, view-heroes-button" text="View Heroes" />
                </children>
             </VBox>
          </children>

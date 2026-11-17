@@ -7,7 +7,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
-<?import javafx.scene.text.Font?>
 
 <HBox alignment="CENTER" prefHeight="50.0" prefWidth="1111.5" styleClass="footer" stylesheets="@guild-theme.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.mpgc.rpg130419.controller.FooterController">
    <children>
@@ -16,13 +15,9 @@
             <Image url="@../assets/leaf.png" />
          </image>
       </ImageView>
-      <Label fx:id="underwayExpeditionsLabel" text="&lt;expeditions-underway&gt;">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
+      <Label fx:id="underwayExpeditionsLabel" text="&lt;expeditions-underway&gt;" styleClass="footer-status" />
       <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-      <Button fx:id="endDayButton" mnemonicParsing="false" onAction="#handleEndDayButton" prefHeight="82.0" prefWidth="158.0" styleClass="button-main" text="End Day" textAlignment="CENTER">
+      <Button fx:id="endDayButton" mnemonicParsing="false" onAction="#handleEndDayButton" prefHeight="82.0" prefWidth="158.0" styleClass="button-main, end-day-button" text="End Day" textAlignment="CENTER">
          <graphic>
             <ImageView fitHeight="36.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -30,12 +25,9 @@
                </image>
             </ImageView>
          </graphic>
-         <font>
-            <Font size="18.0" />
-         </font>
       </Button>
    </children>
    <padding>
-      <Insets bottom="5.0" top="5.0" />
+      <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
    </padding>
 </HBox>

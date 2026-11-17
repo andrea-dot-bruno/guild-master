@@ -7,18 +7,15 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <VBox prefHeight="530.0" prefWidth="1100.0" stylesheets="@guild-theme.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.mpgc.rpg130419.controller.RecruitmentController">
    <children>
-      <Label prefHeight="22.0" prefWidth="336.0" text="Recruitment Board">
-         <font>
-            <Font name="System Bold" size="33.0" />
-         </font>
-      </Label>
+      <Label prefHeight="22.0" prefWidth="336.0" text="Recruitment Board" styleClass="screen-title" />
       <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
             <TableView fx:id="recruitmentCandidatesTable" prefHeight="457.0" prefWidth="478.0">
@@ -45,99 +42,57 @@
                               <Image url="@../assets/mage-icons/lyra.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="recruitHeroName" prefHeight="66.0" prefWidth="390.0" text="&lt;player-name&gt;" textAlignment="CENTER" wrapText="true">
-                           <font>
-                              <Font name="System Bold" size="28.0" />
-                           </font>
-                        </Label>
+                        <Label fx:id="recruitHeroName" prefHeight="66.0" prefWidth="390.0" styleClass="detail-title" text="&lt;player-name&gt;" wrapText="true" />
                      </children>
                   </HBox>
-                  <Label fx:id="recruitHeroLevel" layoutX="21.0" layoutY="10.0" prefHeight="0.0" prefWidth="603.0" text="&lt;level&gt;" textAlignment="CENTER">
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="recruitHeroClass" layoutX="21.0" layoutY="42.0" prefHeight="0.0" prefWidth="603.0" text="&lt;class&gt;" textAlignment="CENTER">
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="recruitHeroPay" layoutX="21.0" layoutY="133.0" prefHeight="0.0" prefWidth="603.0" text="&lt;pay&gt;" textAlignment="CENTER">
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="recruitHeroHireFee" layoutX="21.0" layoutY="129.0" prefHeight="0.0" prefWidth="603.0" text="&lt;hire-fee&gt;" textAlignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="22.0" />
-                     </font>
-                  </Label>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="equipment-border-pane">
-                     <top>
-                        <Label text="EQUIPMENT" BorderPane.alignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="20.0" />
-                           </font>
-                        </Label>
-                     </top>
-                     <left>
-                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="170.0" BorderPane.alignment="CENTER">
-                           <children>
-                              <ImageView fx:id="recruitHeroLeftItemIcon" fitHeight="130.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../assets/weapon-icons/iron-sword.png" />
-                                 </image>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </ImageView>
-                              <Label fx:id="recruitHeroLeftItemDamage" text="&lt;weapon-damage&gt;">
-                                 <font>
-                                    <Font size="19.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <BorderPane.margin>
-                              <Insets left="100.0" />
-                           </BorderPane.margin>
-                        </VBox>
-                     </left>
-                     <right>
-                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="170.0" BorderPane.alignment="CENTER">
-                           <children>
-                              <ImageView fx:id="recruitHeroRightItemIcon" fitHeight="130.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../assets/weapon-icons/shield.png" />
-                                 </image>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </ImageView>
-                              <Label fx:id="recruitHeroRightItemDamage" prefHeight="23.0" prefWidth="221.0" text="&lt;weapon-damage&gt;">
-                                 <font>
-                                    <Font size="19.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <BorderPane.margin>
-                              <Insets right="100.0" />
-                           </BorderPane.margin>
-                        </VBox>
-                     </right>
+                  <Label fx:id="recruitHeroLevelAndClass" maxWidth="Infinity" styleClass="detail-stat" text="Level 1 · Mage" />
+                  <HBox alignment="CENTER_LEFT" spacing="24.0">
+                     <VBox.margin>
+                        <Insets top="4.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label fx:id="recruitHeroPay" styleClass="detail-stat" text="Daily Pay: 10 G" />
+                        <Label fx:id="recruitHeroHireFee" styleClass="detail-stat, detail-stat-primary" text="Hire Fee: 50 G" />
+                     </children>
+                  </HBox>
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0" spacing="8.0" styleClass="equipment-panel">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
                      <padding>
                         <Insets top="10.0" />
                      </padding>
-                  </BorderPane>
-                  <Button fx:id="hireHeroButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleHireHeroButton" prefHeight="67.0" prefWidth="177.0" styleClass="button-main" text="Hire Hero" textAlignment="CENTER" wrapText="true">
+                     <children>
+                        <Label styleClass="equipment-title" text="EQUIPMENT" />
+                        <GridPane alignment="CENTER" hgap="50.0" vgap="6.0">
+                           <columnConstraints>
+                              <ColumnConstraints halignment="CENTER" prefWidth="170.0" />
+                              <ColumnConstraints halignment="CENTER" prefWidth="170.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="130.0" prefHeight="130.0" maxHeight="130.0" valignment="CENTER" />
+                           </rowConstraints>
+                           <children>
+                              <ImageView fx:id="recruitHeroLeftItemIcon" fitHeight="130.0" fitWidth="130.0" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/weapon-icons/iron-sword.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="recruitHeroRightItemIcon" fitHeight="130.0" fitWidth="130.0" preserveRatio="true" GridPane.columnIndex="1">
+                                 <image>
+                                    <Image url="@../assets/weapon-icons/shield.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="recruitHeroLeftItemDamage" styleClass="detail-stat, detail-stat-primary" text="Power: 0" GridPane.rowIndex="1" />
+                              <Label fx:id="recruitHeroRightItemDamage" styleClass="detail-stat, detail-stat-primary" text="Power: 0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </VBox>
+                  <Button fx:id="hireHeroButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleHireHeroButton" prefHeight="67.0" prefWidth="177.0" styleClass="button-main, board-action" text="Hire Hero" textAlignment="CENTER" wrapText="true">
                      <VBox.margin>
-                        <Insets top="7.0" />
+                        <Insets top="30.0" />
                      </VBox.margin>
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
                   </Button>
                </children>
                <padding>

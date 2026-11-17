@@ -3,14 +3,19 @@ package it.unicam.cs.mpgc.rpg130419.controller;
 
 import it.unicam.cs.mpgc.rpg130419.model.Expedition;
 import it.unicam.cs.mpgc.rpg130419.model.Hero;
+import javafx.beans.property.ReadOnlyDoubleWrapper;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+
+import java.math.RoundingMode;
+import java.text.NumberFormat;
 import java.util.List;
 
 public class OverviewController {
@@ -19,6 +24,8 @@ public class OverviewController {
     @FXML private TableColumn<Expedition, String> aeTableExpeditionColumn;
     @FXML private TableColumn<Expedition, String> aeTableHeroesColumn;
     @FXML private TableColumn<Expedition, Number> aeTableRemainingColumn;
+    @FXML private TableColumn<Expedition, Number> aeTableGoldRewardColumn;
+    @FXML private TableColumn<Expedition, Number> aeTableSuccessChanceColumn;
     @FXML private TableView<Expedition> activeExpeditionsTable;
     @FXML private ListView<Hero> availableHeroesList;
 
@@ -29,6 +36,21 @@ public class OverviewController {
                 new ReadOnlyStringWrapper(cell.getValue().printInvolvedHeroes()));
         aeTableRemainingColumn.setCellValueFactory(cell ->
                 new ReadOnlyIntegerWrapper(cell.getValue().getRemainingTime()));
+        aeTableGoldRewardColumn.setCellValueFactory(cell ->
+                new ReadOnlyIntegerWrapper(cell.getValue().getDungeon().getGoldReward()));
+        aeTableSuccessChanceColumn.setCellValueFactory(cell ->
+                new ReadOnlyDoubleWrapper(cell.getValue().getSuccessProbability()));
+
+        NumberFormat probabilityFormat = NumberFormat.getPercentInstance();
+        probabilityFormat.setMaximumFractionDigits(1);
+        probabilityFormat.setRoundingMode(RoundingMode.DOWN);
+        aeTableSuccessChanceColumn.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(Number probability, boolean empty) {
+                super.updateItem(probability, empty);
+                setText(empty || probability == null ? null : probabilityFormat.format(probability));
+            }
+        });
 
         availableHeroesList.setCellFactory(list -> new ListCell<>() {
             @Override

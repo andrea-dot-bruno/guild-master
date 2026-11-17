@@ -28,8 +28,7 @@ public class RecruitmentController {
     @FXML private TableColumn<RecruitmentCandidate, Number> candidateHireFeeColumn;
     @FXML private ImageView recruitHeroIcon;
     @FXML private Label recruitHeroName;
-    @FXML private Label recruitHeroLevel;
-    @FXML private Label recruitHeroClass;
+    @FXML private Label recruitHeroLevelAndClass;
     @FXML private Label recruitHeroPay;
     @FXML private Label recruitHeroHireFee;
     @FXML private ImageView recruitHeroLeftItemIcon;
@@ -91,8 +90,7 @@ public class RecruitmentController {
     private void clearInfoFields() {
         recruitHeroName.setText("Select a Hero to display its details.");
         recruitHeroIcon.setImage(null);
-        recruitHeroLevel.setText("");
-        recruitHeroClass.setText("");
+        recruitHeroLevelAndClass.setText("");
         recruitHeroPay.setText("");
         recruitHeroHireFee.setText("");
         recruitHeroLeftItemIcon.setImage(null);
@@ -105,10 +103,9 @@ public class RecruitmentController {
         Hero hero = candidate.hero();
         recruitHeroName.setText(hero.getName());
         recruitHeroIcon.setImage(new Image(hero.getIconPath()));
-        recruitHeroLevel.setText("Level: %d".formatted(hero.getLevel()));
-        recruitHeroClass.setText("Class: %s".formatted(hero.getHeroClass()));
-        recruitHeroPay.setText("Daily Pay: %d".formatted(hero.getDailyPay()));
-        recruitHeroHireFee.setText("Hire Fee: %d".formatted(candidate.hireFee()));
+        recruitHeroLevelAndClass.setText("Level %d · %s".formatted(hero.getLevel(), hero.getHeroClass()));
+        recruitHeroPay.setText("Daily Pay: %d G".formatted(hero.getDailyPay()));
+        recruitHeroHireFee.setText("Hire Fee: %d G".formatted(candidate.hireFee()));
         recruitHeroLeftItemIcon.setImage(new Image(hero.getLeftWeaponIconPath()));
         recruitHeroLeftItemDamage.setText("Power: %d".formatted(hero.getLeftWeaponPower()));
         recruitHeroRightItemIcon.setImage(new Image(hero.getRightWeaponIconPath()));

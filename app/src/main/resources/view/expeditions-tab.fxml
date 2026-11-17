@@ -9,15 +9,10 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <VBox prefHeight="530.0" prefWidth="1100.0" stylesheets="@guild-theme.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.mpgc.rpg130419.controller.ExpeditionsController">
    <children>
-      <Label prefHeight="22.0" prefWidth="336.0" text="Expedition Board">
-         <font>
-            <Font name="System Bold" size="33.0" />
-         </font>
-      </Label>
+      <Label prefHeight="22.0" prefWidth="336.0" text="Expedition Board" styleClass="screen-title" />
       <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
             <TableView fx:id="availableDungeonsTable" prefHeight="457.0" prefWidth="635.0">
@@ -36,43 +31,34 @@
             </TableView>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="dungeon-details" HBox.hgrow="ALWAYS">
                <children>
-                  <Label fx:id="boardDungeonName" prefHeight="82.0" prefWidth="424.0" text="&lt;dungeon-name&gt;" textAlignment="CENTER" wrapText="true">
-                     <font>
-                        <Font name="System Bold" size="28.0" />
-                     </font>
-                  </Label>
+                  <Label fx:id="boardDungeonName" alignment="CENTER" prefHeight="82.0" prefWidth="424.0" styleClass="detail-title" text="&lt;dungeon-name&gt;" textAlignment="CENTER" wrapText="true" />
                   <ImageView fx:id="boardDungeonIcon" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../assets/dungeon-icons/emberstone.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="boardDungeonDifficulty" layoutX="21.0" layoutY="10.0" prefHeight="0.0" prefWidth="424.0" text="&lt;difficulty&gt;" textAlignment="CENTER">
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="boardDungeonDays" layoutX="21.0" layoutY="42.0" prefHeight="0.0" prefWidth="424.0" text="&lt;days&gt;" textAlignment="CENTER">
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="boardDungeonExpReward" layoutX="21.0" layoutY="133.0" prefHeight="0.0" prefWidth="424.0" text="&lt;reward&gt;" textAlignment="CENTER">
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="boardDungeonGoldReward" layoutX="21.0" layoutY="133.0" prefHeight="0.0" prefWidth="424.0" text="&lt;reward&gt;" textAlignment="CENTER">
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="prepareExpeditionButton" alignment="CENTER" mnemonicParsing="false" onAction="#handlePrepareExpeditionButton" prefHeight="67.0" prefWidth="177.0" styleClass="button-main" text="Prepare Expedition" textAlignment="CENTER" wrapText="true">
+                  <HBox alignment="CENTER" spacing="24.0">
+                     <VBox.margin>
+                        <Insets top="12.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label fx:id="boardDungeonDifficulty" styleClass="detail-stat" text="Difficulty: 8" />
+                        <Label fx:id="boardDungeonDays" styleClass="detail-stat" text="Days: 1" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" spacing="24.0">
+                     <VBox.margin>
+                        <Insets top="6.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label fx:id="boardDungeonGoldReward" styleClass="detail-stat, detail-stat-primary" text="Gold Reward: 100 G" />
+                        <Label fx:id="boardDungeonExpReward" styleClass="detail-stat, detail-stat-primary" text="XP Reward: 50" />
+                     </children>
+                  </HBox>
+                  <Button fx:id="prepareExpeditionButton" alignment="CENTER" mnemonicParsing="false" onAction="#handlePrepareExpeditionButton" prefHeight="67.0" prefWidth="177.0" styleClass="button-main, board-action" text="Prepare Expedition" textAlignment="CENTER" wrapText="true">
                      <VBox.margin>
                         <Insets top="40.0" />
                      </VBox.margin>
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
                   </Button>
                </children>
                <padding>

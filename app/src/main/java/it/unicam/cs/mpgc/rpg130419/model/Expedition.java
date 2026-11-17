@@ -38,6 +38,10 @@ public class Expedition {
         return id;
     }
 
+    public double getSuccessProbability() {
+        return calculateSuccessProbability(dungeon, heroes);
+    }
+
     public static double calculateSuccessProbability(Dungeon dungeon, List<Hero> heroes) {
         if (heroes.isEmpty()) return 0.0;
 
@@ -60,7 +64,7 @@ public class Expedition {
 
         remainingTime = Math.max(0, remainingTime - 1);
         if (remainingTime == 0) {
-            double probability = calculateSuccessProbability(dungeon, heroes);
+            double probability = getSuccessProbability();
             state = Math.random() < probability ? ExpeditionState.WON : ExpeditionState.LOST;
         }
     }

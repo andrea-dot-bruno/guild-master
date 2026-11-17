@@ -23,6 +23,7 @@ public class HeroesController {
     private Consumer<Hero> fireHero;
     private Set<Hero> availableHeroesSet = Set.of();
     @FXML private TableView<Hero> guildHeroesTable;
+    @FXML private Label totalDailyWagesLabel;
     @FXML private Button fireHeroButton;
     @FXML private TableColumn<Hero, String> heroNameColumn;
     @FXML private TableColumn<Hero, String> heroClassColumn;
@@ -31,8 +32,7 @@ public class HeroesController {
     @FXML private TableColumn<Hero, String> heroStatusColumn;
     @FXML private ImageView guildHeroIcon;
     @FXML private Label guildHeroName;
-    @FXML private Label guildHeroLevel;
-    @FXML private Label guildHeroClass;
+    @FXML private Label guildHeroLevelAndClass;
     @FXML private Label guildHeroPay;
     @FXML private ProgressBar guildHeroExpBar;
     @FXML private ImageView guildHeroLeftWeaponIcon;
@@ -91,9 +91,10 @@ public class HeroesController {
         alert.show();
     }
 
-    public void setGuildHeroes(List<Hero> heroes, List<Hero> availableHeroes) {
+    public void setGuildHeroes(List<Hero> heroes, List<Hero> availableHeroes, int totalDailyWages) {
         availableHeroesSet = Set.copyOf(availableHeroes);
         guildHeroesTable.getItems().setAll(heroes);
+        totalDailyWagesLabel.setText("Total Daily Wages: %d G".formatted(totalDailyWages));
         if (guildHeroesTable.getSelectionModel().isEmpty()) {
             guildHeroesTable.getSelectionModel().selectFirst();
         }
@@ -102,8 +103,7 @@ public class HeroesController {
     public void clearInfoFields() {
         guildHeroIcon.setImage(null);
         guildHeroName.setText("Select a Hero to display its details.");
-        guildHeroLevel.setText("");
-        guildHeroClass.setText("");
+        guildHeroLevelAndClass.setText("");
         guildHeroPay.setText("");
         guildHeroExpBar.setProgress(0.0);
         guildHeroLeftWeaponIcon.setImage(null);
@@ -115,9 +115,8 @@ public class HeroesController {
     public void populateInfoFields(Hero hero) {
         guildHeroIcon.setImage(new Image(hero.getIconPath()));
         guildHeroName.setText(hero.getName());
-        guildHeroLevel.setText("Level: %d".formatted(hero.getLevel()));
-        guildHeroClass.setText("Class: %s".formatted(hero.getHeroClass()));
-        guildHeroPay.setText("Daily Pay: %d".formatted(hero.getDailyPay()));
+        guildHeroLevelAndClass.setText("Level %d · %s".formatted(hero.getLevel(), hero.getHeroClass()));
+        guildHeroPay.setText("Daily Pay: %d G".formatted(hero.getDailyPay()));
         guildHeroExpBar.setProgress(hero.getExpPercentage());
         guildHeroLeftWeaponIcon.setImage(new Image(hero.getLeftWeaponIconPath()));
         guildHeroLeftWeaponDamage.setText("Power: %d".formatted(hero.getLeftWeaponPower()));
