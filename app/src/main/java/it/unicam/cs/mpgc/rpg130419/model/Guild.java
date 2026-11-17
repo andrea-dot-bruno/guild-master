@@ -24,6 +24,11 @@ public class Guild {
         return name;
     }
 
+    void rename(String name) {
+        if (name == null || name.isBlank()) throw new IllegalArgumentException("Guild name cannot be blank.");
+        this.name = name.strip();
+    }
+
     public int getGold() {
         return wallet.getGold();
     }

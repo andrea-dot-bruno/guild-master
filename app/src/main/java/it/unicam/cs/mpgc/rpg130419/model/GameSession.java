@@ -43,6 +43,10 @@ public class GameSession {
         return guild.getName();
     }
 
+    public void renameGuild(String name) {
+        guild.rename(name);
+    }
+
     public void addMoney(int amount) {
         guild.addMoney(amount);
     }
@@ -121,7 +125,6 @@ public class GameSession {
 
     public DayResult endDay() {
         if (gameOver) throw new IllegalStateException("The game has ended.");
-
         currentDay += 1;
         List<Expedition> completedExpeditions = guild.advanceExpeditions();
         guild.awardExpeditionRewards(completedExpeditions);

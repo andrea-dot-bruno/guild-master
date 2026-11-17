@@ -14,6 +14,7 @@ import it.unicam.cs.mpgc.rpg130419.model.weapons.Wand;
 import it.unicam.cs.mpgc.rpg130419.persistence.GameSaveRepository;
 import it.unicam.cs.mpgc.rpg130419.persistence.JsonGameSaveRepository;
 import it.unicam.cs.mpgc.rpg130419.view.DayEndDialogs;
+import it.unicam.cs.mpgc.rpg130419.view.GuildIntroduction;
 import it.unicam.cs.mpgc.rpg130419.view.SaveDialogs;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +25,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 
 public class MainApplication extends Application {
     @Override
@@ -48,8 +50,14 @@ public class MainApplication extends Application {
     private void loadGame(Stage stage, GameSaveRepository saves) {
         GameSession session;
         try {
-            session = saves.loadOrCreate(this::newSession);
-            stage.getScene().setRoot(createGameView(session, saves));
+            Optional<GameSession> savedSession = saves.load();
+            if (savedSession.isEmpty()) {
+                startNewGame(stage, saves);
+                return;
+            }
+            session = savedSession.get();
+            FXMLLoader gameView = loadGameView(session, saves);
+            stage.getScene().setRoot(gameView.getRoot());
         } catch (IOException exception) {
             SaveDialogs.showError(stage, "Could Not Open Game", exception);
             return;
@@ -59,30 +67,46 @@ public class MainApplication extends Application {
         }
     }
 
-    private Parent createGameView(GameSession session, GameSaveRepository saves) throws IOException {
+    private FXMLLoader loadGameView(GameSession session, GameSaveRepository saves) throws IOException {
         FXMLLoader loader = new FXMLLoader(
                 MainApplication.class.getResource("/view/main-page.fxml")
         );
-        Parent root = loader.load();
+        loader.load();
         MainController controller = loader.getController();
         controller.linkSession(session, saves);
         controller.updateDisplay();
-        return root;
+        return loader;
     }
 
     private void startNewGame(Stage stage, GameSaveRepository saves) {
         GameSession session = newSession();
         try {
-            Parent root = createGameView(session, saves);
-            saves.save(session);
-            stage.getScene().setRoot(root);
+            FXMLLoader gameView = loadGameView(session, saves);
+            MainController controller = gameView.getController();
+            Stage introduction = GuildIntroduction.create(stage, name -> {
+                if (!saveNewGuildName(session, saves, name)) return false;
+                controller.setGuildNameLabel();
+                return true;
+            });
+            stage.getScene().setRoot(gameView.getRoot());
+            introduction.show();
         } catch (IOException exception) {
             SaveDialogs.showError(stage, "Could Not Start New Game", exception);
         }
     }
 
+    private boolean saveNewGuildName(GameSession session, GameSaveRepository saves, String name) {
+        session.renameGuild(name);
+        try {
+            saves.save(session);
+            return true;
+        } catch (IOException exception) {
+            return false;
+        }
+    }
+
     private GameSession newSession() {
-        Guild guild = new Guild("Adventurers' Guild");
+        Guild guild = new Guild("Your Guild");
         GameSession session = new GameSession(guild, 1, false, List.of(), List.of());
         session.addMoney(150);
 

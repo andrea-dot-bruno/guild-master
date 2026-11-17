@@ -11,8 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.Objects;
-import java.util.function.Supplier;
+import java.util.Optional;
 
 public final class JsonGameSaveRepository implements GameSaveRepository {
     private final Gson gson = new GsonBuilder().setPrettyPrinting().setStrictness(Strictness.STRICT).create();
@@ -23,29 +22,23 @@ public final class JsonGameSaveRepository implements GameSaveRepository {
     }
 
     @Override
-    public GameSession loadOrCreate(Supplier<GameSession> newSession) throws IOException {
+    public Optional<GameSession> load() throws IOException {
         String json;
         try {
             json = Files.readString(saveFile);
         } catch (NoSuchFileException exception) {
-            return createAndSave(newSession);
+            return Optional.empty();
         }
 
-        if (json.isBlank()) return createAndSave(newSession);
+        if (json.isBlank()) return Optional.empty();
 
         try {
             GameSave save = gson.fromJson(json, GameSave.class);
             if (save == null) throw new IllegalArgumentException("Expected a JSON save object.");
-            return save.restore();
+            return Optional.of(save.restore());
         } catch (JsonParseException | IllegalArgumentException | NullPointerException exception) {
             throw new IOException("Invalid game save: " + saveFile, exception);
         }
-    }
-
-    private GameSession createAndSave(Supplier<GameSession> newSession) throws IOException {
-        GameSession session = Objects.requireNonNull(newSession.get(), "Expected a new game session.");
-        save(session);
-        return session;
     }
 
     @Override

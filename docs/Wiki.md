@@ -58,22 +58,26 @@ L'implementazione futura di metodi differenti di persistenza è resa possibile g
 All'avvio dell'applicazione, al giocatore vengono presentate due alternative per iniziare la partita: *New Game* e *Load Game*.
 
 ### New Game
-Permette di creare un nuovo salvataggio pulito, sovrascrivendo quello precedente (se presente).
-Il click del pulsante lancia il metodo `startNewGame` di `MainApplication`, a sua volta chiama il metodo `newSession()`. Quest'ultimo restituisce una istanza di `GameSession` (`it.unicam.cs.mpgc.rpg130419.model.GameSession`) con il setup iniziale del gioco.
-Infine, il file JSON viene sovrascritto tramite il metodo `save`, salvando quindi la nuova partita.
+Permette di creare un nuovo salvataggio, sovrascrivendo quello precedente (se presente).
+Il click del pulsante lancia il metodo `startNewGame` di `MainApplication`, che a sua volta chiama il metodo `newSession()`. Quest'ultimo restituisce una istanza di `GameSession` (`it.unicam.cs.mpgc.rpg130419.model.GameSession`) con il setup iniziale del gioco.
+Viene poi caricata la vista principale, collegato il controller, e caricata la finestra di introduzione per il giocatore. In quest'ultima, quando il giocatore inserisce e infine invia il nome della nuova Gilda, il salvataggio viene sovrascritto. In questo modo, nel caso in cui il giocatore avviasse un nuovo salvataggio, ma uscisse dal gioco prima di inviare il nome, il salvataggio precedente (se presente) non verrebbe toccato.
 ### Load Game
-Permette di caricare l'ultimo salvataggio effettuato. Nel caso in cui il file di salvataggio non sia presente o sia vuoto, viene creato da zero, riutilizzando la funzione `newSession`.
+Permette di caricare l'ultimo salvataggio effettuato.
+Nel caso in cui il file di salvataggio non sia presente o sia vuoto, il metodo `load` di `GameSaveRepository` restituisce un oggetto `Optional` vuoto, e quindi il salvataggio viene creato da zero, riutilizzando la funzione `startNewGame`.
 Nel caso in cui il salvataggio precedente sia terminato in un Game Over, verrà avviata una nuova partita, sempre grazie al riutilizzo del metodo `startNewGame`.
 La deserializzazione avviene ricreando la classe `GameSave`(`it.unicam.cs.mpgc.rpg130419.persistence.GameSave`) tramite il file di salvataggio.
 
 ## Salvataggio della partita
 Il salvataggio avviene automaticamente alla fine di ogni giornata, a seguito del click del pulsante *End Day*. Può però essere effettuato anche manualmente tramite il pulsante *Save Game* situato all'interno del *Menu*, accessibile dal pulsante nell'header.
-## Salvataggio a fine giornata
+### Salvataggio a fine giornata
 Dopo l'aggiornamento delle statistiche della partita scaturito dal click del pulsante *End Day*, viene lanciato il metodo `save` dell'interfaccia `GameSaveRepository`. Questo, tramite il metodo `toJson` della liberia Gson, converte l'oggetto `session`, passato come parametro della funzione, in una stringa con il contenuto dell'oggetto in sintassi Json.
 Crea poi un file temporaneo con prefisso `guild-master-`, al cui interno salva la stringa Json precedentemente creata. Poi procede a tentare la copia del file temporaneo sul file di salvataggio in una azione atomica, se supportata. In questo modo non si rischiano interruzioni durante la sovrascrittura del file di salvataggio, evitando di perdere la precedente sessione di gioco.
 Infine, il file temporaneo viene rimosso.
-## Salvataggio manuale
+### Salvataggio manuale
 Il salvataggio sfrutta lo stesso metodo `save` utilizzato dal salvataggio automatico.
+
+## Game Over
+Al termine della giornata il metodo `payDailyWages` di `Guild`(`it.unicam.cs.mpgc.rpg130419.model.Guild`) calcola l'ammontare giornaliero dei pagamenti per gli eroi. Se la Gilda non può pagare tutti gli eroi, il gioco termina con un Game Over.
 
 ---
 

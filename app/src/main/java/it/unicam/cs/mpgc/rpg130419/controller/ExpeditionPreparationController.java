@@ -67,15 +67,16 @@ public class ExpeditionPreparationController {
 
         Label name = new Label(hero.getName());
         name.getStyleClass().add("preparation-hero-name");
-        Label level = new Label("Level %d".formatted(hero.getLevel()));
-        level.getStyleClass().add("preparation-hero-level");
-        HBox details = new HBox(12, portrait, new VBox(3, name, level));
+        String power = NumberFormat.getNumberInstance().format(hero.getTotalPower());
+        Label stats = new Label("Level %d · Power %s".formatted(hero.getLevel(), power));
+        stats.getStyleClass().add("preparation-hero-level");
+        HBox details = new HBox(12, portrait, new VBox(3, name, stats));
         details.setAlignment(Pos.CENTER_LEFT);
 
         ToggleButton card = new ToggleButton();
         card.getStyleClass().add("preparation-hero-card");
         card.setGraphic(details);
-        card.setAccessibleText(hero.getName() + ", " + level.getText());
+        card.setAccessibleText(hero.getName() + ", " + stats.getText());
         card.setMaxWidth(Double.MAX_VALUE);
         card.selectedProperty().addListener((property, previouslySelected, selected) -> {
             if (selected) {

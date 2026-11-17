@@ -154,6 +154,37 @@
     -fx-padding: 0 16 16 16;
 }
 
+/* Introduzione alla gilda */
+.introduction-content {
+    -fx-padding: 20 24;
+}
+
+.introduction-content .label {
+    -fx-font-size: 16px;
+    -fx-text-fill: guild-ink;
+}
+
+.introduction-content .introduction-field-label {
+    -fx-font-weight: bold;
+}
+
+.introduction-content .text-field {
+    -fx-background-color: derive(guild-background, 35%);
+    -fx-background-radius: 0;
+    -fx-border-color: guild-divider;
+    -fx-font-size: 16px;
+    -fx-text-fill: guild-ink;
+}
+
+.introduction-content .text-field:focused {
+    -fx-border-color: guild-walnut;
+}
+
+.introduction-content .introduction-error {
+    -fx-font-size: 14px;
+    -fx-text-fill: guild-error;
+}
+
 /* Preparazione della spedizione */
 .expedition-preparation {
     -fx-border-color: guild-walnut-shadow;
