@@ -33,6 +33,7 @@ public class MainController {
     @FXML private Tab expeditionsTab;
 
     public void initialize() {
+        headerController.setSaveGameAction(this::saveGame);
         heroesController.setFireHero(this::fireHero);
         recruitmentController.setHireHero(this::hireHero);
         overviewController.setShowHeroesAction(this::showHeroesTab);
@@ -87,15 +88,25 @@ public class MainController {
         DayResult result = session.endDay();
         updateDisplay();
         Window owner = mainTabPane.getScene().getWindow();
-        try {
-            saves.save(session);
-        } catch (IOException exception) {
-            SaveDialogs.showError(owner, "Could Not Autosave Game", exception);
-        }
+        saveSession(owner, "Could Not Autosave Game");
         if (result.gameOver()) {
             DayEndDialogs.showGameOver(owner);
         } else if (!result.completedExpeditions().isEmpty()) {
             DayEndDialogs.showExpeditionReport(owner, result.completedExpeditions());
+        }
+    }
+
+    private boolean saveGame(Window owner) {
+        return saveSession(owner, "Could Not Save Game");
+    }
+
+    private boolean saveSession(Window owner, String errorTitle) {
+        try {
+            saves.save(session);
+            return true;
+        } catch (IOException exception) {
+            SaveDialogs.showError(owner, errorTitle, exception);
+            return false;
         }
     }
 

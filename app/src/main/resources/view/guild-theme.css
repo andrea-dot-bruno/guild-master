@@ -108,7 +108,8 @@
 }
 
 .game-menu .game-menu-status {
-    -fx-text-fill: guild-muted-ink;
+    -fx-background-color: transparent;
+    -fx-text-fill: guild-light-ink;
     -fx-font-size: 14px;
 }
 

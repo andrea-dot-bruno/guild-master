@@ -6,6 +6,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox prefWidth="360.0" styleClass="game-menu" stylesheets="@guild-theme.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.mpgc.rpg130419.controller.GameMenuController">
@@ -16,10 +17,11 @@
          </image>
       </ImageView>
       <Label styleClass="game-menu-title" text="Game Menu" />
+      <Region HBox.hgrow="ALWAYS" />
+      <Label fx:id="saveStatusLabel" styleClass="game-menu-status" text="Game saved." visible="false" />
    </HBox>
    <VBox spacing="8.0" styleClass="game-menu-actions">
-      <Label styleClass="game-menu-status" text="Saving is not available yet." wrapText="true" />
-      <Button disable="true" maxWidth="Infinity" mnemonicParsing="false" styleClass="button-main" text="Save Game" />
+      <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#handleSaveGameButton" styleClass="button-main" text="Save Game" />
       <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#handleQuitGameButton" styleClass="button-secondary" text="Quit Game" />
       <Button fx:id="closeMenuButton" cancelButton="true" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleCloseMenuButton" styleClass="button-secondary" text="Close Menu">
          <VBox.margin>
