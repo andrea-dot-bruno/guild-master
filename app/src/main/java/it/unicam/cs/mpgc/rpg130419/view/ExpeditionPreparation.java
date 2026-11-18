@@ -1,8 +1,8 @@
 package it.unicam.cs.mpgc.rpg130419.view;
 
 import it.unicam.cs.mpgc.rpg130419.controller.ExpeditionPreparationController;
-import it.unicam.cs.mpgc.rpg130419.model.Dungeon;
-import it.unicam.cs.mpgc.rpg130419.model.Hero;
+import it.unicam.cs.mpgc.rpg130419.model.dungeons.Dungeon;
+import it.unicam.cs.mpgc.rpg130419.model.heroes.Hero;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

@@ -1,5 +1,11 @@
 package it.unicam.cs.mpgc.rpg130419.model;
 
+import it.unicam.cs.mpgc.rpg130419.model.dungeons.Dungeon;
+import it.unicam.cs.mpgc.rpg130419.model.dungeons.RandomDungeonBuilder;
+import it.unicam.cs.mpgc.rpg130419.model.heroes.Hero;
+import it.unicam.cs.mpgc.rpg130419.model.heroes.RandomHeroBuilder;
+import it.unicam.cs.mpgc.rpg130419.model.heroes.RecruitmentCandidate;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -9,7 +15,7 @@ public class GameSession {
     private static final int MIN_RECRUITMENT_CANDIDATES = 4;
     private static final int DAILY_DUNGEON_COUNT = 3;
 
-    private final Guild GUILD;
+    private final Guild guild;
     private int currentDay;
     private boolean gameOver;
     private final List<Dungeon> availableDungeons;
@@ -18,7 +24,7 @@ public class GameSession {
     public GameSession(Guild guild, int currentDay, boolean gameOver, List<Dungeon> availableDungeons,
                        List<RecruitmentCandidate> recruitmentCandidates) {
         if (currentDay < 1) throw new IllegalArgumentException("Invalid game day.");
-        this.GUILD = Objects.requireNonNull(guild);
+        this.guild = Objects.requireNonNull(guild);
         this.currentDay = currentDay;
         this.gameOver = gameOver;
         this.availableDungeons = new ArrayList<>(availableDungeons);
@@ -26,43 +32,43 @@ public class GameSession {
     }
 
     public int getGold() {
-        return GUILD.getGold();
+        return guild.getGold();
     }
 
     public int getTotalDailyWages() {
-        return GUILD.getTotalDailyWages();
+        return guild.getTotalDailyWages();
     }
 
     public int getActiveExpeditionsNumber() {
-        return GUILD.getActiveExpeditionsNumber();
+        return guild.getActiveExpeditionsNumber();
     }
 
     public String getGuildName() {
-        return GUILD.getName();
+        return guild.getName();
     }
 
     public void renameGuild(String name) {
-        GUILD.rename(name);
+        guild.rename(name);
     }
 
     public void addMoney(int amount) {
-        GUILD.addMoney(amount);
+        guild.addMoney(amount);
     }
 
     public boolean canPay(int price) {
-        return GUILD.canPay(price);
+        return guild.canPay(price);
     }
 
     public boolean takeMoney(int amount) {
-        return GUILD.takeMoney(amount);
+        return guild.takeMoney(amount);
     }
 
     public List<Expedition> getActiveExpeditions() {
-        return GUILD.getActiveExpeditions();
+        return guild.getActiveExpeditions();
     }
 
     public boolean launchExpedition(Expedition expedition) {
-        return !gameOver && GUILD.launchExpedition(expedition);
+        return !gameOver && guild.launchExpedition(expedition);
     }
 
     public boolean launchExpedition(Dungeon dungeon, List<Hero> party) {
@@ -96,21 +102,21 @@ public class GameSession {
     public boolean hireHero(RecruitmentCandidate candidate) {
         if (gameOver || !recruitmentCandidates.contains(candidate)) return false;
         Hero hero = candidate.hero();
-        if (GUILD.getHeroes().contains(hero)) return false;
-        if (!GUILD.takeMoney(candidate.hireFee())) return false;
+        if (guild.getHeroes().contains(hero)) return false;
+        if (!guild.takeMoney(candidate.hireFee())) return false;
 
-        GUILD.addHero(hero);
+        guild.addHero(hero);
         recruitmentCandidates.remove(candidate);
         return true;
     }
 
     public boolean canRefreshRecruitment() {
-        return !gameOver && GUILD.canPay(RECRUITMENT_REFRESH_COST);
+        return !gameOver && guild.canPay(RECRUITMENT_REFRESH_COST);
     }
 
     public boolean refreshRecruitment() {
         if (!canRefreshRecruitment()) return false;
-        GUILD.takeMoney(RECRUITMENT_REFRESH_COST);
+        guild.takeMoney(RECRUITMENT_REFRESH_COST);
         recruitmentCandidates.clear();
         for (int i = 0; i < MIN_RECRUITMENT_CANDIDATES; i++) {
             recruitmentCandidates.add(RandomHeroBuilder.buildCandidate());
@@ -119,27 +125,27 @@ public class GameSession {
     }
 
     public void addHero(Hero hero) {
-        GUILD.addHero(hero);
+        guild.addHero(hero);
     }
 
     public List<Hero> getAvailableHeroes() {
-        return GUILD.getAvailableHeroes();
+        return guild.getAvailableHeroes();
     }
 
     public boolean removeHero(Hero hero) {
-        return !gameOver && GUILD.removeHero(hero);
+        return !gameOver && guild.removeHero(hero);
     }
 
     public List<Hero> getHeroes() {
-        return GUILD.getHeroes();
+        return guild.getHeroes();
     }
 
     public DayResult endDay() {
         if (gameOver) throw new IllegalStateException("The game has ended.");
         currentDay += 1;
-        List<Expedition> completedExpeditions = GUILD.advanceExpeditions();
-        GUILD.awardExpeditionRewards(completedExpeditions);
-        gameOver = !GUILD.payDailyWages();
+        List<Expedition> completedExpeditions = guild.advanceExpeditions();
+        guild.awardExpeditionRewards(completedExpeditions);
+        gameOver = !guild.payDailyWages();
         if (!gameOver) {
             replenishRecruitment();
             refreshDungeonBoard();

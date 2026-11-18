@@ -1,11 +1,11 @@
 package it.unicam.cs.mpgc.rpg130419.controller;
 
 import it.unicam.cs.mpgc.rpg130419.model.DayResult;
-import it.unicam.cs.mpgc.rpg130419.model.Dungeon;
+import it.unicam.cs.mpgc.rpg130419.model.dungeons.Dungeon;
 import it.unicam.cs.mpgc.rpg130419.model.Expedition;
 import it.unicam.cs.mpgc.rpg130419.model.GameSession;
-import it.unicam.cs.mpgc.rpg130419.model.Hero;
-import it.unicam.cs.mpgc.rpg130419.model.RecruitmentCandidate;
+import it.unicam.cs.mpgc.rpg130419.model.heroes.Hero;
+import it.unicam.cs.mpgc.rpg130419.model.heroes.RecruitmentCandidate;
 import it.unicam.cs.mpgc.rpg130419.persistence.GameSaveRepository;
 import it.unicam.cs.mpgc.rpg130419.view.DayEndDialogs;
 import it.unicam.cs.mpgc.rpg130419.view.ExpeditionPreparation;

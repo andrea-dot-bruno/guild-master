@@ -1,7 +1,7 @@
 package it.unicam.cs.mpgc.rpg130419.persistence;
 
 import it.unicam.cs.mpgc.rpg130419.model.Expedition;
-import it.unicam.cs.mpgc.rpg130419.model.Hero;
+import it.unicam.cs.mpgc.rpg130419.model.heroes.Hero;
 
 import java.util.List;
 import java.util.Map;

@@ -1,13 +1,14 @@
-package it.unicam.cs.mpgc.rpg130419.model;
+package it.unicam.cs.mpgc.rpg130419.model.heroes;
 
 import com.google.gson.Gson;
-import it.unicam.cs.mpgc.rpg130419.model.weapons.BasicWand;
-import it.unicam.cs.mpgc.rpg130419.model.weapons.BronzeSword;
-import it.unicam.cs.mpgc.rpg130419.model.weapons.EmberWand;
-import it.unicam.cs.mpgc.rpg130419.model.weapons.IronSword;
-import it.unicam.cs.mpgc.rpg130419.model.weapons.MoonstoneScepter;
-import it.unicam.cs.mpgc.rpg130419.model.weapons.Shield;
-import it.unicam.cs.mpgc.rpg130419.model.weapons.SteelSword;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.*;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.knightWeapons.BronzeSword;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.knightWeapons.IronSword;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.knightWeapons.SteelSword;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.mageWeapons.BasicWand;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.mageWeapons.EmberWand;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.mageWeapons.MoonstoneScepter;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.noClassWeapons.Shield;
 
 import java.io.IOException;
 import java.io.InputStream;

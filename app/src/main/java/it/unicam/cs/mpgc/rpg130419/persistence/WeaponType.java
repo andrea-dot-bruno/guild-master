@@ -1,7 +1,15 @@
 package it.unicam.cs.mpgc.rpg130419.persistence;
 
-import it.unicam.cs.mpgc.rpg130419.model.Weapon;
-import it.unicam.cs.mpgc.rpg130419.model.weapons.*;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.Weapon;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.knightWeapons.BronzeSword;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.knightWeapons.IronSword;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.knightWeapons.SteelSword;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.mageWeapons.BasicWand;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.mageWeapons.EmberWand;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.mageWeapons.MoonstoneScepter;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.noClassWeapons.LeftFist;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.noClassWeapons.RightFist;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.noClassWeapons.Shield;
 
 enum WeaponType {
     LEFT_FIST, RIGHT_FIST, SWORD, WAND, IRON_SWORD, STEEL_SWORD, EMBER_WAND, MOONSTONE_SCEPTER, SHIELD;

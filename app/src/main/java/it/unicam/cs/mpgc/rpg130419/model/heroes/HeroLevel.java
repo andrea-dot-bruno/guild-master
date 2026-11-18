@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg130419.model;
+package it.unicam.cs.mpgc.rpg130419.model.heroes;
 
 public class HeroLevel {
     private int level;

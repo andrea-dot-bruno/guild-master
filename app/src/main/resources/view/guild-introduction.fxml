@@ -21,9 +21,9 @@
    </HBox>
    <VBox spacing="13.0" styleClass="introduction-content">
       <Label wrapText="true"
-             text="Welcome back to the Guild, Captain! Thank goodness you’re back. Things have been piling up around here!" />
+             text="Welcome back to the Guild, Captain! Thank goodness you’re back. Just a few days away, and things have been piling up around here!" />
       <Label wrapText="true"
-             text="While you were away, that stubborn Bram set off for Mossroot Warren on his own. He wouldn’t hear of anyone going with him. Lyra, meanwhile, is sitting on her floating stump reading her books, as usual. On top of that, the little gold you set aside is nearly gone. Let’s hope Bram brings back something worth selling, at least enough to keep us from going bankrupt." />
+             text="While you were gone, that stubborn Bram set off for Mossroot Warren on his own. He wouldn’t hear of anyone going with him. Lyra, meanwhile, is sitting on her floating stump reading her books, as usual. On top of that, the little gold you set aside is nearly gone. Let’s hope Bram brings back something worth selling, at least enough to keep us from going bankrupt." />
       <Label wrapText="true"
              text="Oh, and somehow there are a couple of youngsters who want to join the Guild. I wonder what they see in this place, but I suppose they have their reasons…" />
       <Label wrapText="true"

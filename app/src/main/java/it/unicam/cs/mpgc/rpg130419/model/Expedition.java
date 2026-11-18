@@ -1,5 +1,8 @@
 package it.unicam.cs.mpgc.rpg130419.model;
 
+import it.unicam.cs.mpgc.rpg130419.model.dungeons.Dungeon;
+import it.unicam.cs.mpgc.rpg130419.model.heroes.Hero;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;

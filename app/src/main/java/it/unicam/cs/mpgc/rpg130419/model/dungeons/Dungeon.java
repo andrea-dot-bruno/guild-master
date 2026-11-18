@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg130419.model;
+package it.unicam.cs.mpgc.rpg130419.model.dungeons;
 
 import java.util.Objects;
 import java.util.UUID;

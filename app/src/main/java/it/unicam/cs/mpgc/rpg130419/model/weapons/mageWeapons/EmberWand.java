@@ -1,6 +1,6 @@
-package it.unicam.cs.mpgc.rpg130419.model.weapons;
+package it.unicam.cs.mpgc.rpg130419.model.weapons.mageWeapons;
 
-import it.unicam.cs.mpgc.rpg130419.model.Weapon;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.Weapon;
 
 public class EmberWand extends Weapon implements MageWeapon {
     private static String NAME = "Ember Wand";

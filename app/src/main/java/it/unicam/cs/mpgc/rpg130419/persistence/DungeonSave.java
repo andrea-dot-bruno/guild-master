@@ -1,6 +1,6 @@
 package it.unicam.cs.mpgc.rpg130419.persistence;
 
-import it.unicam.cs.mpgc.rpg130419.model.Dungeon;
+import it.unicam.cs.mpgc.rpg130419.model.dungeons.Dungeon;
 
 import java.util.Objects;
 import java.util.UUID;

@@ -2,7 +2,7 @@ package it.unicam.cs.mpgc.rpg130419.controller;
 
 
 import it.unicam.cs.mpgc.rpg130419.model.Expedition;
-import it.unicam.cs.mpgc.rpg130419.model.Hero;
+import it.unicam.cs.mpgc.rpg130419.model.heroes.Hero;
 import javafx.beans.property.ReadOnlyDoubleWrapper;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;

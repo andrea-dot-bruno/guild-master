@@ -1,6 +1,6 @@
 package it.unicam.cs.mpgc.rpg130419.controller;
 
-import it.unicam.cs.mpgc.rpg130419.model.Hero;
+import it.unicam.cs.mpgc.rpg130419.model.heroes.Hero;
 import it.unicam.cs.mpgc.rpg130419.view.GuildDialogTheme;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;

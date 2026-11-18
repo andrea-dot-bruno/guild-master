@@ -1,6 +1,6 @@
 package it.unicam.cs.mpgc.rpg130419.persistence;
 
-import it.unicam.cs.mpgc.rpg130419.model.RecruitmentCandidate;
+import it.unicam.cs.mpgc.rpg130419.model.heroes.RecruitmentCandidate;
 
 record CandidateSave(HeroSave hero, int hireFee) {
     static CandidateSave from(RecruitmentCandidate candidate) {

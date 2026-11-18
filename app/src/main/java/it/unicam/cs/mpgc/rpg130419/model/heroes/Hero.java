@@ -1,4 +1,7 @@
-package it.unicam.cs.mpgc.rpg130419.model;
+package it.unicam.cs.mpgc.rpg130419.model.heroes;
+
+import it.unicam.cs.mpgc.rpg130419.model.weapons.Weapon;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.WeaponSet;
 
 import java.util.Objects;
 import java.util.UUID;

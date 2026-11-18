@@ -1,6 +1,6 @@
 package it.unicam.cs.mpgc.rpg130419.controller;
 
-import it.unicam.cs.mpgc.rpg130419.model.Dungeon;
+import it.unicam.cs.mpgc.rpg130419.model.dungeons.Dungeon;
 import javafx.beans.property.ReadOnlyDoubleWrapper;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;

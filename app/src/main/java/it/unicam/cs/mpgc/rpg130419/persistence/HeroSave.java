@@ -1,8 +1,8 @@
 package it.unicam.cs.mpgc.rpg130419.persistence;
 
-import it.unicam.cs.mpgc.rpg130419.model.Hero;
-import it.unicam.cs.mpgc.rpg130419.model.Knight;
-import it.unicam.cs.mpgc.rpg130419.model.Mage;
+import it.unicam.cs.mpgc.rpg130419.model.heroes.Hero;
+import it.unicam.cs.mpgc.rpg130419.model.heroes.Knight;
+import it.unicam.cs.mpgc.rpg130419.model.heroes.Mage;
 
 import java.util.Objects;
 import java.util.UUID;

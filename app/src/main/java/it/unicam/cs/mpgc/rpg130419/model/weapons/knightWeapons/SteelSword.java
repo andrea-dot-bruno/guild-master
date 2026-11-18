@@ -1,6 +1,6 @@
-package it.unicam.cs.mpgc.rpg130419.model.weapons;
+package it.unicam.cs.mpgc.rpg130419.model.weapons.knightWeapons;
 
-import it.unicam.cs.mpgc.rpg130419.model.Weapon;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.Weapon;
 
 public class SteelSword extends Weapon implements KnightWeapon {
     private static String NAME = "Steel Sword";

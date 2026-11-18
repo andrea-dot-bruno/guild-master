@@ -2,7 +2,7 @@ package it.unicam.cs.mpgc.rpg130419.persistence;
 
 import it.unicam.cs.mpgc.rpg130419.model.GameSession;
 import it.unicam.cs.mpgc.rpg130419.model.Guild;
-import it.unicam.cs.mpgc.rpg130419.model.Hero;
+import it.unicam.cs.mpgc.rpg130419.model.heroes.Hero;
 
 import java.util.HashMap;
 import java.util.List;

@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg130419.model;
+package it.unicam.cs.mpgc.rpg130419.model.dungeons;
 
 import com.google.gson.Gson;
 
@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 

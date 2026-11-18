@@ -1,8 +1,8 @@
 package it.unicam.cs.mpgc.rpg130419.controller;
 
 import it.unicam.cs.mpgc.rpg130419.model.GameSession;
-import it.unicam.cs.mpgc.rpg130419.model.Hero;
-import it.unicam.cs.mpgc.rpg130419.model.RecruitmentCandidate;
+import it.unicam.cs.mpgc.rpg130419.model.heroes.Hero;
+import it.unicam.cs.mpgc.rpg130419.model.heroes.RecruitmentCandidate;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;

@@ -1,7 +1,7 @@
-package it.unicam.cs.mpgc.rpg130419.model;
+package it.unicam.cs.mpgc.rpg130419.model.weapons;
 
-import it.unicam.cs.mpgc.rpg130419.model.weapons.LeftFist;
-import it.unicam.cs.mpgc.rpg130419.model.weapons.RightFist;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.noClassWeapons.LeftFist;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.noClassWeapons.RightFist;
 
 public class WeaponSet {
     private Weapon rightWeapon;

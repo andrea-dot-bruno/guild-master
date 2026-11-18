@@ -1,5 +1,8 @@
 package it.unicam.cs.mpgc.rpg130419.model;
 
+import it.unicam.cs.mpgc.rpg130419.model.dungeons.Dungeon;
+import it.unicam.cs.mpgc.rpg130419.model.heroes.Hero;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -7,14 +10,12 @@ import java.util.List;
 
 public class Guild {
     private String name;
-    private GuildInventory inventory;
-    private Wallet wallet;
-    private List<Hero> heroes;
-    private List<Expedition> activeExpeditions;
+    private final Wallet wallet;
+    private final List<Hero> heroes;
+    private final List<Expedition> activeExpeditions;
 
     public Guild(String name) {
         this.name = name;
-        this.inventory = new GuildInventory();
         this.heroes = new ArrayList<>();
         this.activeExpeditions = new ArrayList<>();
         this.wallet = new Wallet();

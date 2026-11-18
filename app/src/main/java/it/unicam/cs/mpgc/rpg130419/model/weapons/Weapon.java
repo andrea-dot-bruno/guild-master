@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg130419.model;
+package it.unicam.cs.mpgc.rpg130419.model.weapons;
 
 public abstract class Weapon {
     private String name;

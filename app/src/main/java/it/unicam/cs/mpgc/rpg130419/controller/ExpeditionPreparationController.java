@@ -1,8 +1,8 @@
 package it.unicam.cs.mpgc.rpg130419.controller;
 
-import it.unicam.cs.mpgc.rpg130419.model.Dungeon;
+import it.unicam.cs.mpgc.rpg130419.model.dungeons.Dungeon;
 import it.unicam.cs.mpgc.rpg130419.model.Expedition;
-import it.unicam.cs.mpgc.rpg130419.model.Hero;
+import it.unicam.cs.mpgc.rpg130419.model.heroes.Hero;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;

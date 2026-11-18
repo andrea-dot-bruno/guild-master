@@ -1,6 +1,6 @@
-package it.unicam.cs.mpgc.rpg130419.model.weapons;
+package it.unicam.cs.mpgc.rpg130419.model.weapons.noClassWeapons;
 
-import it.unicam.cs.mpgc.rpg130419.model.Weapon;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.Weapon;
 
 public class LeftFist extends Weapon implements NoClassWeapon {
     private static final String NAME = "Left Fist";
