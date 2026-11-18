@@ -24,7 +24,6 @@ public class HeroLevel {
         calculateRequiredExpToLevelUp();
     }
 
-    //TODO: change and balance this formula. It should favour more heroes with smaller expRequiredIncrement value.
     public void calculateRequiredExpToLevelUp() {
         requiredExpToLevelUp = initialExpRequirement + (expRequirementIncrement * (level - 1));
     }
