@@ -86,10 +86,6 @@ public abstract class Hero {
         return heroLevel.getCurrentExp();
     }
 
-    public int getRequiredExpToLevelUp() {
-        return heroLevel.getRequiredExpToLevelUp();
-    }
-
     public Weapon getLeftWeapon() {
         return weaponSet.getLeftWeapon();
     }
@@ -109,12 +105,6 @@ public abstract class Hero {
     }
     public int getRightWeaponPower() {
         return weaponSet.getRightWeaponPower();
-    }
-    public String getLeftWeaponName() {
-        return weaponSet.getLeftWeaponName();
-    }
-    public String getRightWeaponName() {
-        return weaponSet.getRightWeaponName();
     }
 
     @Override

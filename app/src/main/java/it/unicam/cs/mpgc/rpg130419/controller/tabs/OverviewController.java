@@ -6,7 +6,6 @@ import it.unicam.cs.mpgc.rpg130419.model.heroes.Hero;
 import javafx.beans.property.ReadOnlyDoubleWrapper;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -61,11 +60,11 @@ public class OverviewController {
         });
     }
 
-    @FXML private void handlePlanExpeditionButton(ActionEvent actionEvent) {
+    @FXML private void handlePlanExpeditionButton() {
         planExpeditionAction.run();
     }
 
-    @FXML private void handleViewHeroesButton(ActionEvent actionEvent) {
+    @FXML private void handleViewHeroesButton() {
         showHeroesAction.run();
     }
 

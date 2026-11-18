@@ -37,25 +37,6 @@ public class Expedition {
         return new Expedition(id, dungeon, heroes, remainingTime);
     }
 
-    public UUID getId() {
-        return id;
-    }
-
-    public double getSuccessProbability() {
-        return calculateSuccessProbability(dungeon, heroes);
-    }
-
-    public static double calculateSuccessProbability(Dungeon dungeon, List<Hero> heroes) {
-        if (heroes.isEmpty()) return 0.0;
-
-        double partyPower = 0;
-        for (Hero hero : heroes) {
-            partyPower += hero.getTotalPower();
-        }
-        if (partyPower >= dungeon.getDifficulty()) return 1.0;
-        return Math.max(0.0, partyPower / dungeon.getDifficulty());
-    }
-
     boolean start() {
         if (state != ExpeditionState.WAITING) return false;
         state = ExpeditionState.ACTIVE;
@@ -64,12 +45,25 @@ public class Expedition {
 
     void advanceDay() {
         if (state != ExpeditionState.ACTIVE) return;
-
         remainingTime = Math.max(0, remainingTime - 1);
         if (remainingTime == 0) {
             double probability = getSuccessProbability();
             state = Math.random() < probability ? ExpeditionState.WON : ExpeditionState.LOST;
         }
+    }
+
+    public double getSuccessProbability() {
+        return calculateSuccessProbability(dungeon, heroes);
+    }
+
+    public static double calculateSuccessProbability(Dungeon dungeon, List<Hero> heroes) {
+        if (heroes.isEmpty()) return 0.0;
+        double partyPower = 0;
+        for (Hero hero : heroes) {
+            partyPower += hero.getTotalPower();
+        }
+        if (partyPower >= dungeon.getDifficulty()) return 1.0;
+        return partyPower / dungeon.getDifficulty();
     }
 
     public boolean isCompleted() {
@@ -92,6 +86,7 @@ public class Expedition {
         return heroes;
     }
 
+    //Stampa gli eroi del party, nella forma "Eroe1, Eroe2, ..., EroeN."
     public String printInvolvedHeroes() {
         StringBuilder output = new StringBuilder();
         if (heroes.size() == 1) return heroes.getFirst().getName();
@@ -108,6 +103,10 @@ public class Expedition {
 
     public String getDungeonName() {
         return dungeon.getName();
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     @Override

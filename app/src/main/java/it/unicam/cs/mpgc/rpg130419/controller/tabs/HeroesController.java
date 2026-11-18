@@ -44,7 +44,7 @@ public class HeroesController {
         heroNameColumn.setCellValueFactory(cell ->
                 new ReadOnlyStringWrapper(cell.getValue().getName()));
         heroClassColumn.setCellValueFactory(cell ->
-                new ReadOnlyStringWrapper(cell.getValue().getClass().getSimpleName()));
+                new ReadOnlyStringWrapper(cell.getValue().getHeroClass()));
         heroLevelColumn.setCellValueFactory(cell ->
                 new ReadOnlyIntegerWrapper(cell.getValue().getLevel()));
         heroPayColumn.setCellValueFactory(cell ->
@@ -100,7 +100,7 @@ public class HeroesController {
         }
     }
 
-    public void clearInfoFields() {
+    private void clearInfoFields() {
         guildHeroIcon.setImage(null);
         guildHeroName.setText("Select a Hero to display its details.");
         guildHeroLevelAndClass.setText("");
@@ -112,7 +112,7 @@ public class HeroesController {
         guildHeroRightWeaponDamage.setText("");
     }
 
-    public void populateInfoFields(Hero hero) {
+    private void populateInfoFields(Hero hero) {
         guildHeroIcon.setImage(new Image(hero.getIconPath()));
         guildHeroName.setText(hero.getName());
         guildHeroLevelAndClass.setText("Level %d · %s".formatted(hero.getLevel(), hero.getHeroClass()));

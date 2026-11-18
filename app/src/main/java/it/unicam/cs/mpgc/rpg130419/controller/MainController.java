@@ -36,7 +36,7 @@ public class MainController {
     @FXML private Tab heroesTab;
     @FXML private Tab expeditionsTab;
 
-    public void initialize() {
+    @FXML private void initialize() {
         headerController.setSaveGameAction(this::saveGame);
         heroesController.setFireHero(this::fireHero);
         recruitmentController.setHireHero(this::hireHero);
@@ -147,18 +147,18 @@ public class MainController {
                 session.getTotalDailyWages());
     }
 
-    public void setGoldAmountLabel() {
+    private void setGoldAmountLabel() {
         int goldAmount = session.getGold();
         headerController.setGoldAmountLabel(goldAmount);
         recruitmentController.setRefreshRecruitmentDisabled(!session.canRefreshRecruitment());
     }
 
-    public void setDayNumberLabel() {
+    private void setDayNumberLabel() {
         int currentDay = session.getCurrentDay();
         headerController.setDayNumberLabel(currentDay);
     }
 
-    public void setUnderwayExpeditionsLabel() {
+    private void setUnderwayExpeditionsLabel() {
         int activeExpeditions = session.getActiveExpeditionsNumber();
         footerController.setUnderwayExpeditionsLabel(activeExpeditions);
     }
@@ -168,7 +168,7 @@ public class MainController {
         headerController.setGuildNameLabel(guildName);
     }
 
-    public void setActiveExpeditionsTable() {
+    private void setActiveExpeditionsTable() {
         List<Expedition> activeExpeditionsList = session.getActiveExpeditions();
         overviewController.setActiveExpeditionsTable(activeExpeditionsList);
     }
@@ -183,7 +183,7 @@ public class MainController {
         recruitmentController.setRecruitmentCandidates(recruitmentCandidates);
     }
 
-    public void setAvailableHeroesList() {
+    private void setAvailableHeroesList() {
         List<Hero> availableHeroesList = session.getAvailableHeroes();
         overviewController.setAvailableHeroesList(availableHeroesList);
     }

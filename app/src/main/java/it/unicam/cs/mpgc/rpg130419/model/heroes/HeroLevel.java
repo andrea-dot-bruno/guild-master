@@ -24,7 +24,7 @@ public class HeroLevel {
         calculateRequiredExpToLevelUp();
     }
 
-    public void calculateRequiredExpToLevelUp() {
+    private void calculateRequiredExpToLevelUp() {
         requiredExpToLevelUp = initialExpRequirement + (expRequirementIncrement * (level - 1));
     }
 
@@ -51,9 +51,5 @@ public class HeroLevel {
 
     public int getCurrentExp() {
         return currentExp;
-    }
-
-    public int getRequiredExpToLevelUp() {
-        return requiredExpToLevelUp;
     }
 }

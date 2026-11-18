@@ -44,12 +44,4 @@ public class WeaponSet {
     public int getRightWeaponPower() {
         return rightWeapon.getPower();
     }
-
-    public String getLeftWeaponName() {
-        return leftWeapon.getName();
-    }
-    public String getRightWeaponName() {
-        return rightWeapon.getName();
-    }
-
 }

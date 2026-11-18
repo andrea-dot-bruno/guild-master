@@ -55,14 +55,6 @@ public class GameSession {
         guild.addMoney(amount);
     }
 
-    public boolean canPay(int price) {
-        return guild.canPay(price);
-    }
-
-    public boolean takeMoney(int amount) {
-        return guild.takeMoney(amount);
-    }
-
     public List<Expedition> getActiveExpeditions() {
         return guild.getActiveExpeditions();
     }

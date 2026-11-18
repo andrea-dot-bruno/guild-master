@@ -31,7 +31,7 @@ public final class RandomHeroBuilder {
 
     private RandomHeroBuilder() {}
 
-    public static Hero buildHero() {
+    private static Hero buildHero() {
         ThreadLocalRandom random = ThreadLocalRandom.current();
         String name = DATA.names().get(random.nextInt(DATA.names().size()));
         Hero hero;

@@ -87,7 +87,7 @@
                            <children>
                               <ImageView fx:id="recruitHeroLeftItemIcon" fitHeight="130.0" fitWidth="130.0" preserveRatio="true">
                                  <image>
-                                    <Image url="@../assets/weapon-icons/iron-bronzeSword.png" />
+                                    <Image url="@../assets/weapon-icons/bronze-sword.png" />
                                  </image>
                               </ImageView>
                               <ImageView fx:id="recruitHeroRightItemIcon" fitHeight="130.0" fitWidth="130.0" preserveRatio="true" GridPane.columnIndex="1">
