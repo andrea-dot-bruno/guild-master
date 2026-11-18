@@ -6,6 +6,7 @@ import java.util.UUID;
 public abstract class Hero {
     private static final int BASE_DAILY_PAY = 5;
     private static final int POWER_PER_EXTRA_GOLD = 2;
+    private static final int POWER_PER_LEVEL = 2;
 
     protected final UUID id;
     protected final String name;
@@ -45,10 +46,8 @@ public abstract class Hero {
     }
 
     public double getTotalPower() {
-        return calculateTotalPower();
+        return getEquipmentPower() + (getLevel() - 1) * (double) POWER_PER_LEVEL;
     }
-
-    public abstract double calculateTotalPower();
 
     public int getEquipmentPower() {
         return weaponSet.getWeaponSetPower();

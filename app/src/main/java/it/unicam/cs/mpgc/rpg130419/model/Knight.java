@@ -5,7 +5,6 @@ import java.util.UUID;
 public class Knight extends Hero {
     private static final int initialExpRequirement = 100;
     private static final int expRequirementIncrement = 50;
-    private final double powerMultiplier = 1.2;
 
     public Knight(String name, String iconPath) {
         super(name, iconPath, new HeroLevel(initialExpRequirement, expRequirementIncrement));
@@ -18,10 +17,5 @@ public class Knight extends Hero {
     @Override
     public String getHeroClass() {
         return "Knight";
-    }
-
-    @Override
-    public double calculateTotalPower() {
-        return getEquipmentPower();
     }
 }

@@ -8,6 +8,7 @@ import it.unicam.cs.mpgc.rpg130419.model.GameSession;
 import it.unicam.cs.mpgc.rpg130419.model.Guild;
 import it.unicam.cs.mpgc.rpg130419.model.Knight;
 import it.unicam.cs.mpgc.rpg130419.model.Mage;
+import it.unicam.cs.mpgc.rpg130419.model.RandomDungeonBuilder;
 import it.unicam.cs.mpgc.rpg130419.model.RecruitmentCandidate;
 import it.unicam.cs.mpgc.rpg130419.model.weapons.BronzeSword;
 import it.unicam.cs.mpgc.rpg130419.model.weapons.BasicWand;
@@ -125,10 +126,12 @@ public class MainApplication extends Application {
     }
 
     private GameSession newSession() {
+        //Creando la gilda, impostando il giorno e l'oro.
         Guild guild = new Guild("Your Guild");
         GameSession session = new GameSession(guild, 1, false, List.of(), List.of());
         session.addMoney(150);
 
+        //Creando i due eroi di partenza.
         Knight bram = new Knight("Bram", "/assets/knight-icons/bram.png");
         bram.setRightWeapon(new BronzeSword());
         Mage lyra = new Mage("Lyra", "/assets/mage-icons/lyra.png");
@@ -136,11 +139,12 @@ public class MainApplication extends Application {
         session.addHero(bram);
         session.addHero(lyra);
 
-        Dungeon firstDungeon = new Dungeon("Mossroot Warren", "/assets/dungeon-icons/mossroot.png", 8, 1, 50, 100);
+        //Creando la prima spedizione e il primo dungeon disponibile.
+        Dungeon firstDungeon = new Dungeon("Mossroot Warren", "/assets/dungeon-icons/mossroot.png", 1, 1, 50, 100);
         session.launchExpedition(new Expedition(firstDungeon, List.of(bram)));
-        session.addAvailableDungeon(new Dungeon("Old King's Road", "/assets/dungeon-icons/trail.png", 8, 1, 50, 100));
-        session.addAvailableDungeon(new Dungeon("Briarwatch Ruins", "/assets/dungeon-icons/ruins.png", 16, 2, 100, 140));
+        session.addAvailableDungeon(RandomDungeonBuilder.buildDungeon());
 
+        //Creando i primi due eroi reclutabili.
         Knight gareth = new Knight("Gareth", "/assets/knight-icons/cedric.png");
         gareth.setRightWeapon(new BronzeSword());
         Mage iris = new Mage("Iris", "/assets/mage-icons/mira.png");

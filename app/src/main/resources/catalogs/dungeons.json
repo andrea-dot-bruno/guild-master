@@ -15,10 +15,5 @@
   "icons": {
     "directory": "/assets/dungeon-icons",
     "files": ["emberstone.png", "mossroot.png", "ruins.png", "trail.png", "watchtower.png"]
-  },
-  "profiles": [
-    { "difficulty": 8, "days": 1, "xp": 50, "gold": 100 },
-    { "difficulty": 16, "days": 2, "xp": 100, "gold": 140 },
-    { "difficulty": 28, "days": 4, "xp": 180, "gold": 240 }
-  ]
+  }
 }
