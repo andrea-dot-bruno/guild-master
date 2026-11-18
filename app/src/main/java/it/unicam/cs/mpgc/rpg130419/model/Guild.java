@@ -130,6 +130,6 @@ public class Guild {
     }
 
     public List<Hero> getHeroes() {
-        return heroes;
+        return List.copyOf(heroes);
     }
 }
