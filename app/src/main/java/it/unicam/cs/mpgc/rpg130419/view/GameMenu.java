@@ -1,6 +1,6 @@
 package it.unicam.cs.mpgc.rpg130419.view;
 
-import it.unicam.cs.mpgc.rpg130419.controller.GameMenuController;
+import it.unicam.cs.mpgc.rpg130419.controller.dialogs.GameMenuController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

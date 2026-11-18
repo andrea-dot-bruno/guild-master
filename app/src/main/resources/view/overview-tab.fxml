@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="530.0" prefWidth="1100.0" stylesheets="@guild-theme.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.mpgc.rpg130419.controller.OverviewController">
+<VBox prefHeight="530.0" prefWidth="1100.0" stylesheets="@guild-theme.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.mpgc.rpg130419.controller.tabs.OverviewController">
    <children>
       <HBox alignment="CENTER" prefHeight="61.0" prefWidth="1100.0" spacing="10.0">
          <children>

@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg130419.controller;
+package it.unicam.cs.mpgc.rpg130419.controller.tabs;
 
 
 import it.unicam.cs.mpgc.rpg130419.model.Expedition;

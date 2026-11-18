@@ -1,5 +1,9 @@
 package it.unicam.cs.mpgc.rpg130419.controller;
 
+import it.unicam.cs.mpgc.rpg130419.controller.tabs.ExpeditionsController;
+import it.unicam.cs.mpgc.rpg130419.controller.tabs.HeroesController;
+import it.unicam.cs.mpgc.rpg130419.controller.tabs.OverviewController;
+import it.unicam.cs.mpgc.rpg130419.controller.tabs.RecruitmentController;
 import it.unicam.cs.mpgc.rpg130419.model.DayResult;
 import it.unicam.cs.mpgc.rpg130419.model.dungeons.Dungeon;
 import it.unicam.cs.mpgc.rpg130419.model.Expedition;

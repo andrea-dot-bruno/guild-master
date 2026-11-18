@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg130419.controller;
+package it.unicam.cs.mpgc.rpg130419.controller.dialogs;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;

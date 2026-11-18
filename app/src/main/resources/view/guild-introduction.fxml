@@ -10,7 +10,7 @@
 
 <VBox prefWidth="660.0" styleClass="game-menu" stylesheets="@guild-theme.css"
       xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="it.unicam.cs.mpgc.rpg130419.controller.GuildIntroductionController">
+      fx:controller="it.unicam.cs.mpgc.rpg130419.controller.dialogs.GuildIntroductionController">
    <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="game-menu-header">
       <ImageView fitHeight="38.0" fitWidth="32.0" preserveRatio="true">
          <image>

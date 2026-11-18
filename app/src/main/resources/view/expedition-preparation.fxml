@@ -11,7 +11,7 @@
 
 <VBox prefWidth="720.0" styleClass="expedition-preparation" stylesheets="@guild-theme.css"
       xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="it.unicam.cs.mpgc.rpg130419.controller.ExpeditionPreparationController">
+      fx:controller="it.unicam.cs.mpgc.rpg130419.controller.dialogs.ExpeditionPreparationController">
    <Label alignment="CENTER" maxWidth="Infinity" styleClass="preparation-title" text="Preparing Expedition" />
    <HBox spacing="20.0" styleClass="preparation-content">
       <VBox prefWidth="330.0" spacing="12.0" styleClass="preparation-dungeon" HBox.hgrow="ALWAYS">
