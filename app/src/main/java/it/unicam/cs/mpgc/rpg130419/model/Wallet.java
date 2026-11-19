@@ -7,10 +7,6 @@ public class Wallet {
         this.gold = 0;
     }
 
-    public int getGold() {
-        return gold;
-    }
-
     public void addMoney(int amount) {
         if (amount < 0) throw new IllegalArgumentException("Cannot add negative amount of gold.");
         gold += amount;
@@ -24,5 +20,9 @@ public class Wallet {
         if (!canPay(amount)) return false;
         gold -= amount;
         return true;
+    }
+
+    public int getGold() {
+        return gold;
     }
 }

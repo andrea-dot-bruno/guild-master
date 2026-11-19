@@ -38,21 +38,80 @@ Comprende l'insieme di classi che amministrano i dati di gioco, suddivise intern
 Classe che definisce una spedizione. Contiene campi privati che descrivono il dungeon affrontato, la lista degli eroi di cui è composta, il numero di giorni rimanenti e lo stato della spedizione.<br>
 Se il numero di giorni rimanenti è zero, calcola automaticamente se la spedizione è stata vinta o persa, aggiornando lo stato della spedizione.
 #### .model.GameSession
+Classe che raccoglie e gestisce i dati della sessione, come la gilda, il giorno corrente, i dungeon da affrontare, gli eroi disponibili, e lo stato della partita.<br>
 #### .model.Guild
+Classe che raccoglie e gestisce gli elementi della gilda, come l'oro, i suoi eroi e le sue spedizioni attive. 
 #### .model.Wallet
+Classe che regola i movimenti effettuati sul saldo dell'oro.
 ### .model.dungeons
+#### .model.dungeons.Dungeon
+Classe che identifica un dungeon. Dato che il dungeon è generato automaticamente dalla classe `RandomDungeonBuilder` (`.model.dungeons.RandomDungeonBuilder`), e non ci sono logiche intrinseche al dungeon stesso, ma i suoi dati vengono elaborati al di fuori, questa classe espone solo i suoi valori tramite metodi getter.
+#### .model.dungeons.RandomDungeonBuilder
+Classe che genera dungeon in maniera casuale.<br>
+Costruisce un record interno `DungeonData`, nel quale inserisce un catalogo di stringhe contenenti nomi per i dungeon e i percorsi alle icone, per poi estrarre un elemento ciascuno randomicamente, da assegnare al dungeon finale.
 ### .model.heroes
+#### .model.heroes.Hero
+Classe astratta che implementa tutti i campi e i metodi in comune che un eroe dovrebbe avere.
+#### .model.heroes.HeroLevel
+Classe che amministra l'esperienza e il leveling degli eroi.
+#### .model.heroes.RandomHeroBuilder
+Classe che genera eroi in maniera casuale.<br>
+Costruisce un record interno `HeroData`, nel quale inserisce un catalogo di stringhe contenenti nomi per gli eroi e i percorsi alle icone, suddivise per classi, per poi estrarre un elemento ciascuno randomicamente, da assegnare all'eroe finale.
+#### .model.heroes.RecruitmentCandidate
+Record che raccoglie gli eroi generati e il loro prezzo di reclutamento, calcolato automaticamente in base alla potenza dell'eroe. Dato che il prezzo di reclutamento, una volta inserito l'eroe nella gilda, non ha più utilità, è stato inserito al di fuori della classe Hero, ma collegato ad essa tramite questo record.
 ### .model.weapons
-
+I pagkage `.model.weapons.knightWeapons`, `.model.weapons.mageWeapons` e `.model.weapons.noClassWeapons` contengono le classi che definiscono le armi delle varie classi di eroi.
+#### .model.weapons.Weapon
+Classe astratta che rappresenta una generica arma.
+#### .model.weapons.WeaponSet
+Classe che raccoglie l'arma destra e sinistra di un eroe, andando a formare il suo equipaggiamento.
 ## .persistence
+Comprende tutte le classi, interfacce, record ed enum che si occupano di salvare e recuperare i dati di salvataggio.
+#### .persistence.GameSaveRepository 
+È l'interfaccia principale di tutto il package. Ogni classe che implementa un tipo diverso di persistenza di questo progetto deve utilizzarla.
+#### .persistence.JsonGameSaveRepository
+Classe che implementa il salvataggio e il caricamento dei dati in un file JSON, sfruttando i metodi della liberia Gson.
 ## .view
-
+Racchiude tutte le classi che si occupano di mostrare e gestire le finestre di pop-up.
 
 ---
 
 # Persistenza dei dati
 La persistenza dei dati è stata realizzata tramite file JSON. Serializzazione e deserializzazione sono svolte dalla libreria Gson. Il file di salvataggio `save.json` è contenuto nella cartella `/saves`.<br>
-L'implementazione futura di metodi differenti di persistenza è resa possibile grazie all'interfaccia `.persistence.GameSaveRepository`. Ogni nuova classe che utilizza un nuovo metodo di persistenza deve semplicemente implementare questa interfaccia, estendere i suoi metodi e modificare solo la creazione dell'oggetto nel metodo `start` di `.app.MainApplication`.<br>
+L'implementazione futura di metodi differenti di persistenza è resa possibile grazie all'interfaccia `.persistence.GameSaveRepository`. È possibile trovare un esempio più dettagliato nel capitolo *Estensioni Future*.
+
+## Avvio della partita
+All'avvio dell'applicazione, al giocatore vengono presentate due alternative per iniziare la partita: *New Game* e *Load Game*.
+
+### New Game
+Permette di creare un nuovo salvataggio, sovrascrivendo quello precedente (se presente).<br>
+Il click del pulsante lancia il metodo `startNewGame` di `MainApplication`, che a sua volta chiama il metodo `newSession()`. Quest'ultimo restituisce una istanza di `GameSession` (`.model.GameSession`) con il setup iniziale del gioco. Viene poi caricata la vista principale, collegato il controller, e caricata la finestra di introduzione per il giocatore. In quest'ultima, quando il giocatore inserisce e infine invia il nome della nuova Gilda, il salvataggio viene sovrascritto. In questo modo, nel caso in cui il giocatore avviasse un nuovo salvataggio, ma uscisse dal gioco prima di inviare il nome, il salvataggio precedente (se presente) non verrebbe toccato.
+### Load Game
+Permette di caricare l'ultimo salvataggio effettuato.<br>
+Nel caso in cui il file di salvataggio non sia presente o sia vuoto, il metodo `load` di `JsonGameSaveRepository` restituisce un oggetto `Optional` vuoto, e quindi il salvataggio viene creato da zero, riutilizzando la funzione `startNewGame`.<br>
+Nel caso in cui il salvataggio precedente sia terminato in un Game Over, verrà avviata una nuova partita, sempre grazie al riutilizzo del metodo `startNewGame`.<br>
+La deserializzazione avviene ricreando la classe `GameSave` (`.persistence.GameSave`) tramite il file di salvataggio.
+
+## Salvataggio della partita
+Il salvataggio avviene automaticamente alla fine di ogni giornata, a seguito del click del pulsante *End Day*. Può però essere effettuato anche manualmente tramite il pulsante *Save Game* situato all'interno del *Menu*, accessibile dal pulsante nell'header.
+### Salvataggio a fine giornata
+Dopo l'aggiornamento delle statistiche della partita scaturito dal click del pulsante *End Day*, viene lanciato il metodo `save` della classe `JsonGameSaveRepository`. Questo, tramite il metodo `toJson` della liberia Gson, converte l'oggetto `session`, passato come parametro della funzione, in una stringa con il contenuto dell'oggetto in sintassi Json. Crea poi un file temporaneo con prefisso `guild-master-`, al cui interno salva la stringa Json precedentemente creata. Poi procede a tentare la copia del file temporaneo sul file di salvataggio in una azione atomica, se supportata. In questo modo non si rischiano interruzioni durante la sovrascrittura del file di salvataggio, evitando di perdere la precedente sessione di gioco. Infine, il file temporaneo viene rimosso.
+### Salvataggio manuale
+Il salvataggio sfrutta lo stesso metodo `save` utilizzato dal salvataggio automatico.
+
+## Game Over
+Al termine della giornata il metodo `payDailyWages` di `Guild` (`.model.Guild`) calcola l'ammontare giornaliero dei pagamenti per gli eroi. Se la Gilda non può pagare tutti gli eroi, il gioco termina con un Game Over.
+
+---
+
+# Estensioni future
+A seguire sono illustrati alcuni esempi di modifica o estensione del codice. 
+## Nuova classe di eroi (DA COMPLETARE)
+Una delle più ovvie estensioni di Guild Master sta nell'aggiungere una nuova classe di eroi, come per esempio il *Rogue*. Sarebbe semplicemente necessario creare la rispettiva classe `Rogue.java`, che ne presenta tutte le caratteristiche, estendendo la classe astratta `Hero`. Andrebbe poi creata la marker interface per contrassegnare tutte le armi dedicate alla nuova classe, oltre a creare le classi delle armi stesse. 
+## Interfaccia grafica
+Se per caso vi fosse necessità di pubblicare il gioco su una pagina web, invece che un pacchetto scaricabile ed eseguibile, la modularità del pattern MVC permette di mantenere tutte le classi che gestiscono la logica interna dell'app, come eroi, armi dungeon e spedizioni, dovendo quindi sviluppare semplicemente il mezzo di fruizione grafico del progetto. Tutti i metodi per recuperare i dati necessari, al fine di mostrarli nell'interfaccia utente, sono esposti dalle classi del package `.model`.
+## Persistenza dati
+Nel momento in cui si volesse modificare il sistema di salvataggio e caricamento dei dati, sostituendo quello JSON con, per esempio, un file XML, basta semplicemente implementare la nuova logica in una classe, come `XMLGameSaveRepository`, sempre utilizzando la stessa interfaccia `.persistence.GameSaveRepository`. È necessario quindi modificare solo la creazione dell'oggetto nel metodo `start` di `.app.MainApplication`.<br>
 Per esempio:
 ```java
 it.unicam.cs.mpgc.rpg130419.app.MainApplication
@@ -63,33 +122,6 @@ public void start(Stage stage) throws IOException {
     ...
 }
 ```
-
-## Avvio della partita
-All'avvio dell'applicazione, al giocatore vengono presentate due alternative per iniziare la partita: *New Game* e *Load Game*.
-
-### New Game
-Permette di creare un nuovo salvataggio, sovrascrivendo quello precedente (se presente).<br>
-Il click del pulsante lancia il metodo `startNewGame` di `MainApplication`, che a sua volta chiama il metodo `newSession()`. Quest'ultimo restituisce una istanza di `GameSession` (`.model.GameSession`) con il setup iniziale del gioco. Viene poi caricata la vista principale, collegato il controller, e caricata la finestra di introduzione per il giocatore. In quest'ultima, quando il giocatore inserisce e infine invia il nome della nuova Gilda, il salvataggio viene sovrascritto. In questo modo, nel caso in cui il giocatore avviasse un nuovo salvataggio, ma uscisse dal gioco prima di inviare il nome, il salvataggio precedente (se presente) non verrebbe toccato.
-### Load Game
-Permette di caricare l'ultimo salvataggio effettuato.<br>
-Nel caso in cui il file di salvataggio non sia presente o sia vuoto, il metodo `load` di `GameSaveRepository` restituisce un oggetto `Optional` vuoto, e quindi il salvataggio viene creato da zero, riutilizzando la funzione `startNewGame`.<br>
-Nel caso in cui il salvataggio precedente sia terminato in un Game Over, verrà avviata una nuova partita, sempre grazie al riutilizzo del metodo `startNewGame`.<br>
-La deserializzazione avviene ricreando la classe `GameSave`(`.persistence.GameSave`) tramite il file di salvataggio.
-
-## Salvataggio della partita
-Il salvataggio avviene automaticamente alla fine di ogni giornata, a seguito del click del pulsante *End Day*. Può però essere effettuato anche manualmente tramite il pulsante *Save Game* situato all'interno del *Menu*, accessibile dal pulsante nell'header.
-### Salvataggio a fine giornata
-Dopo l'aggiornamento delle statistiche della partita scaturito dal click del pulsante *End Day*, viene lanciato il metodo `save` dell'interfaccia `GameSaveRepository`. Questo, tramite il metodo `toJson` della liberia Gson, converte l'oggetto `session`, passato come parametro della funzione, in una stringa con il contenuto dell'oggetto in sintassi Json. Crea poi un file temporaneo con prefisso `guild-master-`, al cui interno salva la stringa Json precedentemente creata. Poi procede a tentare la copia del file temporaneo sul file di salvataggio in una azione atomica, se supportata. In questo modo non si rischiano interruzioni durante la sovrascrittura del file di salvataggio, evitando di perdere la precedente sessione di gioco. Infine, il file temporaneo viene rimosso.
-### Salvataggio manuale
-Il salvataggio sfrutta lo stesso metodo `save` utilizzato dal salvataggio automatico.
-
-## Game Over
-Al termine della giornata il metodo `payDailyWages` di `Guild`(`.model.Guild`) calcola l'ammontare giornaliero dei pagamenti per gli eroi. Se la Gilda non può pagare tutti gli eroi, il gioco termina con un Game Over.
-
----
-
-# Estensioni future
-INDIPENDENZA MVC, INTERFACE GAMESAVEREPOSITORY, MARKER INTERFACE PER ARMI, NUOVO TIPO DI EROE.
 
 ---
 
@@ -169,14 +201,16 @@ $$
 ---
 
 # Utilizzo dell'AI
-* Utilizzato ChatGPT per:
-    * brainstorming sulle feature del gioco;
-    * comprendere concetti teorici, come l'uso delle interfacce Consumer, Runnable, Supplier e altre usate nel progetto;
-    * identificazione di bug o errori di compilazione particolarmente tediosi;
-    * migliorare la resa estetica dei componenti dell'interfaccia grafica;
-    * generazione degli asset di gioco;
-    * scrittura di codice ripetitivo, come getter e setter;
-* Utilizzato ChatGPT per generare una prima versione di una funzione, poi:
-    * controllata e compresa l'implementazione, e discusse le alternative;
-    * corretta e modificata personalmente per rispettare i principi SOLID e di Clean Code.
+Utilizzato ChatGPT per:
+* brainstorming sulle feature del gioco;
+* comprendere concetti teorici, come l'uso delle interfacce Consumer, Runnable, Supplier e altre, usate nel progetto;
+* identificazione di bug o errori di compilazione particolarmente tediosi;
+* migliorare la resa estetica dei componenti dell'interfaccia grafica;
+* generazione degli asset di gioco;
+* scrittura di codice ripetitivo, come getter e setter;
+
+Utilizzato ChatGPT per generare una prima versione di una funzione, poi:
+* compresa e controllata l'implementazione, ed eventualmente discusse le alternative;
+* corretta e modificata personalmente per rispettare i principi SOLID e di Clean Code.
+
 Ogni utilizzo dell'Intelligenza Artificiale è stato effettuato coscenziosamente, e sempre supervisionato. Inoltre, ogni azione sul codice è sempre stata pianificata e discussa in anticipo.

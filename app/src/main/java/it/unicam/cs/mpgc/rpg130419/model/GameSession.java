@@ -31,32 +31,17 @@ public class GameSession {
         this.recruitmentCandidates = new ArrayList<>(recruitmentCandidates);
     }
 
-    public int getGold() {
-        return guild.getGold();
-    }
-
-    public int getTotalDailyWages() {
-        return guild.getTotalDailyWages();
-    }
-
-    public int getActiveExpeditionsNumber() {
-        return guild.getActiveExpeditionsNumber();
-    }
-
-    public String getGuildName() {
-        return guild.getName();
-    }
-
-    public void renameGuild(String name) {
-        guild.rename(name);
-    }
-
-    public void addMoney(int amount) {
-        guild.addMoney(amount);
-    }
-
-    public List<Expedition> getActiveExpeditions() {
-        return guild.getActiveExpeditions();
+    public DayResult endDay() {
+        if (gameOver) throw new IllegalStateException("The game has ended.");
+        currentDay += 1;
+        List<Expedition> completedExpeditions = guild.advanceExpeditions();
+        guild.awardExpeditionRewards(completedExpeditions);
+        gameOver = !guild.payDailyWages();
+        if (!gameOver) {
+            replenishRecruitment();
+            refreshDungeonBoard();
+        }
+        return new DayResult(completedExpeditions, gameOver);
     }
 
     public boolean launchExpedition(Expedition expedition) {
@@ -66,23 +51,14 @@ public class GameSession {
     public boolean launchExpedition(Dungeon dungeon, List<Hero> party) {
         if (!availableDungeons.contains(dungeon)) return false;
         if (!launchExpedition(new Expedition(dungeon, party))) return false;
-
         availableDungeons.remove(dungeon);
         return true;
-    }
-
-    public List<Dungeon> getAvailableDungeons() {
-        return availableDungeons;
     }
 
     public void addAvailableDungeon(Dungeon newDungeon) {
         if (newDungeon == null) throw new IllegalArgumentException("Dungeon can't be null.");
         if (availableDungeons.contains(newDungeon)) throw new IllegalArgumentException("Dungeon already present in the list.");
         availableDungeons.add(newDungeon);
-    }
-
-    public List<RecruitmentCandidate> getRecruitmentCandidates() {
-        return recruitmentCandidates;
     }
 
     public void addRecruitmentCandidate(RecruitmentCandidate candidate) {
@@ -96,7 +72,6 @@ public class GameSession {
         Hero hero = candidate.hero();
         if (guild.getHeroes().contains(hero)) return false;
         if (!guild.takeMoney(candidate.hireFee())) return false;
-
         guild.addHero(hero);
         recruitmentCandidates.remove(candidate);
         return true;
@@ -116,6 +91,27 @@ public class GameSession {
         return true;
     }
 
+    private void replenishRecruitment() {
+        while (recruitmentCandidates.size() < MIN_RECRUITMENT_CANDIDATES) {
+            addRecruitmentCandidate(RandomHeroBuilder.buildCandidate());
+        }
+    }
+
+    private void refreshDungeonBoard() {
+        availableDungeons.clear();
+        for (int i = 0; i < DAILY_DUNGEON_COUNT; i++) {
+            availableDungeons.add(RandomDungeonBuilder.buildDungeon());
+        }
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public int getCurrentDay() {
+        return currentDay;
+    }
+
     public void addHero(Hero hero) {
         guild.addHero(hero);
     }
@@ -132,38 +128,40 @@ public class GameSession {
         return guild.getHeroes();
     }
 
-    public DayResult endDay() {
-        if (gameOver) throw new IllegalStateException("The game has ended.");
-        currentDay += 1;
-        List<Expedition> completedExpeditions = guild.advanceExpeditions();
-        guild.awardExpeditionRewards(completedExpeditions);
-        gameOver = !guild.payDailyWages();
-        if (!gameOver) {
-            replenishRecruitment();
-            refreshDungeonBoard();
-        }
-
-        return new DayResult(completedExpeditions, gameOver);
+    public List<RecruitmentCandidate> getRecruitmentCandidates() {
+        return recruitmentCandidates;
     }
 
-    public int getCurrentDay() {
-        return currentDay;
+    public List<Dungeon> getAvailableDungeons() {
+        return availableDungeons;
     }
 
-    public boolean isGameOver() {
-        return gameOver;
+    public List<Expedition> getActiveExpeditions() {
+        return guild.getActiveExpeditions();
     }
 
-    private void replenishRecruitment() {
-        while (recruitmentCandidates.size() < MIN_RECRUITMENT_CANDIDATES) {
-            addRecruitmentCandidate(RandomHeroBuilder.buildCandidate());
-        }
+    public int getGold() {
+        return guild.getGold();
     }
 
-    private void refreshDungeonBoard() {
-        availableDungeons.clear();
-        for (int i = 0; i < DAILY_DUNGEON_COUNT; i++) {
-            availableDungeons.add(RandomDungeonBuilder.buildDungeon());
-        }
+    public int getTotalDailyWages() {
+        return guild.getTotalDailyWages();
     }
+
+    public void addMoney(int amount) {
+        guild.addMoney(amount);
+    }
+
+    public int getActiveExpeditionsNumber() {
+        return guild.getActiveExpeditionsNumber();
+    }
+
+    public String getGuildName() {
+        return guild.getName();
+    }
+
+    public void renameGuild(String name) {
+        guild.rename(name);
+    }
+
 }

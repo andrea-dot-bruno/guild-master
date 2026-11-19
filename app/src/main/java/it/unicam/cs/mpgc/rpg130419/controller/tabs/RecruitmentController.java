@@ -127,9 +127,9 @@ public class RecruitmentController {
         recruitHeroLevelAndClass.setText("Level %d · %s".formatted(hero.getLevel(), hero.getHeroClass()));
         recruitHeroPay.setText("Daily Pay: %d G".formatted(hero.getDailyPay()));
         recruitHeroHireFee.setText("Hire Fee: %d G".formatted(candidate.hireFee()));
-        recruitHeroLeftItemIcon.setImage(new Image(hero.getLeftWeaponIconPath()));
-        recruitHeroLeftItemDamage.setText("Power: %d".formatted(hero.getLeftWeaponPower()));
-        recruitHeroRightItemIcon.setImage(new Image(hero.getRightWeaponIconPath()));
-        recruitHeroRightItemDamage.setText("Power: %d".formatted(hero.getRightWeaponPower()));
+        recruitHeroLeftItemIcon.setImage(new Image(hero.getLeftWeapon().getIconPath()));
+        recruitHeroLeftItemDamage.setText("Power: %d".formatted(hero.getLeftWeapon().getPower()));
+        recruitHeroRightItemIcon.setImage(new Image(hero.getRightWeapon().getIconPath()));
+        recruitHeroRightItemDamage.setText("Power: %d".formatted(hero.getRightWeapon().getPower()));
     }
 }

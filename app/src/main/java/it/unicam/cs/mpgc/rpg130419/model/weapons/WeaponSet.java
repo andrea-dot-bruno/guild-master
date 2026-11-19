@@ -15,6 +15,7 @@ public class WeaponSet {
     public void setRightWeapon(Weapon rightWeapon) {
         this.rightWeapon = rightWeapon;
     }
+
     public void setLeftWeapon(Weapon leftWeapon) {
         this.leftWeapon = leftWeapon;
     }
@@ -29,19 +30,5 @@ public class WeaponSet {
 
     public int getWeaponSetPower() {
         return leftWeapon.getPower() + rightWeapon.getPower();
-    }
-
-    public String getLeftWeaponIconPath() {
-        return leftWeapon.getIconPath();
-    }
-    public String getRightWeaponIconPath() {
-        return rightWeapon.getIconPath();
-    }
-
-    public int getLeftWeaponPower() {
-        return leftWeapon.getPower();
-    }
-    public int getRightWeaponPower() {
-        return rightWeapon.getPower();
     }
 }

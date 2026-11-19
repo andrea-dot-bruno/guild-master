@@ -7,10 +7,10 @@ public class Dungeon {
     private final UUID id;
     private final String name;
     private final String iconPath;
-    private double difficulty;
-    private int timeToBeat;
-    private int expReward;
-    private int goldReward;
+    private final double difficulty;
+    private final int timeToBeat;
+    private final int expReward;
+    private final int goldReward;
 
     public Dungeon(String name, String iconPath, double difficulty, int timeToBeat, int expReward, int goldReward) {
         this.id = UUID.randomUUID();

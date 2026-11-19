@@ -21,51 +21,11 @@ public class Guild {
         this.wallet = new Wallet();
     }
 
-    public String getName() {
-        return name;
-    }
-
-    void rename(String name) {
-        if (name == null || name.isBlank()) throw new IllegalArgumentException("Guild name cannot be blank.");
-        this.name = name.strip();
-    }
-
-    public int getGold() {
-        return wallet.getGold();
-    }
-
-    public int getActiveExpeditionsNumber() {
-        return activeExpeditions.size();
-    }
-
-    public void addMoney(int amount) {
-        wallet.addMoney(amount);
-    }
-
-    public boolean canPay(int price) {
-        return wallet.canPay(price);
-    }
-
-    public boolean takeMoney(int amount) {
-        return wallet.takeMoney(amount);
-    }
-
-    public void addHero(Hero hero) {
-        if (hero == null) throw new IllegalArgumentException("Hero can't be null.");
-        if (heroes.contains(hero)) throw new IllegalArgumentException("Hero already added to the guild.");
-        heroes.add(hero);
-    }
-
-    public List<Expedition> getActiveExpeditions() {
-        return List.copyOf(activeExpeditions);
-    }
-
     public boolean launchExpedition(Expedition expedition) {
         if (expedition == null) throw new IllegalArgumentException("Expedition can't be null.");
         List<Hero> party = expedition.getInvolvedHeroes();
         if (party.isEmpty() || new HashSet<>(party).size() != party.size()) return false;
         if (!getAvailableHeroes().containsAll(party)) return false;
-
         if (!expedition.start()) return false;
         activeExpeditions.add(expedition);
         return true;
@@ -97,6 +57,31 @@ public class Guild {
         }
     }
 
+    public String getName() {
+        return name;
+    }
+
+    void rename(String name) {
+        if (name == null || name.isBlank()) throw new IllegalArgumentException("Guild name cannot be blank.");
+        this.name = name.strip();
+    }
+
+    public int getGold() {
+        return wallet.getGold();
+    }
+
+    public void addMoney(int amount) {
+        wallet.addMoney(amount);
+    }
+
+    public boolean canPay(int price) {
+        return wallet.canPay(price);
+    }
+
+    public boolean takeMoney(int amount) {
+        return wallet.takeMoney(amount);
+    }
+
     boolean payDailyWages() {
         return takeMoney(getTotalDailyWages());
     }
@@ -107,6 +92,29 @@ public class Guild {
             totalWages += hero.getDailyPay();
         }
         return totalWages;
+    }
+
+    public List<Hero> getHeroes() {
+        return List.copyOf(heroes);
+    }
+
+    public void addHero(Hero hero) {
+        if (hero == null) throw new IllegalArgumentException("Hero can't be null.");
+        if (heroes.contains(hero)) throw new IllegalArgumentException("Hero already added to the guild.");
+        heroes.add(hero);
+    }
+
+    public boolean removeHero(Hero hero) {
+        if (!getAvailableHeroes().contains(hero)) return false;
+        return heroes.remove(hero);
+    }
+
+    public List<Expedition> getActiveExpeditions() {
+        return List.copyOf(activeExpeditions);
+    }
+
+    public int getActiveExpeditionsNumber() {
+        return activeExpeditions.size();
     }
 
     public List<Hero> getAvailableHeroes() {
@@ -122,14 +130,5 @@ public class Guild {
             if (available) availableHeroes.add(h);
         }
         return availableHeroes;
-    }
-
-    public boolean removeHero(Hero hero) {
-        if (!getAvailableHeroes().contains(hero)) return false;
-        return heroes.remove(hero);
-    }
-
-    public List<Hero> getHeroes() {
-        return List.copyOf(heroes);
     }
 }

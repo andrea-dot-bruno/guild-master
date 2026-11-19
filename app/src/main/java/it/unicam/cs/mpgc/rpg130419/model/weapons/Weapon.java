@@ -1,9 +1,9 @@
 package it.unicam.cs.mpgc.rpg130419.model.weapons;
 
 public abstract class Weapon {
-    private String name;
-    private String iconPath;
-    private int power;
+    private final String name;
+    private final String iconPath;
+    private final int power;
 
     public Weapon(String name, String iconPath, int power) {
         this.name = name;

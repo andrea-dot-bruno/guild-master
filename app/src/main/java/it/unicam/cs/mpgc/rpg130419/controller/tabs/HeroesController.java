@@ -118,9 +118,9 @@ public class HeroesController {
         guildHeroLevelAndClass.setText("Level %d · %s".formatted(hero.getLevel(), hero.getHeroClass()));
         guildHeroPay.setText("Daily Pay: %d G".formatted(hero.getDailyPay()));
         guildHeroExpBar.setProgress(hero.getExpPercentage());
-        guildHeroLeftWeaponIcon.setImage(new Image(hero.getLeftWeaponIconPath()));
-        guildHeroLeftWeaponDamage.setText("Power: %d".formatted(hero.getLeftWeaponPower()));
-        guildHeroRightWeaponIcon.setImage(new Image(hero.getRightWeaponIconPath()));
-        guildHeroRightWeaponDamage.setText("Power: %d".formatted(hero.getRightWeaponPower()));
+        guildHeroLeftWeaponIcon.setImage(new Image(hero.getLeftWeapon().getIconPath()));
+        guildHeroLeftWeaponDamage.setText("Power: %d".formatted(hero.getLeftWeapon().getPower()));
+        guildHeroRightWeaponIcon.setImage(new Image(hero.getRightWeapon().getIconPath()));
+        guildHeroRightWeaponDamage.setText("Power: %d".formatted(hero.getRightWeapon().getPower()));
     }
 }

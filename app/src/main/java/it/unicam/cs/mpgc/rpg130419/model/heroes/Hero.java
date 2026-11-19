@@ -33,6 +33,12 @@ public abstract class Hero {
         this.weaponSet = new WeaponSet();
     }
 
+    public abstract String getHeroClass();
+
+    public int getDailyPay() {
+        return BASE_DAILY_PAY + getEquipmentPower() / POWER_PER_EXTRA_GOLD;
+    }
+
     public void addExp(int exp) {
         heroLevel.addExp(exp);
     }
@@ -41,11 +47,16 @@ public abstract class Hero {
         heroLevel.levelUp();
     }
 
-    public void setRightWeapon(Weapon rightWeapon) {
-        weaponSet.setRightWeapon(rightWeapon);
+    public int getLevel() {
+        return heroLevel.getLevel();
     }
-    public void setLeftWeapon(Weapon leftWeapon) {
-        weaponSet.setLeftWeapon(leftWeapon);
+
+    public int getCurrentExp() {
+        return heroLevel.getCurrentExp();
+    }
+
+    public double getExpPercentage() {
+        return heroLevel.getExpPercentage();
     }
 
     public double getTotalPower() {
@@ -56,8 +67,20 @@ public abstract class Hero {
         return weaponSet.getWeaponSetPower();
     }
 
-    public double getExpPercentage() {
-        return heroLevel.getExpPercentage();
+    public Weapon getLeftWeapon() {
+        return weaponSet.getLeftWeapon();
+    }
+
+    public Weapon getRightWeapon() {
+        return weaponSet.getRightWeapon();
+    }
+
+    public void setRightWeapon(Weapon rightWeapon) {
+        weaponSet.setRightWeapon(rightWeapon);
+    }
+
+    public void setLeftWeapon(Weapon leftWeapon) {
+        weaponSet.setLeftWeapon(leftWeapon);
     }
 
     public UUID getId() {
@@ -70,41 +93,6 @@ public abstract class Hero {
 
     public String getIconPath() {
         return iconPath;
-    }
-
-    public abstract String getHeroClass();
-
-    public int getDailyPay() {
-        return BASE_DAILY_PAY + getEquipmentPower() / POWER_PER_EXTRA_GOLD;
-    }
-
-    public int getLevel() {
-        return heroLevel.getLevel();
-    }
-
-    public int getCurrentExp() {
-        return heroLevel.getCurrentExp();
-    }
-
-    public Weapon getLeftWeapon() {
-        return weaponSet.getLeftWeapon();
-    }
-
-    public Weapon getRightWeapon() {
-        return weaponSet.getRightWeapon();
-    }
-
-    public String getLeftWeaponIconPath() {
-        return weaponSet.getLeftWeaponIconPath();
-    }
-    public String getRightWeaponIconPath() {
-        return weaponSet.getRightWeaponIconPath();
-    }
-    public int getLeftWeaponPower() {
-        return weaponSet.getLeftWeaponPower();
-    }
-    public int getRightWeaponPower() {
-        return weaponSet.getRightWeaponPower();
     }
 
     @Override
