@@ -21,10 +21,10 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class ExpeditionPreparationController {
-    private final List<Hero> selectedHeroes = new ArrayList<>();
+    private final List<Hero<?>> selectedHeroes = new ArrayList<>();
     private final NumberFormat probabilityFormat = NumberFormat.getPercentInstance();
     private Dungeon dungeon;
-    private Predicate<List<Hero>> launchExpedition;
+    private Predicate<List<Hero<?>>> launchExpedition;
 
     @FXML private Label dungeonName;
     @FXML private ImageView dungeonIcon;
@@ -37,8 +37,8 @@ public class ExpeditionPreparationController {
     @FXML private Label launchError;
     @FXML private Button launchButton;
 
-    public void prepare(Dungeon dungeon, List<Hero> availableHeroes,
-                        Predicate<List<Hero>> launchExpedition) {
+    public void prepare(Dungeon dungeon, List<Hero<?>> availableHeroes,
+                        Predicate<List<Hero<?>>> launchExpedition) {
         this.dungeon = dungeon;
         this.launchExpedition = launchExpedition;
         probabilityFormat.setMaximumFractionDigits(1);
@@ -53,13 +53,13 @@ public class ExpeditionPreparationController {
         if (availableHeroes.isEmpty()) {
             heroCards.getChildren().add(new Label("No heroes available."));
         }
-        for (Hero hero : availableHeroes) {
+        for (Hero<?> hero : availableHeroes) {
             heroCards.getChildren().add(createHeroCard(hero));
         }
         updateProbability();
     }
 
-    private ToggleButton createHeroCard(Hero hero) {
+    private ToggleButton createHeroCard(Hero<?> hero) {
         ImageView portrait = new ImageView(new Image(hero.getIconPath()));
         portrait.setFitWidth(46);
         portrait.setFitHeight(46);

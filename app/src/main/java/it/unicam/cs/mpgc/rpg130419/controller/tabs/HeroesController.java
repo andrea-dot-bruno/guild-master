@@ -20,16 +20,16 @@ import java.util.Set;
 import java.util.function.Consumer;
 
 public class HeroesController {
-    private Consumer<Hero> fireHero;
-    private Set<Hero> availableHeroesSet = Set.of();
-    @FXML private TableView<Hero> guildHeroesTable;
+    private Consumer<Hero<?>> fireHero;
+    private Set<Hero<?>> availableHeroesSet = Set.of();
+    @FXML private TableView<Hero<?>> guildHeroesTable;
     @FXML private Label totalDailyWagesLabel;
     @FXML private Button fireHeroButton;
-    @FXML private TableColumn<Hero, String> heroNameColumn;
-    @FXML private TableColumn<Hero, String> heroClassColumn;
-    @FXML private TableColumn<Hero, Number> heroLevelColumn;
-    @FXML private TableColumn<Hero, Number> heroPayColumn;
-    @FXML private TableColumn<Hero, String> heroStatusColumn;
+    @FXML private TableColumn<Hero<?>, String> heroNameColumn;
+    @FXML private TableColumn<Hero<?>, String> heroClassColumn;
+    @FXML private TableColumn<Hero<?>, Number> heroLevelColumn;
+    @FXML private TableColumn<Hero<?>, Number> heroPayColumn;
+    @FXML private TableColumn<Hero<?>, String> heroStatusColumn;
     @FXML private ImageView guildHeroIcon;
     @FXML private Label guildHeroName;
     @FXML private Label guildHeroLevelAndClass;
@@ -68,15 +68,15 @@ public class HeroesController {
     }
 
     @FXML private void handleFireHeroButton() {
-        Hero hero = guildHeroesTable.getSelectionModel().getSelectedItem();
+        Hero<?> hero = guildHeroesTable.getSelectionModel().getSelectedItem();
         if (hero != null) fireHero.accept(hero);
     }
 
-    public void setFireHero(Consumer<Hero> fireHero) {
+    public void setFireHero(Consumer<Hero<?>> fireHero) {
         this.fireHero = fireHero;
     }
 
-    public void showFireFailure(Hero hero) {
+    public void showFireFailure(Hero<?> hero) {
         Alert alert = new Alert(Alert.AlertType.WARNING,
                 "You can't remove %s while on an expedition."
                         .formatted(hero.getName()),
@@ -91,7 +91,7 @@ public class HeroesController {
         alert.show();
     }
 
-    public void setGuildHeroes(List<Hero> heroes, List<Hero> availableHeroes, int totalDailyWages) {
+    public void setGuildHeroes(List<Hero<?>> heroes, List<Hero<?>> availableHeroes, int totalDailyWages) {
         availableHeroesSet = Set.copyOf(availableHeroes);
         guildHeroesTable.getItems().setAll(heroes);
         totalDailyWagesLabel.setText("Total Daily Wages: %d G".formatted(totalDailyWages));
@@ -112,7 +112,7 @@ public class HeroesController {
         guildHeroRightWeaponDamage.setText("");
     }
 
-    private void populateInfoFields(Hero hero) {
+    private void populateInfoFields(Hero<?> hero) {
         guildHeroIcon.setImage(new Image(hero.getIconPath()));
         guildHeroName.setText(hero.getName());
         guildHeroLevelAndClass.setText("Level %d · %s".formatted(hero.getLevel(), hero.getHeroClass()));

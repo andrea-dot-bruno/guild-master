@@ -21,8 +21,8 @@ import java.util.function.Predicate;
 public final class ExpeditionPreparation {
     private ExpeditionPreparation() {}
 
-    public static void show(Window owner, Dungeon dungeon, List<Hero> availableHeroes,
-                            Predicate<List<Hero>> launchExpedition) {
+    public static void show(Window owner, Dungeon dungeon, List<Hero<?>> availableHeroes,
+                            Predicate<List<Hero<?>>> launchExpedition) {
         URL location = Objects.requireNonNull(
                 ExpeditionPreparation.class.getResource("/view/expedition-preparation.fxml"),
                 "Missing expedition-preparation.fxml");

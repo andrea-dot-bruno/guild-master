@@ -10,11 +10,11 @@ import java.util.UUID;
 public class Expedition {
     private final UUID id;
     private final Dungeon dungeon;
-    private final List<Hero> heroes;
+    private final List<Hero<?>> heroes;
     private int remainingTime;
     private ExpeditionState state;
 
-    public Expedition(Dungeon dungeon, List<Hero> heroes) {
+    public Expedition(Dungeon dungeon, List<Hero<?>> heroes) {
         this.id = UUID.randomUUID();
         this.dungeon = dungeon;
         this.heroes = List.copyOf(heroes);
@@ -22,7 +22,7 @@ public class Expedition {
         this.state = ExpeditionState.WAITING;
     }
 
-    private Expedition(UUID id, Dungeon dungeon, List<Hero> heroes, int remainingTime) {
+    private Expedition(UUID id, Dungeon dungeon, List<Hero<?>> heroes, int remainingTime) {
         this.id = Objects.requireNonNull(id);
         this.dungeon = dungeon;
         this.heroes = List.copyOf(heroes);
@@ -30,7 +30,7 @@ public class Expedition {
         this.state = ExpeditionState.WAITING;
     }
 
-    public static Expedition restore(UUID id, Dungeon dungeon, List<Hero> heroes, int remainingTime) {
+    public static Expedition restore(UUID id, Dungeon dungeon, List<Hero<?>> heroes, int remainingTime) {
         if (remainingTime < 1 || remainingTime > dungeon.getTimeToBeat()) {
             throw new IllegalArgumentException("Invalid remaining expedition time.");
         }
@@ -56,10 +56,10 @@ public class Expedition {
         return calculateSuccessProbability(dungeon, heroes);
     }
 
-    public static double calculateSuccessProbability(Dungeon dungeon, List<Hero> heroes) {
+    public static double calculateSuccessProbability(Dungeon dungeon, List<Hero<?>> heroes) {
         if (heroes.isEmpty()) return 0.0;
         double partyPower = 0;
-        for (Hero hero : heroes) {
+        for (Hero<?> hero : heroes) {
             partyPower += hero.getTotalPower();
         }
         if (partyPower >= dungeon.getDifficulty()) return 1.0;
@@ -82,7 +82,7 @@ public class Expedition {
         return dungeon;
     }
 
-    public List<Hero> getInvolvedHeroes() {
+    public List<Hero<?>> getInvolvedHeroes() {
         return heroes;
     }
 
@@ -91,7 +91,7 @@ public class Expedition {
         StringBuilder output = new StringBuilder();
         if (heroes.size() == 1) return heroes.getFirst().getName();
         for (int i = 0; i < heroes.size(); i++) {
-            Hero h = heroes.get(i);
+            Hero<?> h = heroes.get(i);
             if (i == heroes.size() - 1) {
                 output.append("%s.".formatted(h.getName()));
             } else {

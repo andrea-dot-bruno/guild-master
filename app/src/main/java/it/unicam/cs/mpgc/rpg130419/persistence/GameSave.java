@@ -29,9 +29,9 @@ record GameSave(int version, String guildName, int currentDay, int gold, boolean
 
         Guild guild = new Guild(Objects.requireNonNull(guildName));
         guild.addMoney(gold);
-        Map<UUID, Hero> heroesById = new HashMap<>();
+        Map<UUID, Hero<?>> heroesById = new HashMap<>();
         for (HeroSave savedHero : heroes) {
-            Hero hero = savedHero.restore();
+            Hero<?> hero = savedHero.restore();
             guild.addHero(hero);
             heroesById.put(hero.getId(), hero);
         }

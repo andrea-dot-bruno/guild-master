@@ -11,7 +11,7 @@ import java.util.List;
 public class Guild {
     private String name;
     private final Wallet wallet;
-    private final List<Hero> heroes;
+    private final List<Hero<?>> heroes;
     private final List<Expedition> activeExpeditions;
 
     public Guild(String name) {
@@ -23,7 +23,7 @@ public class Guild {
 
     public boolean launchExpedition(Expedition expedition) {
         if (expedition == null) throw new IllegalArgumentException("Expedition can't be null.");
-        List<Hero> party = expedition.getInvolvedHeroes();
+        List<Hero<?>> party = expedition.getInvolvedHeroes();
         if (party.isEmpty() || new HashSet<>(party).size() != party.size()) return false;
         if (!getAvailableHeroes().containsAll(party)) return false;
         if (!expedition.start()) return false;
@@ -50,7 +50,7 @@ public class Guild {
             if (expedition.getState() != ExpeditionState.WON) continue;
             Dungeon dungeon = expedition.getDungeon();
             addMoney(dungeon.getGoldReward());
-            for (Hero hero : expedition.getInvolvedHeroes()) {
+            for (Hero<?> hero : expedition.getInvolvedHeroes()) {
                 hero.addExp(dungeon.getExpReward());
                 hero.levelUp();
             }
@@ -88,23 +88,23 @@ public class Guild {
 
     int getTotalDailyWages() {
         int totalWages = 0;
-        for (Hero hero : heroes) {
+        for (Hero<?> hero : heroes) {
             totalWages += hero.getDailyPay();
         }
         return totalWages;
     }
 
-    public List<Hero> getHeroes() {
+    public List<Hero<?>> getHeroes() {
         return List.copyOf(heroes);
     }
 
-    public void addHero(Hero hero) {
+    public void addHero(Hero<?> hero) {
         if (hero == null) throw new IllegalArgumentException("Hero can't be null.");
         if (heroes.contains(hero)) throw new IllegalArgumentException("Hero already added to the guild.");
         heroes.add(hero);
     }
 
-    public boolean removeHero(Hero hero) {
+    public boolean removeHero(Hero<?> hero) {
         if (!getAvailableHeroes().contains(hero)) return false;
         return heroes.remove(hero);
     }
@@ -117,9 +117,9 @@ public class Guild {
         return activeExpeditions.size();
     }
 
-    public List<Hero> getAvailableHeroes() {
-        List<Hero> availableHeroes = new ArrayList<>();
-        for (Hero h : heroes) {
+    public List<Hero<?>> getAvailableHeroes() {
+        List<Hero<?>> availableHeroes = new ArrayList<>();
+        for (Hero<?> h : heroes) {
             boolean available = true;
             for (Expedition e : activeExpeditions) {
                 if (e.getInvolvedHeroes().contains(h)) {

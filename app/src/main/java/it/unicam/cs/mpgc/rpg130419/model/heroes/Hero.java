@@ -1,12 +1,12 @@
 package it.unicam.cs.mpgc.rpg130419.model.heroes;
 
-import it.unicam.cs.mpgc.rpg130419.model.weapons.Weapon;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.Equippable;
 import it.unicam.cs.mpgc.rpg130419.model.weapons.WeaponSet;
 
 import java.util.Objects;
 import java.util.UUID;
 
-public abstract class Hero {
+public abstract class Hero<W extends Equippable> {
     private static final int BASE_DAILY_PAY = 5;
     private static final int POWER_PER_EXTRA_GOLD = 2;
     private static final int POWER_PER_LEVEL = 2;
@@ -15,22 +15,18 @@ public abstract class Hero {
     protected final String name;
     protected final String iconPath;
     protected final HeroLevel heroLevel;
-    protected WeaponSet weaponSet;
+    private final WeaponSet<W> weaponSet;
 
-    public Hero(String name, String iconPath, HeroLevel heroLevel) {
-        this.id = UUID.randomUUID();
-        this.name = name;
-        this.iconPath = iconPath;
-        this.heroLevel = heroLevel;
-        this.weaponSet = new WeaponSet();
+    protected Hero(String name, String iconPath, HeroLevel heroLevel, WeaponSet<W> weaponSet) {
+        this(UUID.randomUUID(), name, iconPath, heroLevel, weaponSet);
     }
 
-    protected Hero(UUID id, String name, String iconPath, HeroLevel heroLevel) {
+    protected Hero(UUID id, String name, String iconPath, HeroLevel heroLevel, WeaponSet<W> weaponSet) {
         this.id = Objects.requireNonNull(id);
         this.name = name;
         this.iconPath = iconPath;
         this.heroLevel = heroLevel;
-        this.weaponSet = new WeaponSet();
+        this.weaponSet = Objects.requireNonNull(weaponSet);
     }
 
     public abstract String getHeroClass();
@@ -67,19 +63,19 @@ public abstract class Hero {
         return weaponSet.getWeaponSetPower();
     }
 
-    public Weapon getLeftWeapon() {
+    public W getLeftWeapon() {
         return weaponSet.getLeftWeapon();
     }
 
-    public Weapon getRightWeapon() {
+    public W getRightWeapon() {
         return weaponSet.getRightWeapon();
     }
 
-    public void setRightWeapon(Weapon rightWeapon) {
+    public void setRightWeapon(W rightWeapon) {
         weaponSet.setRightWeapon(rightWeapon);
     }
 
-    public void setLeftWeapon(Weapon leftWeapon) {
+    public void setLeftWeapon(W leftWeapon) {
         weaponSet.setLeftWeapon(leftWeapon);
     }
 
@@ -97,7 +93,7 @@ public abstract class Hero {
 
     @Override
     public final boolean equals(Object other) {
-        return other instanceof Hero hero && id.equals(hero.id);
+        return other instanceof Hero<?> hero && id.equals(hero.id);
     }
 
     @Override

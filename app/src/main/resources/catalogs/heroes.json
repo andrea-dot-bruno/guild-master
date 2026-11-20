@@ -7,12 +7,14 @@
     "Melis", "Mira", "Nessa", "Nolan", "Orla", "Osric", "Perrin", "Rhea",
     "Ronan", "Seren", "Sigrid", "Talion", "Tamsin", "Torin", "Vera", "Wystan"
   ],
-  "knightIcons": {
-    "directory": "/assets/knight-icons",
-    "files": ["bram.png", "cedric.png", "elric.png"]
-  },
-  "mageIcons": {
-    "directory": "/assets/mage-icons",
-    "files": ["lyra.png", "mira.png"]
+  "iconsByClass": {
+    "knight": {
+      "directory": "/assets/knight-icons",
+      "files": ["bram.png", "cedric.png", "elric.png"]
+    },
+    "mage": {
+      "directory": "/assets/mage-icons",
+      "files": ["lyra.png", "mira.png"]
+    }
   }
 }

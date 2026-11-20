@@ -1,30 +1,27 @@
 package it.unicam.cs.mpgc.rpg130419.model.weapons;
 
-import it.unicam.cs.mpgc.rpg130419.model.weapons.noClassWeapons.LeftFist;
-import it.unicam.cs.mpgc.rpg130419.model.weapons.noClassWeapons.RightFist;
+public class WeaponSet<W extends Equippable> {
+    private W leftWeapon;
+    private W rightWeapon;
 
-public class WeaponSet {
-    private Weapon rightWeapon;
-    private Weapon leftWeapon;
-
-    public WeaponSet() {
-        rightWeapon = new RightFist();
-        leftWeapon = new LeftFist();
-    }
-
-    public void setRightWeapon(Weapon rightWeapon) {
+    public WeaponSet(W leftWeapon, W rightWeapon) {
+        this.leftWeapon = leftWeapon;
         this.rightWeapon = rightWeapon;
     }
 
-    public void setLeftWeapon(Weapon leftWeapon) {
+    public void setLeftWeapon(W leftWeapon) {
         this.leftWeapon = leftWeapon;
     }
 
-    public Weapon getLeftWeapon() {
+    public void setRightWeapon(W rightWeapon) {
+        this.rightWeapon = rightWeapon;
+    }
+
+    public W getLeftWeapon() {
         return leftWeapon;
     }
 
-    public Weapon getRightWeapon() {
+    public W getRightWeapon() {
         return rightWeapon;
     }
 

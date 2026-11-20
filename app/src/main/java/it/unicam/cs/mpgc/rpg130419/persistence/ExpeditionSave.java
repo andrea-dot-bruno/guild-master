@@ -10,12 +10,12 @@ import java.util.UUID;
 record ExpeditionSave(UUID id, DungeonSave dungeon, int remainingTime, List<UUID> partyIds) {
     static ExpeditionSave from(Expedition expedition) {
         return new ExpeditionSave(expedition.getId(), DungeonSave.from(expedition.getDungeon()),
-                expedition.getRemainingTime(), expedition.getInvolvedHeroes().stream().map(Hero::getId).toList());
+                expedition.getRemainingTime(), expedition.getInvolvedHeroes().stream().map(Hero<?>::getId).toList());
     }
 
-    Expedition restore(Map<UUID, Hero> heroesById) {
-        List<Hero> party = partyIds.stream().map(id -> {
-            Hero hero = heroesById.get(id);
+    Expedition restore(Map<UUID, Hero<?>> heroesById) {
+        List<Hero<?>> party = partyIds.stream().<Hero<?>>map(id -> {
+            Hero<?> hero = heroesById.get(id);
             if (hero == null) throw new IllegalArgumentException("Unknown expedition hero: " + id);
             return hero;
         }).toList();

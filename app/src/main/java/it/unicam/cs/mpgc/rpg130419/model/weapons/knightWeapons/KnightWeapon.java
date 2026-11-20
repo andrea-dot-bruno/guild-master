@@ -1,5 +1,6 @@
 package it.unicam.cs.mpgc.rpg130419.model.weapons.knightWeapons;
 
-/** Marker interface for knight weapons. */
-public interface KnightWeapon {
+import it.unicam.cs.mpgc.rpg130419.model.weapons.Equippable;
+
+public interface KnightWeapon extends Equippable {
 }

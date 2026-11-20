@@ -26,7 +26,7 @@ public class OverviewController {
     @FXML private TableColumn<Expedition, Number> aeTableGoldRewardColumn;
     @FXML private TableColumn<Expedition, Number> aeTableSuccessChanceColumn;
     @FXML private TableView<Expedition> activeExpeditionsTable;
-    @FXML private ListView<Hero> availableHeroesList;
+    @FXML private ListView<Hero<?>> availableHeroesList;
 
     @FXML private void initialize() {
         aeTableExpeditionColumn.setCellValueFactory(cell ->
@@ -53,7 +53,7 @@ public class OverviewController {
 
         availableHeroesList.setCellFactory(list -> new ListCell<>() {
             @Override
-            protected void updateItem(Hero hero, boolean empty) {
+            protected void updateItem(Hero<?> hero, boolean empty) {
                 super.updateItem(hero, empty);
                 setText(empty || hero == null ? null : hero.getName());
             }
@@ -83,7 +83,7 @@ public class OverviewController {
         }
     }
 
-    public void setAvailableHeroesList(List<Hero> availableHeroes) {
+    public void setAvailableHeroesList(List<Hero<?>> availableHeroes) {
         availableHeroesList.getItems().setAll(availableHeroes);
     }
 }

@@ -48,7 +48,7 @@ public class GameSession {
         return !gameOver && guild.launchExpedition(expedition);
     }
 
-    public boolean launchExpedition(Dungeon dungeon, List<Hero> party) {
+    public boolean launchExpedition(Dungeon dungeon, List<Hero<?>> party) {
         if (!availableDungeons.contains(dungeon)) return false;
         if (!launchExpedition(new Expedition(dungeon, party))) return false;
         availableDungeons.remove(dungeon);
@@ -69,7 +69,7 @@ public class GameSession {
 
     public boolean hireHero(RecruitmentCandidate candidate) {
         if (gameOver || !recruitmentCandidates.contains(candidate)) return false;
-        Hero hero = candidate.hero();
+        Hero<?> hero = candidate.hero();
         if (guild.getHeroes().contains(hero)) return false;
         if (!guild.takeMoney(candidate.hireFee())) return false;
         guild.addHero(hero);
@@ -112,19 +112,19 @@ public class GameSession {
         return currentDay;
     }
 
-    public void addHero(Hero hero) {
+    public void addHero(Hero<?> hero) {
         guild.addHero(hero);
     }
 
-    public List<Hero> getAvailableHeroes() {
+    public List<Hero<?>> getAvailableHeroes() {
         return guild.getAvailableHeroes();
     }
 
-    public boolean removeHero(Hero hero) {
+    public boolean removeHero(Hero<?> hero) {
         return !gameOver && guild.removeHero(hero);
     }
 
-    public List<Hero> getHeroes() {
+    public List<Hero<?>> getHeroes() {
         return guild.getHeroes();
     }
 

@@ -1,13 +1,16 @@
 package it.unicam.cs.mpgc.rpg130419.model.heroes;
 
 import com.google.gson.Gson;
-import it.unicam.cs.mpgc.rpg130419.model.weapons.*;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.Equippable;
 import it.unicam.cs.mpgc.rpg130419.model.weapons.knightWeapons.BronzeSword;
 import it.unicam.cs.mpgc.rpg130419.model.weapons.knightWeapons.IronSword;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.knightWeapons.KnightWeapon;
 import it.unicam.cs.mpgc.rpg130419.model.weapons.knightWeapons.SteelSword;
 import it.unicam.cs.mpgc.rpg130419.model.weapons.mageWeapons.BasicWand;
 import it.unicam.cs.mpgc.rpg130419.model.weapons.mageWeapons.EmberWand;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.mageWeapons.MageWeapon;
 import it.unicam.cs.mpgc.rpg130419.model.weapons.mageWeapons.MoonstoneScepter;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.noClassWeapons.NoClassWeapon;
 import it.unicam.cs.mpgc.rpg130419.model.weapons.noClassWeapons.Shield;
 
 import java.io.IOException;
@@ -16,47 +19,52 @@ import java.io.InputStreamReader;
 import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
 public final class RandomHeroBuilder {
     private static final int BASIC_WEAPON_CHANCE = 60;
     private static final int INTERMEDIATE_WEAPON_CHANCE = 30;
     private static final int SHIELD_CHANCE = 20;
-    private static final List<Supplier<Weapon>> KNIGHT_WEAPONS = List.of(
-            BronzeSword::new, IronSword::new, SteelSword::new);
-    private static final List<Supplier<Weapon>> MAGE_WEAPONS = List.of(
-            BasicWand::new, EmberWand::new, MoonstoneScepter::new);
     private static final HeroData DATA = loadHeroData();
+    private static final List<HeroProfile<? super NoClassWeapon>> PROFILES = List.of(
+            new HeroProfile<KnightWeapon>(Knight::new, DATA.iconsFor("knight"),
+                    BronzeSword::new, IronSword::new, SteelSword::new),
+            new HeroProfile<MageWeapon>(Mage::new, DATA.iconsFor("mage"),
+                    BasicWand::new, EmberWand::new, MoonstoneScepter::new));
 
     private RandomHeroBuilder() {}
 
-    private static Hero buildHero() {
+    public static RecruitmentCandidate buildCandidate() {
         ThreadLocalRandom random = ThreadLocalRandom.current();
+        var profile = PROFILES.get(random.nextInt(PROFILES.size()));
         String name = DATA.names().get(random.nextInt(DATA.names().size()));
-        Hero hero;
-        if (random.nextBoolean()) {
-            hero = new Knight(name, DATA.knightIcons().randomPath(random));
-            hero.setRightWeapon(rollRightWeapon(KNIGHT_WEAPONS, random));
-        } else {
-            hero = new Mage(name, DATA.mageIcons().randomPath(random));
-            hero.setRightWeapon(rollRightWeapon(MAGE_WEAPONS, random));
-        }
+        Hero<? super NoClassWeapon> hero = profile.buildHero(name, random);
         if (random.nextInt(100) < SHIELD_CHANCE) {
             hero.setLeftWeapon(new Shield());
         }
-        return hero;
+        return new RecruitmentCandidate(hero);
     }
 
-    public static RecruitmentCandidate buildCandidate() {
-        return new RecruitmentCandidate(buildHero());
-    }
+    private record HeroProfile<W extends Equippable>(
+            BiFunction<String, String, Hero<W>> constructor, IconGroup icons,
+            Supplier<W> basicWeapon, Supplier<W> intermediateWeapon, Supplier<W> advancedWeapon) {
 
-    private static Weapon rollRightWeapon(List<Supplier<Weapon>> weapons, ThreadLocalRandom random) {
-        int roll = random.nextInt(100);
-        if (roll < BASIC_WEAPON_CHANCE) return weapons.get(0).get();
-        if (roll < BASIC_WEAPON_CHANCE + INTERMEDIATE_WEAPON_CHANCE) return weapons.get(1).get();
-        return weapons.get(2).get();
+        Hero<W> buildHero(String name, ThreadLocalRandom random) {
+            Hero<W> hero = constructor.apply(name, icons.randomPath(random));
+            hero.setRightWeapon(rollRightWeapon(random));
+            return hero;
+        }
+
+        private W rollRightWeapon(ThreadLocalRandom random) {
+            int roll = random.nextInt(100);
+            if (roll < BASIC_WEAPON_CHANCE) return basicWeapon.get();
+            if (roll < BASIC_WEAPON_CHANCE + INTERMEDIATE_WEAPON_CHANCE) return intermediateWeapon.get();
+            return advancedWeapon.get();
+        }
     }
 
     private static HeroData loadHeroData() {
@@ -70,7 +78,11 @@ public final class RandomHeroBuilder {
         }
     }
 
-    private record HeroData(List<String> names, IconGroup knightIcons, IconGroup mageIcons) {}
+    private record HeroData(List<String> names, Map<String, IconGroup> iconsByClass) {
+        IconGroup iconsFor(String heroClass) {
+            return Objects.requireNonNull(iconsByClass.get(heroClass), "Missing icons for " + heroClass);
+        }
+    }
 
     private record IconGroup(String directory, List<String> files) {
         String randomPath(ThreadLocalRandom random) {

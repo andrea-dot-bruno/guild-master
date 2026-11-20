@@ -1,6 +1,6 @@
 package it.unicam.cs.mpgc.rpg130419.persistence;
 
-import it.unicam.cs.mpgc.rpg130419.model.weapons.Weapon;
+import it.unicam.cs.mpgc.rpg130419.model.weapons.Equippable;
 import it.unicam.cs.mpgc.rpg130419.model.weapons.knightWeapons.BronzeSword;
 import it.unicam.cs.mpgc.rpg130419.model.weapons.knightWeapons.IronSword;
 import it.unicam.cs.mpgc.rpg130419.model.weapons.knightWeapons.SteelSword;
@@ -14,7 +14,7 @@ import it.unicam.cs.mpgc.rpg130419.model.weapons.noClassWeapons.Shield;
 enum WeaponType {
     LEFT_FIST, RIGHT_FIST, SWORD, WAND, IRON_SWORD, STEEL_SWORD, EMBER_WAND, MOONSTONE_SCEPTER, SHIELD;
 
-    static WeaponType from(Weapon weapon) {
+    static WeaponType from(Equippable weapon) {
         return switch (weapon) {
             case LeftFist fist -> LEFT_FIST;
             case RightFist fist -> RIGHT_FIST;
@@ -29,8 +29,8 @@ enum WeaponType {
         };
     }
 
-    Weapon create() {
-        return switch (this) {
+    <W extends Equippable> W createFor(Class<W> allowedType) {
+        Equippable weapon = switch (this) {
             case LEFT_FIST -> new LeftFist();
             case RIGHT_FIST -> new RightFist();
             case SWORD -> new BronzeSword();
@@ -41,5 +41,9 @@ enum WeaponType {
             case MOONSTONE_SCEPTER -> new MoonstoneScepter();
             case SHIELD -> new Shield();
         };
+        if (!allowedType.isInstance(weapon)) {
+            throw new IllegalArgumentException(this + " is incompatible with " + allowedType.getSimpleName());
+        }
+        return allowedType.cast(weapon);
     }
 }

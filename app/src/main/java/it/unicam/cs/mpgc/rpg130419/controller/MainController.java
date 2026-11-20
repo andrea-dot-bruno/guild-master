@@ -79,7 +79,7 @@ public class MainController {
                 session.getAvailableHeroes(), party -> launchExpedition(dungeon, party));
     }
 
-    private boolean launchExpedition(Dungeon dungeon, List<Hero> party) {
+    private boolean launchExpedition(Dungeon dungeon, List<Hero<?>> party) {
         if (!session.launchExpedition(dungeon, party)) return false;
         setAvailableDungeonsTable();
         setUnderwayExpeditionsLabel();
@@ -115,7 +115,7 @@ public class MainController {
         }
     }
 
-    private void fireHero(Hero hero) {
+    private void fireHero(Hero<?> hero) {
         if (!session.removeHero(hero)) {
             heroesController.showFireFailure(hero);
             return;
@@ -184,7 +184,7 @@ public class MainController {
     }
 
     private void setAvailableHeroesList() {
-        List<Hero> availableHeroesList = session.getAvailableHeroes();
+        List<Hero<?>> availableHeroesList = session.getAvailableHeroes();
         overviewController.setAvailableHeroesList(availableHeroesList);
     }
 

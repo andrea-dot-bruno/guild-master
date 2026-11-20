@@ -121,7 +121,7 @@ public class RecruitmentController {
     }
 
     private void populateInfoFields(RecruitmentCandidate candidate) {
-        Hero hero = candidate.hero();
+        Hero<?> hero = candidate.hero();
         recruitHeroName.setText(hero.getName());
         recruitHeroIcon.setImage(new Image(hero.getIconPath()));
         recruitHeroLevelAndClass.setText("Level %d · %s".formatted(hero.getLevel(), hero.getHeroClass()));

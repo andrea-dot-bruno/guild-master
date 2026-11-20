@@ -16,7 +16,7 @@ Per preparare una nuova spedizione, selezionare quella desiderata dalla pagina *
 Gli eroi appartenenti alla gilda possono salire di livello facendo esperienza durante le spedizioni. Le spedizioni di successo, infatti, comportano un guadagno di exp da parte degli eroi che ne hanno preso parte.
 
 ## Fine della giornata
-Quando il giocatore ritiene di aver terminato tutte le azioni per la giornata, può cliccare il pulsante "End Day", che farà terminare la giornata in corso. Le spedizioni in corso avanzeranno di un giorno, e quelle terminate verranno "calcolate", assegnando, in caso di vittoria, oro al giocatore ed esperienza agli eroi ingaggiati. Infine, vengono sottratte al totale dell'oro della gilda le paghe giornaliere degli eroi. Prima dell'inizio della giornata successiva vengono anche generati casualmente nuovi dungeon ed eroi da assumere, nel caso in cui il giorno precedente erano stati consumati, fino ad un massimo di tre dungeon e quattro eroi per una singola giornata.
+Quando il giocatore ritiene di aver terminato tutte le azioni per la giornata, può cliccare il pulsante "End Day", che farà terminare la giornata in corso. Le spedizioni in corso avanzeranno di un giorno, e quelle terminate verranno "calcolate", assegnando, in caso di vittoria, oro al giocatore ed esperienza agli eroi ingaggiati. Infine, vengono sottratte al totale dell'oro della gilda le paghe giornaliere degli eroi. Prima dell'inizio della giornata successiva vengono anche generati casualmente nuovi dungeon, rimuovendo quelli non utilizzati in precedenza e ripopolando quelli giornalieri, fino a un totale di tre. Gli eroi reclutabili, invece, vengono mantenuti se non ingaggiati, generandone di nuovi fino a raggiungere un totale di quattro eroi reclutabili a inizio giornata. 
 
 ---
 
@@ -51,33 +51,36 @@ Classe che genera dungeon in maniera casuale.<br>
 Costruisce un record interno `DungeonData`, nel quale inserisce un catalogo di stringhe contenenti nomi per i dungeon e i percorsi alle icone, per poi estrarre un elemento ciascuno randomicamente, da assegnare al dungeon finale.
 ### .model.heroes
 #### .model.heroes.Hero
-Classe astratta che implementa tutti i campi e i metodi in comune che un eroe dovrebbe avere.
+Classe astratta che implementa tutti i campi e i metodi in comune che un eroe dovrebbe avere. Contenendo la classe WeaponSet, anche questa deve specificare il tipo `W` di equipaggiamento permesso. 
 #### .model.heroes.HeroLevel
 Classe che amministra l'esperienza e il leveling degli eroi.
 #### .model.heroes.RandomHeroBuilder
-Classe che genera eroi in maniera casuale.<br>
-Costruisce un record interno `HeroData`, nel quale inserisce un catalogo di stringhe contenenti nomi per gli eroi e i percorsi alle icone, suddivise per classi, per poi estrarre un elemento ciascuno randomicamente, da assegnare all'eroe finale.
+Classe che genera RecruitmentCandidate (ossia il record "eroe + prezzo di ingaggio") in maniera casuale.<br>
+Per prima cosa, presenta un record interno `HeroData`, nel quale inserisce un catalogo di stringhe contenenti nomi per gli eroi e i percorsi alle icone, suddivise per classi, per poi estrarre un elemento ciascuno randomicamente, da assegnare all'eroe finale.<br>
+Per la creazione effettiva dell'oggetto, invece, estrae in maniera casuale uno dei profili registrati in PROFILES e sceglie un nome dal catalogo comune. Il profilo selezionato associa il costruttore del suo eroe ai ritratti e ai costruttori delle tre armi. Il builder usa poi il profilo per creare l'eroe e assegnare l'arma destra, sorteggiando poi per la presenza dello scudo in quella sinistra, e infine calcola il prezzo.
 #### .model.heroes.RecruitmentCandidate
 Record che raccoglie gli eroi generati e il loro prezzo di reclutamento, calcolato automaticamente in base alla potenza dell'eroe. Dato che il prezzo di reclutamento, una volta inserito l'eroe nella gilda, non ha più utilità, è stato inserito al di fuori della classe Hero, ma collegato ad essa tramite questo record.
 ### .model.weapons
-I pagkage `.model.weapons.knightWeapons`, `.model.weapons.mageWeapons` e `.model.weapons.noClassWeapons` contengono le classi che definiscono le armi delle varie classi di eroi.
+I package `.model.weapons.knightWeapons`, `.model.weapons.mageWeapons` e `.model.weapons.noClassWeapons` contengono le classi che definiscono le armi delle varie classi di eroi, oltre a una marker interface per permettere alla rispettiva classe di utilizzare le armi che implementano questa interfaccia.  
+#### .model.weapons.Equippable
+Interfaccia richiesta da ogni arma del gioco.
 #### .model.weapons.Weapon
-Classe astratta che rappresenta una generica arma.
+Classe astratta che implementa l'interfaccia `Equippable`. Le armi concrete estendono questa classe e dichiarano quali eroi possono utilizzarle tramite l'uso delle marker interface `KnightWeapon` e `MageWeapon`. Gli oggetti che invece usano `NoClassWeapon` possono essere assegnati a qualsiasi eroe.
 #### .model.weapons.WeaponSet
-Classe che raccoglie l'arma destra e sinistra di un eroe, andando a formare il suo equipaggiamento.
+Classe che raccoglie l'arma destra e sinistra di un eroe, andando a formare il suo equipaggiamento. Il parametro `W` determina quali oggetti possono essere assegnati. 
 ## .persistence
 Comprende tutte le classi, interfacce, record ed enum che si occupano di salvare e recuperare i dati di salvataggio.
 #### .persistence.GameSaveRepository 
 È l'interfaccia principale di tutto il package. Ogni classe che implementa un tipo diverso di persistenza di questo progetto deve utilizzarla.
 #### .persistence.JsonGameSaveRepository
-Classe che implementa il salvataggio e il caricamento dei dati in un file JSON, sfruttando i metodi della liberia Gson.
+Classe che implementa il salvataggio e il caricamento dei dati in un file JSON, sfruttando i metodi della libreria Gson.
 ## .view
 Racchiude tutte le classi che si occupano di mostrare e gestire le finestre di pop-up.
 
 ---
 
 # Persistenza dei dati
-La persistenza dei dati è stata realizzata tramite file JSON. Serializzazione e deserializzazione sono svolte dalla libreria Gson. Il file di salvataggio `save.json` è contenuto nella cartella `/saves`.<br>
+La persistenza dei dati è stata realizzata tramite file JSON. Serializzazione e deserializzazione sono svolte dalla libreria Gson. Il file di salvataggio `save.json` è contenuto nella cartella `saves`.<br>
 L'implementazione futura di metodi differenti di persistenza è resa possibile grazie all'interfaccia `.persistence.GameSaveRepository`. È possibile trovare un esempio più dettagliato nel capitolo *Estensioni Future*.
 
 ## Avvio della partita
@@ -89,13 +92,13 @@ Il click del pulsante lancia il metodo `startNewGame` di `MainApplication`, che 
 ### Load Game
 Permette di caricare l'ultimo salvataggio effettuato.<br>
 Nel caso in cui il file di salvataggio non sia presente o sia vuoto, il metodo `load` di `JsonGameSaveRepository` restituisce un oggetto `Optional` vuoto, e quindi il salvataggio viene creato da zero, riutilizzando la funzione `startNewGame`.<br>
-Nel caso in cui il salvataggio precedente sia terminato in un Game Over, verrà avviata una nuova partita, sempre grazie al riutilizzo del metodo `startNewGame`.<br>
-La deserializzazione avviene ricreando la classe `GameSave` (`.persistence.GameSave`) tramite il file di salvataggio.
+Nel caso in cui il salvataggio precedente sia terminato in un Game Over, verrà avviata una nuova partita su conferma dell'utente, sempre grazie al riutilizzo del metodo `startNewGame`.<br>
+La deserializzazione avviene ricreando l'istanza di `GameSave` (`.persistence.GameSave`) tramite il file di salvataggio.
 
 ## Salvataggio della partita
 Il salvataggio avviene automaticamente alla fine di ogni giornata, a seguito del click del pulsante *End Day*. Può però essere effettuato anche manualmente tramite il pulsante *Save Game* situato all'interno del *Menu*, accessibile dal pulsante nell'header.
 ### Salvataggio a fine giornata
-Dopo l'aggiornamento delle statistiche della partita scaturito dal click del pulsante *End Day*, viene lanciato il metodo `save` della classe `JsonGameSaveRepository`. Questo, tramite il metodo `toJson` della liberia Gson, converte l'oggetto `session`, passato come parametro della funzione, in una stringa con il contenuto dell'oggetto in sintassi Json. Crea poi un file temporaneo con prefisso `guild-master-`, al cui interno salva la stringa Json precedentemente creata. Poi procede a tentare la copia del file temporaneo sul file di salvataggio in una azione atomica, se supportata. In questo modo non si rischiano interruzioni durante la sovrascrittura del file di salvataggio, evitando di perdere la precedente sessione di gioco. Infine, il file temporaneo viene rimosso.
+Dopo l'aggiornamento delle statistiche della partita scaturito dal click del pulsante *End Day*, viene lanciato il metodo `save` della classe `JsonGameSaveRepository`. Il metodo `GameSave.from(session)` raccoglie i dati da conservare in un record GameSave, che il metodo `toJson` della libreria Gson converte in stringa JSON. Il repository scrive la stringa in un file temporaneo nella stessa cartella di `save.json`. Una volta completata la scrittura, tenta la sostituzione del file di salvataggio con il file temporaneo, tramite `Files.move`. Questa operazione è effettuata in maniera atomica con l'opzione `ATOMIC_MOVE`, se supportata. In questo modo, se la scrittura del file temporaneo si interrompe, il salvataggio precedente non viene sovrascritto.
 ### Salvataggio manuale
 Il salvataggio sfrutta lo stesso metodo `save` utilizzato dal salvataggio automatico.
 
@@ -106,8 +109,14 @@ Al termine della giornata il metodo `payDailyWages` di `Guild` (`.model.Guild`) 
 
 # Estensioni future
 A seguire sono illustrati alcuni esempi di modifica o estensione del codice. 
-## Nuova classe di eroi (DA COMPLETARE)
-Una delle più ovvie estensioni di Guild Master sta nell'aggiungere una nuova classe di eroi, come per esempio il *Rogue*. Sarebbe semplicemente necessario creare la rispettiva classe `Rogue.java`, che ne presenta tutte le caratteristiche, estendendo la classe astratta `Hero`. Andrebbe poi creata la marker interface per contrassegnare tutte le armi dedicate alla nuova classe, oltre a creare le classi delle armi stesse. 
+## Nuova classe di eroi
+Una delle più ovvie estensioni di Guild Master sta nell'aggiungere una nuova classe di eroi, come per esempio il *Rogue*. È immediato pensare che la nuova classe abbia anche delle armi ad essa dedicate, perciò iniziamo creando, nel package `.model.weapons.rogueWeapons`, l'interfaccia `RogueWeapon`, che deve estendere quella `Equippable`. Aggiungiamo inoltre questa interfaccia tra quelle estese da `NoClassWeapon`, in modo tale che anche il Rogue possa sfruttare quelle armi. Creiamo quindi alcune armi dedicate alla nuova classe. Tutte queste devono estendere la classe `Weapon` e implementare `RogueWeapon`. A questo punto, è dunque necessario creare la classe Java del nuovo eroe, `Rogue.java`, da inserire nel package `.model.heroes`, nel seguente modo: 
+```java
+public class Rogue extends Hero<RogueWeapon> {...}
+```
+Possiamo quindi aggiungere gli sprite per il Rogue in `assets/rogue-icons` e registrarli nel catalogo `catalogs/heroes.json`.
+Possiamo ora modificare la classe RandomHeroBuilder, aggiungendo alla lista `PROFILES` il nuovo `HeroProfile` dedicato alla nuova classe, che comprende il puntatore al costruttore della classe, il gruppo di icone corrispondenti e i costruttori delle nuove armi dedicate (in ordine di rarità).
+Infine, per adeguare anche la persistenza, aggiungiamo `ROGUE` a `HeroType` e aggiungiamo i casi dedicati negli switch di `from` e `restore` in `HeroSave`. Lo stesso vale per le nuove armi nelle classi, aggiornando i metodi `from` e `createFor` in `WeaponType`.
 ## Interfaccia grafica
 Se per caso vi fosse necessità di pubblicare il gioco su una pagina web, invece che un pacchetto scaricabile ed eseguibile, la modularità del pattern MVC permette di mantenere tutte le classi che gestiscono la logica interna dell'app, come eroi, armi dungeon e spedizioni, dovendo quindi sviluppare semplicemente il mezzo di fruizione grafico del progetto. Tutti i metodi per recuperare i dati necessari, al fine di mostrarli nell'interfaccia utente, sono esposti dalle classi del package `.model`.
 ## Persistenza dati
@@ -177,13 +186,16 @@ La potenza del gruppo è la somma delle singole potenze degli eroi:
 $$P_{\text{gruppo}} = \sum P_{\text{eroe}}$$
 ### Calcolo della probabilità di vittoria
 La probabilità di successo $p(\text{W})$ è calcolata semplicemente come il rapporto tra la potenza totale del gruppo e la difficoltà del dungeon:
-$$p(\text{W}) = \frac{P_{\text{gruppo}}}{D}$$
+$$p(\text{W}) = \begin{cases}
+1 & \text{se } P_{\text{gruppo}} \geq D\\
+\frac{P_{\text{gruppo}}}{D} & \text{altrimenti}
+\end{cases}$$
 ### Determinare la vittoria di una spedizione
 Viene estratto un numero casuale $r$ con `Math.random()`. Se il numero è minore della probabilità di successo, allora la spedizione tornerà alla gilda vittoriosa:
 $$
 \begin{cases}
 r < p(\text{W}) & \text{Vittoria} \\
-r >= p(\text{W}) & \text{Sconfitta}
+r \geq p(\text{W}) & \text{Sconfitta}
 \end{cases}
 $$
 ## Costo di un eroe
