@@ -10,7 +10,7 @@
 ### Istruzioni
 ```bash
 git clone https://github.com/andrea-dot-bruno/guild-master.git
-cd <nome-cartella>
+cd guild-master
 ```
 ### Build del progetto
 ```bash
@@ -23,4 +23,4 @@ cd <nome-cartella>
 ---
 
 ## 🤖 Uso di strumenti di AI
-Strumenti di AI sono stati utilizzati nelle fasi di brainstorming, sia per l'aspetto creativo del gioco che per quello implementativo, con un confronto attivo sulle implementazioni suggerite. Una volta definite le scelte implementative, l'AI è stata di supporto per acquisire conoscenze o favorire la risoluzione di problemi legati agli strumenti usati, sempre con documentazioni ufficiali a confronto.
+Strumenti di AI sono stati utilizzati nelle fasi di brainstorming, sia per l'aspetto creativo del gioco che per quello implementativo, con un confronto attivo sulle implementazioni suggerite. L'AI è stata utilizzata anche per chiarire concetti di Java, scrivere parti di codice ripetitivo, individuare errori, rifinire l’interfaccia grafica e generare gli asset di gioco.
