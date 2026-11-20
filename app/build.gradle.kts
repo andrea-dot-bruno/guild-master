@@ -36,6 +36,7 @@ java {
 application {
     // Define the main class for the application.
     mainClass = "it.unicam.cs.mpgc.rpg130419.app.MainApplication"
+    applicationDefaultJvmArgs = listOf("--enable-native-access=javafx.graphics")
 }
 
 javafx {
